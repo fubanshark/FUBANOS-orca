@@ -9,6 +9,21 @@
             if (!raw) return "dark";
 
             const settings = JSON.parse(raw);
+            if (
+                settings &&
+                settings.theme === "light" &&
+                settings.themePreferenceSet !== true
+            ) {
+                settings.theme = "dark";
+                settings.themePreferenceSet = true;
+                try {
+                    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+                } catch (error) {
+                    console.error("Could not migrate the saved color theme:", error);
+                }
+                return "dark";
+            }
+
             return settings && settings.theme === "light" ? "light" : "dark";
         } catch (error) {
             console.error("Could not read the saved color theme:", error);

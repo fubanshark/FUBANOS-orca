@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         theme: "dark",
 
+        themePreferenceSet: false,
+
         weekStart: "monday",
 
         timeFormat: "24"
@@ -121,6 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["light", "dark"].includes(parsed.theme)
                         ? parsed.theme
                         : defaults.theme,
+
+                themePreferenceSet:
+                    parsed.themePreferenceSet === true,
 
                 weekStart:
                     ["monday", "sunday"].includes(parsed.weekStart)
@@ -394,6 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
             settings.theme = event.currentTarget.value === "dark"
                 ? "dark"
                 : "light";
+            settings.themePreferenceSet = true;
 
             if (saveSettings()) {
                 applyTheme();
