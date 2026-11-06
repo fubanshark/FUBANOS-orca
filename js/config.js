@@ -1,17 +1,17 @@
 
-/* =====================================
-   FUBAN OS - SUPABASE CONFIGURATION
-===================================== */
-
 "use strict";
+
+// ==========================================
+// FUBAN OS - SUPABASE CONFIG
+// ==========================================
 
 const SUPABASE_URL =
     "https://qiyenyqdgeabhaoqasjc.supabase.co";
 
 const SUPABASE_ANON_KEY =
-    "วาง_PUBLISHABLE_KEY_ที่ได้รับจาก_SUPABASE_ตรงนี้";
+    "sb_publishable_J3PUB5Bzw4fDmEOTy7KLfw_d0id9aIY";
 
-// Create Supabase Client
+// Initialize Supabase
 window.supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY,
