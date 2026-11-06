@@ -1,198 +1,301 @@
 
 "use strict";
 
-// =========================================
-// FUBAN OS - LOGIN UI
-// Frontend only (Supabase integration later)
-// =========================================
+// ==========================================
+// FUBAN OS - AUTHENTICATION
+// ==========================================
 
+const db = window.supabaseClient;
 
-// ELEMENTS
-const loginView = document.getElementById("login-view");
-const forgotView = document.getElementById("forgot-view");
+const $ = (id) => document.getElementById(id);
 
-const loginForm = document.getElementById("login-form");
-const forgotForm = document.getElementById("forgot-form");
+const loginView = $("login-view");
+const signupView = $("signup-view");
+const forgotView = $("forgot-view");
 
-const loginError = document.getElementById("login-error");
-const forgotError = document.getElementById("forgot-error");
+const loginForm = $("login-form");
+const signupForm = $("signup-form");
+const forgotForm = $("forgot-form");
 
-const passwordInput = document.getElementById("login-password");
-const passwordToggle = document.getElementById("password-toggle");
+const dashboardURL = new URL("index.html", location.href).href;
+const loginURL = new URL("login.html", location.href).href;
 
-
-// =========================================
-// VIEW MANAGEMENT
-// =========================================
-
-function showLogin() {
-    forgotView.hidden = true;
-    loginView.hidden = false;
-
-    clearMessages();
-}
-
-
-function showForgotPassword() {
-    loginView.hidden = true;
-    forgotView.hidden = false;
-
-    clearMessages();
-
-    document.getElementById("recovery-email").value =
-        document.getElementById("login-email").value;
-
-    document.getElementById("recovery-email").focus();
-}
-
-
-// =========================================
-// MESSAGE MANAGEMENT
-// =========================================
+// ==========================================
+// MESSAGES
+// ==========================================
 
 function clearMessages() {
-    loginError.hidden = true;
-    forgotError.hidden = true;
-
-    loginError.textContent = "";
-    forgotError.textContent = "";
+    ["login-error", "signup-message", "forgot-error"].forEach(id => {
+        const element = $(id);
+        if (element) {
+            element.hidden = true;
+            element.textContent = "";
+        }
+    });
 }
 
+function showMessage(id, message, type = "error") {
+    const element = $(id);
+    if (!element) return;
 
-function showError(element, message) {
     element.textContent = message;
     element.hidden = false;
+
+    element.classList.toggle("error-message", type === "error");
+    element.classList.toggle("success-message", type === "success");
 }
 
+// ==========================================
+// VIEW MANAGEMENT
+// ==========================================
 
-// =========================================
+function showView(view) {
+    [loginView, signupView, forgotView].forEach(item => {
+        if (item) item.hidden = item !== view;
+    });
+
+    clearMessages();
+}
+
+$("show-signup")?.addEventListener("click", () => {
+    showView(signupView);
+});
+
+$("back-to-login-from-signup")?.addEventListener("click", () => {
+    showView(loginView);
+});
+
+$("forgot-link")?.addEventListener("click", () => {
+    $("recovery-email").value = $("login-email").value;
+    showView(forgotView);
+});
+
+$("back-to-login")?.addEventListener("click", () => {
+    showView(loginView);
+});
+
+// ==========================================
+// PASSWORD VISIBILITY
+// ==========================================
+
+$("password-toggle")?.addEventListener("click", () => {
+    const input = $("login-password");
+    const isHidden = input.type === "password";
+
+    input.type = isHidden ? "text" : "password";
+    $("password-toggle").textContent = isHidden ? "Hide" : "Show";
+});
+
+// ==========================================
 // VALIDATION
-// =========================================
+// ==========================================
 
-function isValidEmail(email) {
+function validEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+// ==========================================
+// EMAIL + PASSWORD LOGIN
+// ==========================================
 
-// =========================================
-// PASSWORD VISIBILITY
-// =========================================
-
-passwordToggle.addEventListener("click", function () {
-
-    const isPassword = passwordInput.type === "password";
-
-    passwordInput.type = isPassword ? "text" : "password";
-
-    passwordToggle.textContent = isPassword ? "Hide" : "Show";
-
-    passwordToggle.setAttribute(
-        "aria-label",
-        isPassword ? "Hide password" : "Show password"
-    );
-
-});
-
-
-// =========================================
-// NAVIGATION
-// =========================================
-
-document.getElementById("forgot-link")
-    .addEventListener("click", showForgotPassword);
-
-
-document.getElementById("back-to-login")
-    .addEventListener("click", showLogin);
-
-
-// =========================================
-// LOGIN FORM
-// =========================================
-
-loginForm.addEventListener("submit", function (event) {
-
+loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     clearMessages();
 
-    const email = document.getElementById("login-email").value.trim();
-    const password = passwordInput.value;
+    const email = $("login-email").value.trim();
+    const password = $("login-password").value;
+    const button = $("login-submit");
 
-    if (!email || !password) {
-        showError(
-            loginError,
-            "Please enter both your email address and password."
-        );
+    if (!validEmail(email) || !password) {
+        showMessage("login-error", "Please enter a valid email and password.");
         return;
     }
 
-    if (!isValidEmail(email)) {
-        showError(
-            loginError,
-            "Please enter a valid email address."
+    button.disabled = true;
+
+    try {
+        const { data, error } = await db.auth.signInWithPassword({
+            email,
+            password
+        });
+
+        if (error) throw error;
+
+        if (!data.session) {
+            throw new Error("Login session was not created.");
+        }
+
+        location.replace(dashboardURL);
+
+    } catch (error) {
+        console.error("Login:", error);
+        showMessage(
+            "login-error",
+            "Unable to sign in. Please check your email and password."
         );
-        return;
+    } finally {
+        button.disabled = false;
     }
-
-    // Supabase Authentication will be added in Phase 3.
-    showError(
-        loginError,
-        "Authentication is not connected yet. Please try again after Supabase setup."
-    );
-
 });
 
+// ==========================================
+// SIGN UP
+// ==========================================
 
-// =========================================
-// FORGOT PASSWORD FORM
-// =========================================
-
-forgotForm.addEventListener("submit", function (event) {
-
+signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-
     clearMessages();
 
-    const email = document.getElementById("recovery-email").value.trim();
+    const name = $("signup-name").value.trim();
+    const email = $("signup-email").value.trim();
+    const password = $("signup-password").value;
+    const confirmPassword = $("signup-confirm-password").value;
+    const button = $("signup-submit");
 
-    if (!email) {
-        showError(
-            forgotError,
-            "Please enter your email address."
-        );
+    if (!name || !validEmail(email)) {
+        showMessage("signup-message", "Please enter your name and a valid email.");
         return;
     }
 
-    if (!isValidEmail(email)) {
-        showError(
-            forgotError,
-            "Please enter a valid email address."
-        );
+    if (password.length < 8) {
+        showMessage("signup-message", "Password must contain at least 8 characters.");
         return;
     }
 
-    // Supabase Password Recovery will be added in Phase 3.
-    showError(
-        forgotError,
-        "Password recovery is not connected yet. Please try again after Supabase setup."
-    );
+    if (password !== confirmPassword) {
+        showMessage("signup-message", "Passwords do not match.");
+        return;
+    }
 
+    button.disabled = true;
+
+    try {
+        const { data, error } = await db.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    display_name: name
+                },
+                emailRedirectTo: loginURL
+            }
+        });
+
+        if (error) throw error;
+
+        if (data.session) {
+            showMessage(
+                "signup-message",
+                "Account created successfully! Redirecting...",
+                "success"
+            );
+
+            location.replace(dashboardURL);
+        } else {
+            showMessage(
+                "signup-message",
+                "Account created! Please check your email to confirm your account before signing in.",
+                "success"
+            );
+        }
+
+    } catch (error) {
+        console.error("Sign up:", error);
+
+        showMessage(
+            "signup-message",
+            "Unable to create account. Please check your details or try another email."
+        );
+    } finally {
+        button.disabled = false;
+    }
 });
 
+// ==========================================
+// FORGOT PASSWORD
+// ==========================================
 
-// =========================================
+forgotForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearMessages();
+
+    const email = $("recovery-email").value.trim();
+    const button = forgotForm.querySelector('button[type="submit"]');
+
+    if (!validEmail(email)) {
+        showMessage("forgot-error", "Please enter a valid email.");
+        return;
+    }
+
+    button.disabled = true;
+
+    try {
+        const { error } = await db.auth.resetPasswordForEmail(email, {
+            redirectTo: loginURL
+        });
+
+        if (error) throw error;
+
+        showMessage(
+            "forgot-error",
+            "If an account exists, a recovery email will be sent.",
+            "success"
+        );
+
+    } catch (error) {
+        console.error("Password recovery:", error);
+        showMessage("forgot-error", "Unable to send recovery email. Try again.");
+    } finally {
+        button.disabled = false;
+    }
+});
+
+// ==========================================
 // GOOGLE LOGIN
-// =========================================
+// ==========================================
 
-document.getElementById("google-login")
-    .addEventListener("click", function () {
+$("google-login").addEventListener("click", async () => {
+    clearMessages();
 
-        clearMessages();
+    try {
+        const { error } = await db.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: dashboardURL
+            }
+        });
 
-        showError(
-            loginError,
-            "Google Authentication is not connected yet. Please try again after Supabase setup."
-        );
+        if (error) throw error;
 
-    });
+    } catch (error) {
+        console.error("Google login:", error);
+        showMessage("login-error", "Unable to connect with Google.");
+    }
+});
+
+// ==========================================
+// EXISTING SESSION
+// ==========================================
+
+async function checkSession() {
+    if (!db) return;
+
+    const { data, error } = await db.auth.getSession();
+
+    if (error) {
+        console.error("Session:", error);
+        return;
+    }
+
+    if (data.session) {
+        location.replace(dashboardURL);
+    }
+}
+
+if (!db) {
+    console.error("Supabase Client is missing.");
+} else {
+    checkSession();
+}
+
+console.log("FUBAN OS: Authentication initialized.");
