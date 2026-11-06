@@ -45,6 +45,34 @@ function showMessage(id, message, type = "error") {
     element.classList.toggle("success-message", type === "success");
 }
 
+function saveSignupProfileName(user, name) {
+    if (
+        !user?.id ||
+        user.user_metadata?.display_name !== name
+    ) {
+        return false;
+    }
+
+    try {
+        const key = "fuban_profile_settings";
+        const raw = localStorage.getItem(key);
+        const current = raw ? JSON.parse(raw) : {};
+        if (!current || typeof current !== "object" || Array.isArray(current)) {
+            throw new Error("Saved profile settings have an invalid format.");
+        }
+
+        localStorage.setItem(key, JSON.stringify({
+            ...current,
+            authUserId: user.id,
+            displayName: name
+        }));
+        return true;
+    } catch (error) {
+        console.error("Could not save the signup profile name:", error);
+        return false;
+    }
+}
+
 // ==========================================
 // VIEW MANAGEMENT
 // ==========================================
@@ -183,6 +211,8 @@ signupForm.addEventListener("submit", async (event) => {
 
         if (error) throw error;
 
+        const profileNameSaved = saveSignupProfileName(data.user, name);
+
         if (data.session) {
             showMessage(
                 "signup-message",
@@ -194,7 +224,9 @@ signupForm.addEventListener("submit", async (event) => {
         } else {
             showMessage(
                 "signup-message",
-                "Account created! Please check your email to confirm your account before signing in.",
+                profileNameSaved
+                    ? "Account created! Please check your email to confirm your account before signing in."
+                    : "Account created! Please check your email to confirm your account. Your profile name will sync after sign-in.",
                 "success"
             );
         }

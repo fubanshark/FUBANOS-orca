@@ -1120,6 +1120,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setupDataRefresh() {
         window.addEventListener("fuban:xp-change", renderData);
+        window.addEventListener("fuban:auth-user", event => {
+            const user = event.detail?.user;
+            const metadata = user?.user_metadata || {};
+            const displayName = metadata.display_name || metadata.full_name;
+            if (
+                !user?.id ||
+                typeof displayName !== "string" ||
+                !displayName.trim() ||
+                (
+                    profileSettings.authUserId === user.id &&
+                    getProfileValue("displayName")
+                )
+            ) {
+                return;
+            }
+
+            const nextSettings = {
+                ...profileSettings,
+                authUserId: user.id,
+                displayName: displayName.trim()
+            };
+            if (saveProfileSettings(nextSettings)) {
+                initializePersonalization();
+                populateProfileForm();
+            }
+        });
         window.addEventListener("storage", event => {
             if (Object.values(STORAGE_KEYS).includes(event.key)) {
                 renderData();

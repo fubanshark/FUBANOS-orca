@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages/profile.css">
     <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/auth-ui.css?v=account-ui-v1">
     <link rel="stylesheet" href="css/theme.css?v=theme-migration-2ad5aaf">
 </head>
 
@@ -46,7 +47,9 @@
         <div class="header-actions">
             <a href="profile.html" class="top-button active">
                 <span class="profile-dot"></span>
-                Profile : FuBan
+                Profile : <span data-auth-display-name>FuBan</span>
+                <span class="account-verified-badge" data-auth-status-badge
+                      aria-label="Signed in" title="Signed in" hidden>✓</span>
             </a>
 
             <a href="settings.html" class="top-button">
@@ -196,7 +199,11 @@
 
                 <p class="section-eyebrow">YOUR IDENTITY</p>
 
-                <h2 id="profile-display-name">FuBan</h2>
+                <div class="profile-name-row">
+                    <h2 id="profile-display-name" data-auth-display-name>FuBan</h2>
+                    <span class="account-verified-badge" data-auth-status-badge
+                          aria-label="Signed in" title="Signed in" hidden>✓</span>
+                </div>
 
                 <p class="profile-username" id="profile-username">
                     @username
@@ -931,6 +938,9 @@
     <script src="js/xp.js" defer></script>
     <script src="js/pages/profile.js" defer></script>
     <script src="js/profile-avatar.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="js/config.js?v=7a96fbc" defer></script>
+    <script src="js/auth-ui.js?v=account-ui-v1" defer></script>
 
 </body>
 </html>

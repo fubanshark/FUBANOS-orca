@@ -1,0 +1,26 @@
+.account-verified-badge {
+    width: 18px;
+    height: 18px;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 18px;
+    border: 1px solid rgba(120, 220, 157, 0.72);
+    border-radius: 50%;
+    color: #b7f5c8;
+    background: rgba(31, 119, 70, 0.32);
+    font: 700 11px/1 Arial, sans-serif;
+}
+
+.account-verified-badge[hidden] {
+    display: none;
+}
+
+.profile-name-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.profile-name-row .account-verified-badge {
+    margin-top: 5px;
+}

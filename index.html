@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/pages/welcome.css">
     <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/auth-ui.css?v=account-ui-v1">
     <link rel="stylesheet" href="css/theme.css?v=theme-migration-2ad5aaf">
 </head>
 
@@ -20,8 +21,10 @@
 
     <main id="welcome-page">
 
-        <a class="welcome-logout-link" href="login.html">
-            Log out
+        <a class="welcome-logout-link" href="login.html" data-auth-action="login">
+            <span data-auth-label>Log in</span>
+            <span class="account-verified-badge" data-auth-status-badge
+                  aria-label="Signed in" title="Signed in" hidden>✓</span>
         </a>
 
         <!-- พื้นที่สำหรับภาพพื้นหลังและกลุ่มดาว -->
@@ -35,7 +38,9 @@
 
                 <a href="profile.html" class="top-button">
                     <span class="button-icon">●</span>
-                    <span>Profile : FuBan</span>
+                    <span>Profile : <span data-auth-display-name>FuBan</span></span>
+                    <span class="account-verified-badge" data-auth-status-badge
+                          aria-label="Signed in" title="Signed in" hidden>✓</span>
                 </a>
 
                 <a href="settings.html" class="top-button">
@@ -86,6 +91,9 @@
     <script src="js/main.js"></script>
     <script src="js/pages/welcome.js"></script>
     <script src="js/profile-avatar.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js?v=7a96fbc"></script>
+    <script src="js/auth-ui.js?v=account-ui-v1"></script>
 
 </body>
 </html>

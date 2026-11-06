@@ -581,6 +581,24 @@
     display: none;
 }
 
+.auth-message.success-message {
+    border-color: rgba(120, 220, 157, 0.42);
+    color: #b7f5c8;
+    background: rgba(31, 119, 70, 0.16);
+}
+
+.auth-message.success-message::before {
+    content: "✓";
+    display: inline-grid;
+    width: 17px;
+    height: 17px;
+    place-items: center;
+    margin-right: 8px;
+    border: 1px solid rgba(120, 220, 157, 0.72);
+    border-radius: 50%;
+    font-weight: 700;
+}
+
 
 /* =========================================
    16. BACK TO LOGIN

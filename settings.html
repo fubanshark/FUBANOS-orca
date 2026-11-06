@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages/settings.css">
+    <link rel="stylesheet" href="css/auth-ui.css?v=account-ui-v1">
     <link rel="stylesheet" href="css/theme.css?v=theme-migration-2ad5aaf">
 </head>
 
@@ -43,7 +44,9 @@
 
             <a href="profile.html" class="top-button">
                 <span class="profile-dot"></span>
-                Profile : FuBan
+                Profile : <span data-auth-display-name>FuBan</span>
+                <span class="account-verified-badge" data-auth-status-badge
+                      aria-label="Signed in" title="Signed in" hidden>✓</span>
             </a>
 
             <a href="settings.html" class="top-button active">
@@ -109,7 +112,7 @@
 
                     <div class="account-details">
 
-                        <strong id="settings-display-name">
+                        <strong id="settings-display-name" data-auth-display-name>
                             FuBan
                         </strong>
 
@@ -119,7 +122,7 @@
 
                     </div>
 
-                    <span class="local-status">
+                    <span class="local-status" data-auth-connection-label>
                         LOCAL
                     </span>
 
@@ -128,14 +131,16 @@
 
                 <div class="settings-info-row">
                     <span>Account system</span>
-                    <strong>Not connected</strong>
+                    <strong data-auth-account-status>Not connected</strong>
+                    <span class="account-verified-badge" data-auth-status-badge
+                          aria-label="Signed in" title="Signed in" hidden>✓</span>
                 </div>
 
                 <div class="settings-info-row">
                     <span>Email</span>
 
                     <strong class="muted-value">
-                        Available after login setup
+                        <span data-auth-account-email>Available after login</span>
                     </strong>
                 </div>
 
@@ -425,8 +430,11 @@
 
         </section>
 
-        <a class="settings-auth-link" href="login.html">
-            Log in <span aria-hidden="true">→</span>
+        <a class="settings-auth-link" href="login.html" data-auth-action="login">
+            <span data-auth-label>Log in</span>
+            <span class="account-verified-badge" data-auth-status-badge
+                  aria-label="Signed in" title="Signed in" hidden>✓</span>
+            <span aria-hidden="true">→</span>
         </a>
 
         <!-- FOOTER -->
@@ -443,6 +451,9 @@
     </main>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js?v=7a96fbc"></script>
+    <script src="js/auth-ui.js?v=account-ui-v1"></script>
     <script src="js/pages/settings.js?v=theme-migration-2ad5aaf" defer></script>
 
 </body>
