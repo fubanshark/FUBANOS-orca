@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030817">
+
+    <!-- Apply saved Light / Dark theme -->
+    <script src="js/theme.js"></script>
+
+    <title>Login | FUBAN OS</title>
+
+    <!-- Global styles -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+
+    <!-- Login styles -->
+    <link rel="stylesheet" href="css/pages/login.css">
+</head>
+
+<body id="login-page">
+
+    <!-- BACKGROUND -->
+    <div class="login-background" aria-hidden="true">
+        <div class="login-stars"></div>
+        <div class="login-glow"></div>
+    </div>
+
+
+    <!-- BACK TO WELCOME -->
+    <a href="index.html" class="login-back">
+        <span>←</span>
+        Back to Welcome
+    </a>
+
+
+    <!-- MAIN -->
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <!-- BRAND -->
+            <div class="login-brand">
+                <span class="brand-symbol">✦</span>
+                <span>FUBAN OS</span>
+            </div>
+
+
+            <!-- =================================
+                 LOGIN VIEW
+            ================================== -->
+
+            <div id="login-view" class="auth-view">
+
+                <div class="auth-heading">
+                    <p class="auth-eyebrow">PERSONAL SYSTEM / ACCESS</p>
+
+                    <h1>Welcome <span>back.</span></h1>
+
+                    <p>
+                        Sign in to continue your journey.
+                    </p>
+                </div>
+
+
+                <!-- LOGIN FORM -->
+                <form id="login-form" novalidate>
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+
+                        <label for="login-email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="login-email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+
+                        <label for="login-password">
+                            Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="login-password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="password-toggle"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+                    <div class="login-options">
+
+                        <label class="remember-option">
+                            <input
+                                type="checkbox"
+                                id="remember-me"
+                            >
+
+                            <span>Remember me</span>
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="text-button"
+                            id="forgot-link"
+                        >
+                            Forgot password?
+                        </button>
+
+                    </div>
+
+
+                    <!-- ERROR MESSAGE -->
+                    <div
+                        class="auth-message error-message"
+                        id="login-error"
+                        role="alert"
+                        aria-live="polite"
+                        hidden
+                    ></div>
+
+
+                    <!-- SUBMIT -->
+                    <button
+                        type="submit"
+                        class="primary-button"
+                        id="login-submit"
+                    >
+                        <span>Sign In</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                </form>
+
+
+                <!-- DIVIDER -->
+                <div class="auth-divider">
+                    <span></span>
+                    <p>OR CONTINUE WITH</p>
+                    <span></span>
+                </div>
+
+
+                <!-- GOOGLE LOGIN -->
+                <button
+                    type="button"
+                    class="google-button"
+                    id="google-login"
+                >
+
+                    <span class="google-icon">G</span>
+
+                    Continue with Google
+
+                </button>
+
+
+                <!-- INVITE ONLY -->
+                <p class="invite-note">
+                    <span>✧</span>
+                    FUBAN OS is currently invite-only.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================
+                 FORGOT PASSWORD VIEW
+            ================================== -->
+
+            <div
+                id="forgot-view"
+                class="auth-view"
+                hidden
+            >
+
+                <div class="auth-heading">
+
+                    <p class="auth-eyebrow">
+                        ACCOUNT RECOVERY
+                    </p>
+
+                    <h1>Forgot <span>password?</span></h1>
+
+                    <p>
+                        Enter your email address to recover
+                        access to your account.
+                    </p>
+
+                </div>
+
+
+                <form id="forgot-form" novalidate>
+
+                    <div class="form-group">
+
+                        <label for="recovery-email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="recovery-email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- RECOVERY ERROR / STATUS -->
+                    <div
+                        class="auth-message error-message"
+                        id="forgot-error"
+                        role="alert"
+                        aria-live="polite"
+                        hidden
+                    ></div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        <span>Reset Password</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                </form>
+
+
+                <button
+                    type="button"
+                    class="back-to-login"
+                    id="back-to-login"
+                >
+                    ← Back to Login
+                </button>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <footer class="login-footer">
+                <span>FUBAN OS</span>
+                <span>PERSONAL SYSTEM · VERSION 1.0</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+
+
+</body>
+</html>

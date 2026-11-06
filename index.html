@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030817">
+    <script src="js/theme.js"></script>
+
+    <title>Welcome | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pages/welcome.css">
+    <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body>
+
+    <main id="welcome-page">
+
+        <a class="welcome-logout-link" href="login.html">
+            Log out
+        </a>
+
+        <!-- พื้นที่สำหรับภาพพื้นหลังและกลุ่มดาว -->
+        <div class="space-background"></div>
+        <div id="shooting-star-layer"></div>
+
+        <!-- Navigation มุมขวาบน -->
+        <header class="welcome-header">
+
+            <nav class="welcome-actions">
+
+                <a href="profile.html" class="top-button">
+                    <span class="button-icon">●</span>
+                    <span>Profile : FuBan</span>
+                </a>
+
+                <a href="settings.html" class="top-button">
+                    <span class="button-icon">⚙</span>
+                    <span>Setting</span>
+                </a>
+
+            </nav>
+
+            
+        </header>
+
+
+        <!-- เนื้อหาหลัก -->
+        <section class="welcome-content">
+<div id="constellation-area">
+
+    <div id="constellation-layer"></div>
+
+    <div id="constellation-tooltip"></div>
+
+</div>
+
+            <h1>Welcome, Fuban</h1>
+
+            <div class="quote-container">
+
+                <p id="daily-quote">
+                    “The principal goal of education is to create men
+                    who are capable of doing new things, not simply
+                    of repeating what other generations have done.”
+                </p>
+
+                <p class="quote-author">
+                    — Leonhard Euler
+                </p>
+
+            </div>
+
+            <a href="dashboard.html" class="enter-button">
+                เข้าสู่เว็บไซต์
+            </a>
+
+        </section>
+
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/pages/welcome.js"></script>
+    <script src="js/profile-avatar.js" defer></script>
+
+</body>
+</html>

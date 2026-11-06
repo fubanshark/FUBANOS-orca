@@ -1,0 +1,62 @@
+/* ==============================
+   FUBAN OS - GLOBAL STYLES
+================================ */
+
+/* Fonts */
+
+@font-face {
+    font-family: "UID Space";
+    src: url("../assets/fonts/UID SPACE.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Alice";
+    src: url("../assets/fonts/Alice-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+
+/* Color Palette */
+
+:root {
+    --color-background: #030817;
+    --color-deep-blue: #07152E;
+    --color-white: #FFFFFF;
+    --color-text: #E8EDF7;
+    --color-muted: #A7B4C9;
+    --color-icon: #93D4FA;
+    --color-pink: #FF66C4;
+
+    --font-main: "UID Space", sans-serif;
+    --font-quote: "Alice", serif;
+}
+
+
+/* Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-main);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}

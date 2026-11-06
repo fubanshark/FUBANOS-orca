@@ -1,0 +1,673 @@
+@font-face {
+    font-family: "UID Space";
+    src: url("../assets/fonts/UID SPACE.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Alice";
+    src: url("../assets/fonts/Alice-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+
+html[data-theme="light"] {
+    color-scheme: light;
+    --color-background: #e9e9df;
+    --color-text: #26352a;
+    --color-muted: #68736a;
+    --font-main: "Segoe UI", "Noto Sans Thai", Arial, sans-serif;
+    --font-quote: "Alice", Georgia, serif;
+    --font-display: "Alice", Georgia, serif;
+    --theme-ink: #26352a;
+    --theme-muted: #68736a;
+    --theme-accent: #526b50;
+    --theme-highlight: #93aa87;
+    --theme-line: rgba(38, 53, 42, 0.18);
+    --theme-glass: rgba(245, 245, 237, 0.88);
+    --theme-glass-soft: rgba(245, 245, 237, 0.72);
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --color-background: #08090d;
+    --color-text: #e8edf7;
+    --color-muted: #a7b4c9;
+    --font-main: "UID Space", sans-serif;
+    --font-quote: "Alice", Georgia, serif;
+    --theme-ink: #eef5fb;
+    --theme-muted: rgba(230, 240, 248, 0.6);
+    --theme-accent: #93d4fa;
+    --theme-highlight: #b7e4ff;
+    --theme-line: rgba(255, 255, 255, 0.17);
+    --theme-glass: rgba(5, 18, 32, 0.68);
+    --theme-glass-soft: rgba(255, 255, 255, 0.075);
+}
+
+html[data-theme] body {
+    color: var(--color-text);
+    font-family: var(--font-main);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+html[data-theme] :is(button, input, select, textarea) {
+    font-family: var(--font-main);
+}
+
+html[data-theme="light"] :is(h1, h2, h3) {
+    font-family: var(--font-display);
+}
+
+/* The existing dark pages become the soft green, eco-brutalist light theme. */
+html[data-theme="light"] #dashboard-page {
+    --glass: rgba(245, 245, 237, 0.78);
+    --glass-light: rgba(255, 255, 255, 0.58);
+    --border-light: rgba(38, 53, 42, 0.19);
+    --text-main: #26352a;
+    --text-muted: #68736a;
+    --icon-color: #526b50;
+    color: var(--theme-ink);
+    background: #d7dbcf;
+}
+
+html[data-theme="light"] #dashboard-page .wallpaper-overlay {
+    background: rgba(245, 245, 237, 0.4);
+}
+
+html[data-theme="light"] #dashboard-page .dashboard-header {
+    border-color: var(--theme-line);
+    background: rgba(232, 234, 224, 0.9);
+}
+
+html[data-theme="light"] #dashboard-page :is(.dashboard-home-link, .nav-link, .top-button) {
+    color: #435247;
+}
+
+html[data-theme="light"] #dashboard-page .nav-link:is(:hover, .active),
+html[data-theme="light"] #dashboard-page .top-button:is(:hover, .active) {
+    color: #fff;
+    background: #344a38;
+    border-color: #344a38;
+}
+
+html[data-theme="light"] #dashboard-page .panel {
+    border-color: rgba(38, 53, 42, 0.17);
+    background: var(--theme-glass);
+    box-shadow: 5px 5px 0 rgba(38, 54, 41, 0.09);
+    color: var(--theme-ink);
+}
+
+html[data-theme="light"] #dashboard-page .panel:is(.mission-panel, .calendar-panel, .journal-panel, .rooms-panel) {
+    background: rgba(245, 245, 237, 0.58);
+}
+
+html[data-theme="light"] #dashboard-page :is(
+    .panel h2, .panel h3, .mission-name, .calendar-heading, .calendar-day,
+    .activity-summary, .activity-summary p, .activity-category-name, .activity-category-percent,
+    .room-item, .room-item strong, .view-link, .panel-heading
+) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #dashboard-page :is(.empty-message, .mission-category, .calendar-weekdays, .mission-checkbox-label) {
+    color: #68736a;
+}
+
+html[data-theme="light"] #dashboard-page :is(.mission-progress-track, .mission-item, .room-item, .journal-preview) {
+    border-color: var(--theme-line);
+    background-color: rgba(255, 255, 255, 0.45);
+    color: #26352a;
+}
+
+html[data-theme="light"] #dashboard-page :is(.mission-progress-fill, .mission-range, .mission-checkbox) {
+    accent-color: #526b50;
+}
+
+html[data-theme="light"] #dashboard-page .mission-progress-fill {
+    background: #526b50;
+}
+
+html[data-theme="light"] #dashboard-page .modal-box {
+    border-color: var(--theme-line);
+    background: rgba(245, 245, 237, 0.98);
+    color: #26352a;
+}
+
+/* Calendar retains its wallpaper but lifts the contrast and glass surfaces. */
+html[data-theme="light"] #calendar-page {
+    color: #26352a;
+    background: #e9e9df;
+}
+
+html[data-theme="light"] #calendar-page .calendar-wallpaper-overlay {
+    background: rgba(245, 245, 237, 0.34);
+}
+
+html[data-theme="light"] #calendar-page :is(.calendar-navigation, .calendar-goal-card, .calendar-month-panel, .calendar-daily-panel, .calendar-secondary-panel) {
+    border-color: rgba(38, 53, 42, 0.19);
+    background: rgba(245, 245, 237, 0.82);
+    color: #26352a;
+    box-shadow: 4px 5px 18px rgba(38, 54, 41, 0.08);
+}
+
+html[data-theme="light"] #calendar-page .calendar-goal-card:hover {
+    background: rgba(250, 250, 245, 0.96);
+}
+
+html[data-theme="light"] #calendar-page :is(h1, h2, h3, h4, p, span, strong, small, label, a, button) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #calendar-page :is(.calendar-nav-link, .calendar-top-button, .calendar-page-heading h1, .calendar-section-heading h2, .calendar-daily-heading, .calendar-goal-item-heading, .calendar-goal-progress-row strong, .calendar-month-navigation, .calendar-day, .calendar-task-item, .calendar-efficiency-stat) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #calendar-page :is(.calendar-subtitle, .calendar-goal-label, .calendar-empty, .calendar-goal-deadline, .calendar-goal-progress-row, .calendar-weekdays, .calendar-legend, .calendar-small-label, .calendar-subsection-heading p) {
+    color: #68736a;
+}
+
+html[data-theme="light"] #calendar-page :is(.calendar-eyebrow, .calendar-goal-period, .calendar-text-button, .calendar-efficiency-stat) {
+    color: #526b50;
+}
+
+html[data-theme="light"] #calendar-page :is(.calendar-add-button, .calendar-small-add-button, .calendar-month-arrow, .calendar-efficiency-card, .calendar-focus-time) {
+    border-color: var(--theme-line);
+    background: rgba(255, 255, 255, 0.58);
+    color: #344a38;
+}
+
+html[data-theme="light"] #calendar-page :is(input, select, textarea, .calendar-modal-box) {
+    border-color: var(--theme-line);
+    background-color: rgba(250, 250, 245, 0.97);
+    color: #26352a;
+}
+
+html[data-theme="light"] #calendar-page .calendar-modal {
+    background: rgba(38, 53, 42, 0.35);
+}
+
+/* Focus mode uses a bright veil over the selected wallpaper in light mode. */
+html[data-theme="light"] #focus-page {
+    color: #26352a;
+    background: #e9e9df;
+}
+
+html[data-theme="light"] #focus-page .focus-wallpaper-overlay {
+    background: rgba(245, 245, 237, 0.34);
+}
+
+html[data-theme="light"] #focus-page :is(.focus-navigation, .focus-wallpaper-button, .focus-xp-toggle, .focus-modal-box) {
+    border-color: var(--theme-line);
+    background: rgba(245, 245, 237, 0.82);
+    color: #26352a;
+}
+
+html[data-theme="light"] #focus-page :is(.focus-nav-link, .focus-clock, .focus-start-time, .focus-duration, .focus-xp-hint, .focus-modal-description, .focus-darkness-heading) {
+    color: #344a38;
+}
+
+html[data-theme="light"] #focus-page :is(.focus-modal, .focus-controls) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #focus-page .focus-modal {
+    background: rgba(38, 53, 42, 0.28);
+}
+
+html[data-theme="light"] #focus-page :is(.focus-modal input, .focus-modal select, .focus-modal textarea) {
+    border-color: var(--theme-line);
+    background: rgba(255, 255, 255, 0.8);
+    color: #26352a;
+}
+
+html[data-theme="light"] #focus-page .focus-modal-submit {
+    background: #526b50;
+    color: #fff;
+}
+
+html[data-theme="light"] #focus-page :is(.focus-xp-total, .focus-xp-session-result) {
+    color: #526b50;
+}
+
+/* Journal keeps paper pages intact and switches only the surrounding tools. */
+html[data-theme="light"] #journal-page {
+    color: #26352a;
+    background: #e9e9df;
+}
+
+html[data-theme="light"] #journal-page .journal-background::after {
+    background: rgba(245, 245, 237, 0.34);
+}
+
+html[data-theme="light"] #journal-page :is(.journal-header, .journal-sidebar, .journal-topbar, .page-properties-panel, .notebook-footer) {
+    border-color: var(--theme-line);
+    background-color: rgba(245, 245, 237, 0.88);
+    color: #26352a;
+}
+
+html[data-theme="light"] #journal-page :is(.journal-back, .journal-header-title, .journal-save-status, .sidebar-heading h2, .tool-button, .paper-option, .paper-color-control, .sticker-category, .selection-mode-label, .current-page-label, .add-page-button, .page-count, .properties-section-title, .property-field, .properties-heading, .properties-heading h2, .tool-section h3) {
+    color: #344a38;
+}
+
+html[data-theme="light"] #journal-page :is(.sidebar-heading p, .tool-description, .coming-soon) {
+    color: #68736a;
+}
+
+html[data-theme="light"] #journal-page :is(#paper-color-value, .tool-button:disabled, .paper-option:disabled, .sticker-category:disabled, .journal-sidebar input:disabled, .journal-sidebar select:disabled) {
+    color: #68736a;
+    opacity: 0.62;
+}
+
+html[data-theme="light"] #journal-page :is(.tool-button:hover, .paper-option:hover, .sticker-category:hover, .add-page-button:hover) {
+    border-color: rgba(82, 107, 80, 0.3);
+    background: rgba(82, 107, 80, 0.1);
+}
+
+html[data-theme="light"] #journal-page :is(.add-page-menu, .image-toolbar, .journal-selection-menu, .sticker-import-modal, .journal-layer-panel) {
+    border-color: var(--theme-line);
+    background: rgba(245, 245, 237, 0.98);
+    color: #26352a;
+}
+
+html[data-theme="light"] #journal-page :is(.add-page-menu button, .image-toolbar button, .journal-selection-menu button, .journal-selection-menu input, .journal-selection-menu select, .sticker-import-modal input, .sticker-import-modal select) {
+    color: #26352a;
+}
+
+/* Profile glass cards become pale, while keeping existing image personalization. */
+html[data-theme="light"] #profile-page {
+    --profile-glass: rgba(245, 245, 237, 0.86);
+    --profile-glass-light: rgba(255, 255, 255, 0.62);
+    --profile-border: rgba(38, 53, 42, 0.2);
+    --profile-text: #26352a;
+    --profile-muted: rgba(38, 53, 42, 0.68);
+    --profile-accent: #526b50;
+    --profile-green: #607c5c;
+    color: #26352a;
+    background: #d7dbcf;
+}
+
+html[data-theme="light"] #profile-page .profile-wallpaper-overlay {
+    background: rgba(245, 245, 237, 0.34);
+}
+
+html[data-theme="light"] #profile-page .dashboard-header {
+    border-color: var(--theme-line);
+    background: rgba(232, 234, 224, 0.9);
+}
+
+html[data-theme="light"] #profile-page :is(.dashboard-home-link, .nav-link, .top-button, .profile-identity-info h2, .profile-bio, .rank-card, .xp-card, .profile-outline-button, .rank-ladder-item, .mastery-card, .mastery-overview, .stat-card, .activity-panel, .achievement-showcase, .activity-history) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #profile-page :is(.nav-link:hover, .nav-link.active, .top-button:hover, .top-button.active) {
+    color: #fff;
+    background: #344a38;
+}
+
+html[data-theme="light"] #profile-page :is(.profile-outline-button, .profile-edit-form, .rank-card, .xp-card, .rank-ladder-panel, .mastery-card, .mastery-overview, .stat-card, .activity-panel, .achievement-showcase, .activity-history) {
+    border-color: var(--theme-line);
+    background-color: var(--theme-glass);
+}
+
+html[data-theme="light"] #profile-page .profile-wallpaper-settings {
+    border-color: var(--theme-line);
+    background: rgba(245, 245, 237, 0.82);
+}
+
+html[data-theme="light"] #profile-page .profile-wallpaper-settings :is(.wallpaper-setting-info h2, .wallpaper-controls label, .upload-wallpaper-button) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #profile-page .wallpaper-controls select {
+    border-color: var(--theme-line);
+    background: rgba(255, 255, 255, 0.82);
+    color: #26352a;
+}
+
+html[data-theme="light"] #profile-page .wallpaper-controls select option {
+    background: #f5f5ed;
+    color: #26352a;
+}
+
+html[data-theme="light"] #profile-page :is(.profile-cover-shade) {
+    background:
+        linear-gradient(90deg, rgba(38, 53, 42, 0.62), rgba(38, 53, 42, 0.04) 85%),
+        linear-gradient(0deg, rgba(38, 53, 42, 0.42), transparent 75%);
+}
+
+html[data-theme="light"] #profile-page :is(.profile-cover-content, .profile-cover-content h1, .profile-cover-subtitle) {
+    color: #fff;
+}
+
+html[data-theme="light"] #profile-page .profile-cover-content .profile-eyebrow {
+    color: #d7edcf;
+}
+
+html[data-theme="light"] #profile-page :is(.profile-extra-info dd, .profile-achievement-details strong, .profile-activity-details strong, .rank-ladder-item strong, .mastery-card h3, .stat-card strong) {
+    color: #26352a;
+}
+
+/* Milestone glass panels and background. */
+html[data-theme="light"] .milestone-page {
+    --milestone-accent: #526b50;
+    --milestone-text: #26352a;
+    --milestone-muted: rgba(38, 53, 42, 0.67);
+    --milestone-glass: rgba(245, 245, 237, 0.84);
+    --milestone-glass-light: rgba(255, 255, 255, 0.6);
+    --milestone-border: rgba(38, 53, 42, 0.18);
+    color: #26352a;
+    background: #e9e9df;
+}
+
+html[data-theme="light"] .milestone-page .milestone-background {
+    filter: saturate(0.65);
+}
+
+html[data-theme="light"] .milestone-page .milestone-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(245, 245, 237, 0.34);
+}
+
+html[data-theme="light"] .milestone-page .milestone-background-overlay {
+    background: rgba(245, 245, 237, 0.08);
+}
+
+html[data-theme="light"] .milestone-page .navbar {
+    border-color: var(--milestone-border);
+    background: rgba(245, 245, 237, 0.82);
+}
+
+html[data-theme="light"] .milestone-page :is(.nav-link, .header-link) {
+    color: #344a38;
+}
+
+html[data-theme="light"] .milestone-page :is(.nav-link:hover, .nav-link.active, .header-link:hover) {
+    color: #26352a;
+    background: rgba(82, 107, 80, 0.12);
+}
+
+html[data-theme="light"] .milestone-page .milestone-container {
+    border-color: rgba(38, 53, 42, 0.2);
+    background: rgba(245, 245, 237, 0.84);
+    box-shadow: 0 18px 70px rgba(38, 54, 41, 0.12);
+}
+
+html[data-theme="light"] .milestone-page .milestone-container :is(h1, h2, h3, h4, p, span, strong, small, label, button) {
+    color: #26352a;
+}
+
+html[data-theme="light"] .milestone-page :is(.milestone-heading h1, .milestone-summary-card strong, .achievement-card, .achievement-card h3, .achievement-card h2, .milestone-modal-content, .milestone-tab) {
+    color: #26352a;
+}
+
+html[data-theme="light"] .milestone-page :is(.milestone-summary-card, .achievement-card, .milestone-modal-content, .delete-modal-content) {
+    border-color: var(--milestone-border);
+    background: var(--milestone-glass);
+    box-shadow: 4px 5px 18px rgba(38, 54, 41, 0.08);
+}
+
+html[data-theme="light"] .milestone-page :is(.milestone-toolbar input, .milestone-toolbar select, .milestone-modal-content input, .milestone-modal-content textarea, .milestone-modal-content select) {
+    border-color: var(--milestone-border);
+    background: rgba(250, 250, 245, 0.96);
+    color: #26352a;
+}
+
+html[data-theme="light"] .milestone-page .milestone-primary-btn {
+    color: #fff;
+    background: #526b50;
+}
+
+html[data-theme="light"] .milestone-page .milestone-primary-btn span {
+    color: #fff;
+}
+
+/* Welcome uses the same light palette without removing its background artwork. */
+html[data-theme="light"] #welcome-page {
+    color: #26352a;
+    background-color: #e9e9df;
+}
+
+html[data-theme="light"] #welcome-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(245, 245, 237, 0.46);
+    pointer-events: none;
+}
+
+html[data-theme="light"] #welcome-page :is(.top-button, .welcome-content h1, #daily-quote, .enter-button) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #welcome-page :is(.top-button, .welcome-logout-link, .enter-button) {
+    border-color: rgba(38, 53, 42, 0.28);
+    background-color: rgba(245, 245, 237, 0.72);
+    color: #26352a;
+}
+
+html[data-theme="light"] #welcome-page .welcome-logout-link:hover {
+    border-color: #344a38;
+    color: #fff;
+    background: #344a38;
+}
+
+html[data-theme="dark"] #settings-page .settings-auth-link {
+    border-color: var(--settings-line);
+    color: var(--settings-ink);
+    background: rgba(7, 18, 31, 0.78);
+}
+
+html[data-theme="dark"] #settings-page .settings-auth-link:hover {
+    border-color: #93d4fa;
+    color: #061421;
+    background: #93d4fa;
+}
+
+html[data-theme="light"] #welcome-page .quote-author {
+    color: #526b50;
+}
+
+html[data-theme="light"] #settings-page .settings-intro :is(.settings-eyebrow, h1, p) {
+    text-shadow: 0 1px 2px rgba(245, 245, 237, 0.25);
+}
+
+html[data-theme="light"] #dashboard-page :is(.wallpaper-modal-box, .wallpaper-modal-box h2, .wallpaper-modal-box p, .wallpaper-modal-box label, .wallpaper-modal-box span, .wallpaper-modal-box button) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #dashboard-page .wallpaper-modal-box {
+    border-color: var(--theme-line);
+    background: rgba(245, 245, 237, 0.97);
+}
+
+html[data-theme="light"] #dashboard-page .wallpaper-option {
+    border-color: var(--theme-line);
+    background: rgba(255, 255, 255, 0.48);
+}
+
+html[data-theme="light"] #dashboard-page .wallpaper-option.selected {
+    border-color: #526b50;
+    box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.16);
+}
+
+html[data-theme="light"] #dashboard-page .upload-wallpaper {
+    border-color: var(--theme-line);
+    color: #344a38;
+}
+
+html[data-theme="light"] #dashboard-page .wallpaper-adjustments input {
+    accent-color: #526b50;
+}
+
+html[data-theme="light"] #dashboard-page .wallpaper-modal-box .modal-submit {
+    border-color: #344a38;
+    background: #344a38;
+    color: #fff;
+}
+
+html[data-theme="light"] #focus-page .focus-modal-box {
+    border-color: var(--theme-line);
+    background: rgba(245, 245, 237, 0.97);
+    color: #26352a;
+}
+
+html[data-theme="light"] #focus-page .focus-modal-box :is(h2, p, label, span, button) {
+    color: #26352a;
+}
+
+html[data-theme="light"] #focus-page .focus-wallpaper-option,
+html[data-theme="light"] #focus-page .focus-upload-label {
+    border-color: var(--theme-line);
+    background: rgba(255, 255, 255, 0.48);
+    color: #344a38;
+}
+
+html[data-theme="light"] #focus-page .focus-wallpaper-option.selected {
+    border-color: #526b50;
+    box-shadow: 0 0 0 2px rgba(82, 107, 80, 0.16);
+}
+
+html[data-theme="light"] #focus-page .focus-modal-submit {
+    border-color: #344a38;
+    background: #344a38;
+    color: #fff;
+}
+
+html[data-theme="light"] #focus-page .focus-modal-box button.focus-modal-submit {
+    color: #fff;
+}
+
+html[data-theme="light"] #focus-page #focus-wallpaper-opacity-value {
+    color: #526b50;
+}
+
+html[data-theme="light"] #focus-page #focus-wallpaper-opacity {
+    accent-color: #526b50;
+}
+
+html[data-theme="light"] #garden-page {
+    color: #26352a;
+    background: #e9e9df;
+}
+
+html[data-theme="light"] #garden-page .garden-coming-soon h1 {
+    color: #26352a;
+}
+
+html[data-theme="dark"] .milestone-page .milestone-background {
+    background:
+        linear-gradient(180deg, rgba(2, 12, 24, 0.25), rgba(2, 12, 24, 0.75)),
+        url("../assets/wallpapers/1403447.jpg") center / cover no-repeat;
+}
+
+html[data-theme="dark"] #welcome-page {
+    background-image:
+        linear-gradient(rgba(4, 12, 21, 0.48), rgba(4, 12, 21, 0.64)),
+        url("../assets/wallpapers/1403447.jpg");
+}
+
+html[data-theme="dark"] #garden-page {
+    background:
+        linear-gradient(rgba(4, 12, 21, 0.48), rgba(4, 12, 21, 0.64)),
+        url("../assets/wallpapers/1403447.jpg") center / cover no-repeat;
+}
+
+/* The settings page is light by default and receives a matching dark variant. */
+html[data-theme="dark"] #settings-page {
+    --settings-ink: #eef5fb;
+    --settings-paper: #101b28;
+    --settings-paper-soft: #172433;
+    --settings-muted: rgba(230, 240, 248, 0.62);
+    --settings-line: rgba(255, 255, 255, 0.16);
+    --settings-green: #93d4fa;
+    --settings-green-dark: #284257;
+    color: var(--settings-ink);
+    background: #080d16;
+    font-family: var(--font-main);
+}
+
+html[data-theme="dark"] #settings-page .settings-background {
+    background:
+        linear-gradient(rgba(4, 12, 21, 0.64), rgba(4, 12, 21, 0.76)),
+        url("../assets/wallpapers/1403447.jpg") center / cover no-repeat;
+}
+
+html[data-theme="dark"] #settings-page .settings-header {
+    border-color: var(--settings-line);
+    background: rgba(5, 10, 18, 0.88);
+}
+
+html[data-theme="dark"] #settings-page :is(.dashboard-home-link, .nav-link, .top-button) {
+    color: rgba(238, 245, 251, 0.82);
+}
+
+html[data-theme="dark"] #settings-page .top-button:is(:hover, .active) {
+    color: #061421;
+    background: #93d4fa;
+    border-color: #93d4fa;
+}
+
+html[data-theme="dark"] #settings-page .settings-card {
+    border-color: rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    background: rgba(7, 18, 31, 0.78);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(18px);
+}
+
+html[data-theme="dark"] #settings-page :is(.settings-icon, .account-avatar, .settings-card h2, .settings-info-row strong, .settings-static-row strong, .settings-link, .control-copy strong, .settings-danger-zone strong, .select-setting strong) {
+    color: #eef5fb;
+}
+
+html[data-theme="dark"] #settings-page .settings-icon {
+    border-color: var(--settings-line);
+    background: rgba(147, 212, 250, 0.12);
+}
+
+html[data-theme="dark"] #settings-page :is(.settings-info-row, .settings-static-row, .select-setting, .account-summary, .settings-control-row) {
+    border-color: var(--settings-line);
+}
+
+html[data-theme="dark"] #settings-page :is(.select-setting select, .settings-card select) {
+    border-color: var(--settings-line);
+    background: #111f2d;
+    color: #eef5fb;
+}
+
+html[data-theme="dark"] #settings-page .switch-track {
+    border-color: rgba(230, 240, 248, 0.42);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+html[data-theme="dark"] #settings-page .switch input:checked + .switch-track {
+    border-color: #93d4fa;
+    background: #93d4fa;
+}
+
+html[data-theme="dark"] #settings-page .switch input:checked + .switch-track::after {
+    background: #071421;
+}
+
+html[data-theme="dark"] #settings-page .settings-danger-zone {
+    border-color: rgba(255, 150, 150, 0.3);
+    background: rgba(255, 100, 100, 0.06);
+}
+
+html[data-theme="dark"] #settings-page :is(.settings-danger-zone button, .clear-cache-button) {
+    color: #ffc0c0;
+}
+
+html[data-theme="dark"] #settings-page .settings-footer {
+    color: var(--settings-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-theme] *,
+    html[data-theme] *::before,
+    html[data-theme] *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

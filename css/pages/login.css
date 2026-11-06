@@ -1,0 +1,802 @@
+
+/* =========================================
+   FUBAN OS - LOGIN
+   Space / Marine / Minimal
+========================================= */
+
+
+/* =========================================
+   01. PAGE ROOT
+========================================= */
+
+#login-page {
+    --login-text: #eef5fb;
+    --login-muted: rgba(220, 232, 245, 0.62);
+    --login-line: rgba(255, 255, 255, 0.16);
+    --login-accent: #93d4fa;
+    --login-card: rgba(5, 16, 34, 0.78);
+    --login-input: rgba(255, 255, 255, 0.055);
+
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    position: relative;
+
+    color: var(--login-text);
+    background: #030817;
+
+    font-family: var(--font-main);
+}
+
+#login-page * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   02. BACKGROUND
+========================================= */
+
+.login-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(3, 8, 23, 0.88),
+            rgba(7, 21, 46, 0.78),
+            rgba(3, 8, 23, 0.94)
+        ),
+        url("../../assets/images/gradient.png");
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+.login-stars {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.65;
+
+    background-image:
+        radial-gradient(1px 1px at 10% 20%, white 100%, transparent),
+        radial-gradient(1px 1px at 25% 75%, white 100%, transparent),
+        radial-gradient(2px 2px at 45% 35%, white 100%, transparent),
+        radial-gradient(1px 1px at 68% 15%, white 100%, transparent),
+        radial-gradient(2px 2px at 83% 62%, white 100%, transparent),
+        radial-gradient(1px 1px at 92% 30%, white 100%, transparent),
+        radial-gradient(1px 1px at 56% 85%, white 100%, transparent),
+        radial-gradient(2px 2px at 15% 88%, white 100%, transparent);
+
+    background-size: 420px 420px;
+}
+
+
+.login-glow {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: rgba(57, 132, 190, 0.13);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   03. BACK BUTTON
+========================================= */
+
+.login-back {
+    position: absolute;
+
+    top: 28px;
+    left: 35px;
+
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: rgba(235, 244, 255, 0.7);
+
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+
+.login-back span {
+    font-size: 19px;
+}
+
+
+.login-back:hover {
+    color: #ffffff;
+    transform: translateX(-3px);
+}
+
+
+/* =========================================
+   04. MAIN CONTAINER
+========================================= */
+
+.login-container {
+    min-height: 100vh;
+
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 90px 20px 50px;
+}
+
+
+/* =========================================
+   05. LOGIN CARD
+========================================= */
+
+.login-card {
+    width: min(100%, 440px);
+
+    padding: 43px 43px 27px;
+
+    border: 1px solid var(--login-line);
+
+    background: var(--login-card);
+
+    box-shadow:
+        0 25px 90px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+}
+
+
+/* =========================================
+   06. BRAND
+========================================= */
+
+.login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    margin-bottom: 39px;
+
+    color: rgba(238, 245, 251, 0.85);
+
+    font-size: 12px;
+    letter-spacing: 0.2em;
+}
+
+
+.brand-symbol {
+    color: var(--login-accent);
+    font-size: 21px;
+}
+
+
+/* =========================================
+   07. AUTH HEADING
+========================================= */
+
+.auth-heading {
+    margin-bottom: 30px;
+}
+
+
+.auth-eyebrow {
+    margin-bottom: 12px;
+
+    color: var(--login-accent);
+
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+}
+
+
+.auth-heading h1 {
+    margin-bottom: 9px;
+
+    color: #ffffff;
+
+    font-family: var(--font-quote);
+
+    font-size: clamp(34px, 5vw, 43px);
+
+    font-weight: 400;
+
+    letter-spacing: -0.04em;
+}
+
+
+.auth-heading h1 span {
+    color: var(--login-accent);
+}
+
+
+.auth-heading > p:last-child {
+    color: var(--login-muted);
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   08. FORM
+========================================= */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: rgba(238, 245, 251, 0.88);
+
+    font-size: 11px;
+}
+
+
+.form-group input {
+    width: 100%;
+    height: 47px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--login-line);
+
+    border-radius: 2px;
+
+    outline: none;
+
+    background: var(--login-input);
+
+    color: #ffffff;
+
+    font-family: var(--font-main);
+    font-size: 12px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.form-group input::placeholder {
+    color: rgba(220, 232, 245, 0.32);
+}
+
+
+.form-group input:focus {
+    border-color: var(--login-accent);
+
+    background: rgba(147, 212, 250, 0.07);
+
+    box-shadow:
+        0 0 0 3px rgba(147, 212, 250, 0.08);
+}
+
+
+/* =========================================
+   09. PASSWORD
+========================================= */
+
+.password-wrapper {
+    position: relative;
+}
+
+
+.password-wrapper input {
+    padding-right: 65px;
+}
+
+
+.password-toggle {
+    position: absolute;
+
+    right: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    padding: 5px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--login-accent);
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+.password-toggle:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================
+   10. LOGIN OPTIONS
+========================================= */
+
+.login-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin: 5px 0 22px;
+}
+
+
+.remember-option {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--login-muted);
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+.remember-option input {
+    width: 13px;
+    height: 13px;
+
+    accent-color: var(--login-accent);
+}
+
+
+.text-button {
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--login-accent);
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+.text-button:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================
+   11. PRIMARY BUTTON
+========================================= */
+
+.primary-button {
+    width: 100%;
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 17px;
+
+    border: 1px solid rgba(147, 212, 250, 0.65);
+
+    background: rgba(147, 212, 250, 0.12);
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+.primary-button:hover {
+    background: rgba(147, 212, 250, 0.23);
+
+    border-color: var(--login-accent);
+
+    box-shadow:
+        0 0 25px rgba(147, 212, 250, 0.12);
+}
+
+
+.button-arrow {
+    color: var(--login-accent);
+    font-size: 18px;
+
+    transition: transform 0.2s ease;
+}
+
+
+.primary-button:hover .button-arrow {
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   12. DIVIDER
+========================================= */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 25px 0;
+
+    color: rgba(220, 232, 245, 0.4);
+}
+
+
+.auth-divider span {
+    height: 1px;
+    flex: 1;
+
+    background: var(--login-line);
+}
+
+
+.auth-divider p {
+    font-size: 8px;
+    letter-spacing: 0.13em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   13. GOOGLE BUTTON
+========================================= */
+
+.google-button {
+    width: 100%;
+    min-height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border: 1px solid var(--login-line);
+
+    background: rgba(255, 255, 255, 0.035);
+
+    color: rgba(238, 245, 251, 0.88);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.google-button:hover {
+    border-color: rgba(255, 255, 255, 0.42);
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+.google-icon {
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   14. INVITE NOTE
+========================================= */
+
+.invite-note {
+    margin-top: 25px;
+
+    color: rgba(220, 232, 245, 0.42);
+
+    text-align: center;
+
+    font-size: 9px;
+}
+
+
+.invite-note span {
+    margin-right: 5px;
+    color: var(--login-accent);
+}
+
+
+/* =========================================
+   15. ERROR MESSAGE
+========================================= */
+
+.auth-message {
+    margin: 0 0 17px;
+
+    padding: 12px 13px;
+
+    border: 1px solid rgba(255, 116, 116, 0.35);
+
+    background: rgba(255, 80, 80, 0.08);
+
+    color: #ffaaaa;
+
+    font-size: 10px;
+    line-height: 1.65;
+}
+
+
+.auth-message[hidden] {
+    display: none;
+}
+
+
+/* =========================================
+   16. BACK TO LOGIN
+========================================= */
+
+.back-to-login {
+    display: block;
+
+    margin: 23px auto 0;
+
+    padding: 8px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--login-muted);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.back-to-login:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================
+   17. FOOTER
+========================================= */
+
+.login-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 36px;
+    padding-top: 17px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    color: rgba(220, 232, 245, 0.35);
+
+    font-size: 8px;
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================
+   18. LIGHT THEME
+========================================= */
+
+html[data-theme="light"] #login-page {
+    --login-text: #26352a;
+    --login-muted: rgba(38, 53, 42, 0.62);
+    --login-line: rgba(38, 53, 42, 0.2);
+    --login-accent: #526b50;
+    --login-card: rgba(245, 245, 237, 0.88);
+
+    background: #d7dbcf;
+    color: #26352a;
+}
+
+
+html[data-theme="light"] .login-background {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(225, 231, 218, 0.82),
+            rgba(235, 237, 225, 0.75)
+        ),
+        url("../../assets/images/ecbt.png");
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+html[data-theme="light"] .login-stars {
+    opacity: 0.12;
+}
+
+
+html[data-theme="light"] .login-card {
+    border-color: rgba(38, 53, 42, 0.2);
+
+    box-shadow:
+        6px 7px 0 rgba(38, 53, 42, 0.1);
+}
+
+
+html[data-theme="light"] .login-brand,
+html[data-theme="light"] .auth-heading h1,
+html[data-theme="light"] .form-group label,
+html[data-theme="light"] .google-button,
+html[data-theme="light"] .login-back {
+    color: #26352a;
+}
+
+
+html[data-theme="light"] .auth-heading h1 span {
+    color: #526b50;
+}
+
+
+html[data-theme="light"] .form-group input {
+    border-color: rgba(38, 53, 42, 0.2);
+
+    background: rgba(255, 255, 255, 0.55);
+
+    color: #26352a;
+}
+
+
+html[data-theme="light"] .form-group input::placeholder {
+    color: rgba(38, 53, 42, 0.4);
+}
+
+
+html[data-theme="light"] .primary-button {
+    border-color: #526b50;
+
+    background: rgba(82, 107, 80, 0.12);
+
+    color: #26352a;
+}
+
+
+html[data-theme="light"] .primary-button:hover {
+    background: rgba(82, 107, 80, 0.2);
+}
+
+
+html[data-theme="light"] .google-button {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+
+html[data-theme="light"] .google-button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+
+html[data-theme="light"] .login-footer {
+    border-color: rgba(38, 53, 42, 0.16);
+}
+
+
+/* =========================================
+   19. RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .login-container {
+        padding: 80px 17px 30px;
+    }
+
+    .login-back {
+        top: 20px;
+        left: 19px;
+
+        font-size: 10px;
+    }
+
+    .login-card {
+        padding: 34px 24px 23px;
+    }
+
+    .login-brand {
+        margin-bottom: 32px;
+    }
+
+    .auth-heading h1 {
+        font-size: 35px;
+    }
+
+    .login-footer {
+        font-size: 7px;
+    }
+
+}
+
+
+@media (max-width: 360px) {
+
+    .login-card {
+        padding: 30px 19px 20px;
+    }
+
+    .login-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+
+/* =========================================
+   20. REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #login-page *,
+    #login-page *::before,
+    #login-page *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+}

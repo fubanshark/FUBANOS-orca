@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090D">
+    <script src="js/theme.js"></script>
+
+    <title>Dashboard | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/dashboard.css">
+    <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body id="dashboard-page">
+
+    <!-- =====================================
+         BACKGROUND
+    ====================================== -->
+
+    <div class="dashboard-wallpaper"></div>
+    <div class="wallpaper-overlay"></div>
+
+
+    <!-- =====================================
+         NAVIGATION
+    ====================================== -->
+
+    <header class="dashboard-header">
+
+        <a
+            href="index.html"
+            class="dashboard-home-link"
+            aria-label="Back to Welcome"
+            title="Back to Welcome"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"></path>
+            </svg>
+        </a>
+
+        <nav class="main-navigation">
+
+            <a href="dashboard.html" class="nav-link active">
+                Dashboard
+            </a>
+
+            <a href="focus.html" class="nav-link">
+                Focus
+            </a>
+
+            <a href="garden.html" class="nav-link">
+                Garden
+            </a>
+
+            <a href="milestone.html" class="nav-link">
+                Milestone
+            </a>
+
+        </nav>
+
+        <div class="header-actions">
+
+            <a href="profile.html" class="top-button">
+                <span class="profile-dot"></span>
+                Profile : FuBan
+            </a>
+
+            <a href="settings.html" class="top-button">
+                <span>⚙</span>
+                Setting
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         WALLPAPER BUTTON
+    ====================================== -->
+
+    <button
+        type="button"
+        id="wallpaper-open"
+        class="wallpaper-button"
+        aria-label="Change wallpaper"
+        title="Change Wallpaper"
+    >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+            <circle cx="8.5" cy="9" r="1.5"></circle>
+            <path d="M3 16l5-5 4 4 3-3 6 6"></path>
+        </svg>
+
+    </button>
+
+
+    <!-- =====================================
+         DASHBOARD CONTENT
+    ====================================== -->
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-grid">
+
+
+            <!-- =================================
+                 TODAY'S ACTIVITY
+            ================================== -->
+
+            <section class="panel activity-panel">
+
+                <div class="panel-heading">
+                    <h2>Today's Activity</h2>
+                    <span id="dashboard-xp-total" class="dashboard-xp-total">
+                        0 XP
+                    </span>
+                </div>
+
+                <div class="activity-content">
+
+                    <!-- Donut Chart -->
+
+                    <div class="donut-wrapper">
+
+                        <div
+                            id="activity-donut"
+                            class="donut-chart"
+                        >
+
+                            <div class="donut-inner">
+
+                                <strong id="efficiency-value">
+                                    0%
+                                </strong>
+
+                                <span>Efficiency</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Activity Summary -->
+
+                    <div class="activity-summary">
+
+                        <h3>Activity Summary</h3>
+
+                        <p id="activity-summary-text">
+                            No activity recorded yet.
+                        </p>
+
+                        <div id="activity-category-list"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 MISSION
+            ================================== -->
+
+            <section class="panel mission-panel">
+
+                <div class="panel-heading">
+
+                    <h2>Mission</h2>
+
+                    <button
+                        type="button"
+                        id="add-mission-button"
+                        class="add-button"
+                        aria-label="Add mission"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div id="mission-list" class="mission-list">
+
+                    <p class="empty-message">
+                        No missions yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 CALENDAR
+            ================================== -->
+
+            <section class="panel calendar-panel">
+
+                <div class="calendar-heading">
+
+                    <button
+                        type="button"
+                        id="calendar-prev"
+                        class="calendar-arrow"
+                        aria-label="Previous month"
+                    >
+                        ‹
+                    </button>
+
+                    <h2 id="calendar-month">
+                        Month Year
+                    </h2>
+
+                    <button
+                        type="button"
+                        id="calendar-next"
+                        class="calendar-arrow"
+                        aria-label="Next month"
+                    >
+                        ›
+                    </button>
+
+                    <a
+                        href="calendar.html"
+                        id="calendar-expand"
+                        class="calendar-expand"
+                        aria-label="Open full calendar"
+                        title="Open Calendar"
+                    >
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"></path>
+                            <path d="M8 8l-5-5M16 8l5-5M8 16l-5 5M16 16l5 5"></path>
+                        </svg>
+
+                    </a>
+
+                </div>
+
+
+                <div class="calendar-weekdays">
+                    <span>SU</span>
+                    <span>MO</span>
+                    <span>TU</span>
+                    <span>WE</span>
+                    <span>TH</span>
+                    <span>FR</span>
+                    <span>SA</span>
+                </div>
+
+
+                <div
+                    id="calendar-days"
+                    class="calendar-days"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================
+                 JOURNAL
+            ================================== -->
+
+            <section class="panel journal-panel">
+
+                <div class="panel-heading">
+
+                    <h2>Journal</h2>
+
+                    <a href="journal.html" class="view-link">
+                        View
+                    </a>
+
+                </div>
+
+                <a
+                    href="journal.html"
+                    class="journal-preview"
+                    aria-label="Open Journal"
+                >
+
+                    <img
+                        src="assets/images/diary.png"
+                        alt="Open Journal"
+                        class="journal-book"
+                    >
+
+                </a>
+
+            </section>
+
+
+            <!-- =================================
+                 ROOMS
+            ================================== -->
+
+            <section class="panel rooms-panel">
+
+                <div class="panel-heading">
+
+                    <h2>Rooms</h2>
+
+                    <button
+                        type="button"
+                        id="add-room-button"
+                        class="add-button"
+                        aria-label="Add room"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div id="room-list" class="room-list">
+
+                    <p class="empty-message">
+                        No rooms added yet.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================
+         MISSION MODAL
+    ====================================== -->
+
+    <div id="mission-modal" class="modal-overlay">
+
+        <div class="modal-box">
+
+            <button
+                type="button"
+                class="modal-close"
+                data-close="mission-modal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <h2>New Mission</h2>
+
+            <form id="mission-form">
+
+                <label for="mission-name">
+                    Mission Name
+                </label>
+
+                <input
+                    id="mission-name"
+                    type="text"
+                    placeholder="Enter mission name"
+                    required
+                >
+
+
+                <label for="mission-category">
+                    Category
+                </label>
+
+                <select id="mission-category" required>
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="Mathematics">
+                        Mathematics
+                    </option>
+
+                    <option value="Biology">
+                        Biology
+                    </option>
+
+                    <option value="Chemistry">
+                        Chemistry
+                    </option>
+
+                    <option value="Physics">
+                        Physics
+                    </option>
+
+                    <option value="Earth & Astronomy">
+                        Earth & Astronomy
+                    </option>
+
+                    <option value="Painting & Art">
+                        Painting & Art
+                    </option>
+
+                    <option value="Music Skills">
+                        Music Skills
+                    </option>
+
+                    <option value="Sleeping">
+                        Sleeping
+                    </option>
+
+                    <option value="Fitness / Workout">
+                        Fitness / Workout
+                    </option>
+
+                    <option value="English Language">
+                        English Language
+                    </option>
+
+                    <option value="Japanese Language">
+                        Japanese Language
+                    </option>
+
+                    <option value="Russian Language">
+                        Russian Language
+                    </option>
+
+                </select>
+
+
+                <label for="mission-subcategory">
+                    Subcategory
+                </label>
+
+                <input
+                    id="mission-subcategory"
+                    type="text"
+                    placeholder="Optional"
+                >
+
+                <label for="mission-xp-reward">
+                    XP Reward (0-1000)
+                </label>
+
+                <input
+                    id="mission-xp-reward"
+                    type="number"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    value="10"
+                    required
+                >
+
+
+                <label for="mission-type">
+                    Tracking Type
+                </label>
+
+                <select id="mission-type" required>
+
+                    <option value="percentage">
+                        Percentage
+                    </option>
+
+                    <option value="checkbox">
+                        Checkbox
+                    </option>
+
+                </select>
+
+                <label class="achievement-sync-option">
+                    <input
+                        id="mission-sync-achievement-enabled"
+                        type="checkbox"
+                    >
+                    Sync with Achievement
+                </label>
+
+                <div id="mission-sync-achievement-fields" hidden>
+                    <label for="mission-sync-achievement">
+                        Achievement
+                    </label>
+                    <select id="mission-sync-achievement" disabled></select>
+
+                    <label for="mission-sync-achievement-progress">
+                        Progress on completion (1-100%)
+                    </label>
+                    <input
+                        id="mission-sync-achievement-progress"
+                        type="number"
+                        min="1"
+                        max="100"
+                        step="1"
+                        value="10"
+                        disabled
+                    >
+                    <small>Progress is added when this mission reaches 100% and is reverted if it becomes incomplete.</small>
+                </div>
+
+
+                <button type="submit" class="modal-submit">
+                    Create Mission
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         ROOM MODAL
+    ====================================== -->
+
+    <div id="room-modal" class="modal-overlay">
+
+        <div class="modal-box">
+
+            <button
+                type="button"
+                class="modal-close"
+                data-close="room-modal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <h2>New Room</h2>
+
+            <form id="room-form">
+
+                <label for="room-name">
+                    Website Name
+                </label>
+
+                <input
+                    id="room-name"
+                    type="text"
+                    placeholder="Enter website name"
+                    required
+                >
+
+
+                <label for="room-url">
+                    Website URL
+                </label>
+
+                <input
+                    id="room-url"
+                    type="url"
+                    placeholder="https://example.com"
+                    required
+                >
+
+
+                <button type="submit" class="modal-submit">
+                    Add Room
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         WALLPAPER MODAL
+    ====================================== -->
+
+    <div id="wallpaper-modal" class="modal-overlay">
+
+        <div class="modal-box wallpaper-modal-box">
+
+            <button
+                type="button"
+                class="modal-close"
+                data-close="wallpaper-modal"
+                aria-label="Close"
+            >
+                
+            </button>
+
+            <h2>Choose Wallpaper</h2>
+
+            <p class="modal-description">
+                Select a wallpaper for Dashboard.
+            </p>
+
+
+           <div class="wallpaper-options">
+
+    <button
+        type="button"
+        class="wallpaper-option"
+        data-wallpaper="assets/wallpapers/1403447.jpg"
+    >
+        <img src="assets/wallpapers/1403447.jpg" alt="Default">
+        <span>Default</span>
+    </button>
+
+    <button
+        type="button"
+        class="wallpaper-option"
+        data-wallpaper="assets/wallpapers/jungle.jpg"
+    >
+        <img src="assets/wallpapers/jungle.jpg" alt="Jungle">
+        <span>Jungle</span>
+    </button>
+
+    <button
+        type="button"
+        class="wallpaper-option"
+        data-wallpaper="assets/wallpapers/moon.jpg"
+    >
+        <img src="assets/wallpapers/moon.jpg" alt="Moon">
+        <span>Moon</span>
+    </button>
+
+    <button
+        type="button"
+        class="wallpaper-option"
+        data-wallpaper="assets/wallpapers/hakuba.jpg"
+    >
+        <img src="assets/wallpapers/hakuba.jpg" alt="Hakuba">
+        <span>Hakuba</span>
+    </button>
+
+    <button
+        type="button"
+        class="wallpaper-option"
+        data-wallpaper="assets/wallpapers/coffee.jpg"
+    >
+        <img src="assets/wallpapers/coffee.jpg" alt="Coffee">
+        <span>Coffee</span>
+    </button>
+
+    <button
+        type="button"
+        class="wallpaper-option"
+        data-wallpaper="assets/wallpapers/cats.jpg"
+    >
+        <img src="assets/wallpapers/cats.jpg" alt="Cats">
+        <span>Cats</span>
+    </button>
+
+</div>
+
+
+            <label class="upload-wallpaper">
+
+                <span>＋ Upload your own wallpaper</span>
+
+                <input
+                    id="wallpaper-upload"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                >
+
+            </label>
+
+
+            <div class="wallpaper-adjustments">
+
+                <label for="wallpaper-opacity">
+                    Wallpaper darkness
+                    <span id="wallpaper-opacity-value">45%</span>
+                </label>
+
+                <input
+                    id="wallpaper-opacity"
+                    type="range"
+                    min="0"
+                    max="85"
+                    value="45"
+                >
+
+            </div>
+
+
+            <button
+                type="button"
+                id="wallpaper-save"
+                class="modal-submit"
+            >
+                Save Wallpaper
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         SCRIPTS
+    ====================================== -->
+
+    <script src="js/main.js"></script>
+    <script src="js/profile-avatar.js" defer></script>
+    <script src="js/xp.js"></script>
+    <script src="js/achievement-sync.js"></script>
+    <script src="js/system-achievements.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+
+</body>
+
+</html>

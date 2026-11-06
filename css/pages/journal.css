@@ -1,0 +1,2165 @@
+
+/* =====================================================
+   FUBAN OS — JOURNAL
+   Clean Notebook System
+   ===================================================== */
+
+
+/* =====================================================
+   1. BASE
+   ===================================================== */
+
+#journal-page {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+
+    background: #080D18;
+    color: #FFFFFF;
+
+    font-family: var(--font-main, sans-serif);
+}
+
+#journal-page * {
+    box-sizing: border-box;
+}
+
+#journal-page button,
+#journal-page input,
+#journal-page select {
+    font: inherit;
+}
+
+#journal-page button {
+    cursor: pointer;
+}
+
+#journal-page button:disabled,
+#journal-page input:disabled,
+#journal-page select:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   2. DASHBOARD WALLPAPER
+   ===================================================== */
+
+.journal-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    background-color: #080D18;
+    background-image: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    pointer-events: none;
+}
+
+.journal-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, var(--journal-darkness, 0.35));
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   3. HEADER
+   ===================================================== */
+
+.journal-header {
+    position: relative;
+    z-index: 2;
+
+    min-height: 64px;
+    width: 100%;
+    padding: 10px 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    background: rgba(5, 10, 22, 0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.13);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.journal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.journal-back:hover {
+    color: #93D4FA;
+}
+
+.journal-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.journal-header-title span:first-child {
+    color: #93D4FA;
+}
+
+.header-divider {
+    color: rgba(255,255,255,0.35);
+}
+
+.journal-save-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+}
+
+.save-indicator {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: #7ED957;
+}
+
+
+/* =====================================================
+   4. MAIN WORKSPACE
+   ===================================================== */
+
+.journal-workspace {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    min-height: calc(100vh - 64px);
+
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+    align-items: start;
+    gap: 20px;
+
+    padding: 20px 22px;
+}
+
+
+/* Right panel appears only when a page is selected. */
+
+#journal-page.has-page-selection .journal-workspace {
+    grid-template-columns: 230px minmax(0, 1fr) 260px;
+}
+
+
+/* =====================================================
+   5. SIDEBAR
+   ===================================================== */
+
+.journal-sidebar {
+    width: 100%;
+    min-width: 0;
+    height: fit-content;
+
+    padding: 20px 17px;
+
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 17px;
+
+    background: rgba(255,255,255,0.065);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.sidebar-heading {
+    margin-bottom: 23px;
+}
+
+.sidebar-heading h2 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.sidebar-heading p {
+    margin-top: 5px;
+
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+}
+
+.tool-section {
+    padding: 18px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.tool-section h3 {
+    margin-bottom: 13px;
+
+    color: rgba(255,255,255,0.48);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.7px;
+}
+
+.tool-description {
+    margin-top: 8px;
+
+    color: rgba(255,255,255,0.38);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   6. SIDEBAR BUTTONS
+   ===================================================== */
+
+.tool-button {
+    width: 100%;
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 9px 11px;
+    margin-bottom: 5px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    background: transparent;
+    color: rgba(255,255,255,0.76);
+
+    font-size: 12px;
+    text-align: left;
+
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.tool-button:hover:not(:disabled) {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(255,255,255,0.12);
+}
+
+.tool-icon {
+    width: 20px;
+    text-align: center;
+    color: #93D4FA;
+}
+
+
+/* =====================================================
+   7. PAPER STYLE SELECTOR
+   ===================================================== */
+
+.paper-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.paper-option {
+    min-width: 0;
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 8px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+
+    font-size: 11px;
+
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.paper-option:hover:not(:disabled) {
+    background: rgba(255,255,255,0.08);
+}
+
+.paper-option.active {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(147,212,250,0.6);
+}
+
+.paper-preview {
+    width: 55px;
+    height: 68px;
+
+    display: block;
+
+    border-radius: 3px;
+    background-color: #FFFEFA;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.lined-preview {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 14px,
+        #BECBDD 15px,
+        transparent 16px
+    );
+}
+
+.dot-preview {
+    background-image: radial-gradient(
+        #9CAFC2 1px,
+        transparent 1px
+    );
+    background-size: 8px 8px;
+}
+
+.grid-preview {
+    background-image:
+        linear-gradient(#C4D0DD 1px, transparent 1px),
+        linear-gradient(90deg, #C4D0DD 1px, transparent 1px);
+    background-size: 11px 11px;
+}
+
+.blank-preview {
+    background-image: none;
+}
+
+
+/* =====================================================
+   8. PAPER COLOR
+   ===================================================== */
+
+.paper-color-control {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+#paper-color {
+    width: 40px;
+    height: 34px;
+    padding: 2px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 7px;
+
+    background: transparent;
+    cursor: pointer;
+}
+
+#paper-color-value {
+    color: rgba(255,255,255,0.65);
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   9. STICKER COLLECTION
+   ===================================================== */
+
+.sticker-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sticker-category {
+    width: 100%;
+    padding: 9px 10px;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    background: transparent;
+    color: rgba(255,255,255,0.67);
+
+    text-align: left;
+    font-size: 11px;
+}
+
+.sticker-category:hover:not(:disabled) {
+    background: rgba(255,255,255,0.08);
+}
+
+.coming-soon {
+    margin-top: 10px;
+
+    color: rgba(255,255,255,0.35);
+    font-size: 9px;
+    font-style: italic;
+}
+
+
+/* =====================================================
+   10. CENTER JOURNAL
+   ===================================================== */
+
+.journal-main {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+
+/* =====================================================
+   11. TOP BAR — BINDER CLIP ONLY
+   ===================================================== */
+
+.journal-topbar {
+    min-height: 58px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 7px 13px;
+
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 13px;
+
+    background: rgba(255,255,255,0.065);
+
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
+}
+
+.binder-clip-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.binder-clip-button {
+    width: 43px;
+    height: 43px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.06);
+    color: #93D4FA;
+
+    transition: 0.2s;
+}
+
+.binder-clip-button:hover {
+    background: rgba(147,212,250,0.12);
+    border-color: #93D4FA;
+}
+
+.binder-clip-button.active {
+    background: rgba(147,212,250,0.16);
+    border-color: #93D4FA;
+    box-shadow: 0 0 14px rgba(147,212,250,0.2);
+}
+
+.binder-clip-button img {
+    display: block;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.selection-mode-label {
+    color: rgba(255,255,255,0.48);
+    font-size: 10px;
+}
+
+.touch-text-format-button {
+    display: none;
+
+    min-height: 40px;
+    padding: 0 13px;
+
+    border: 1px solid rgba(147,212,250,0.4);
+    border-radius: 9px;
+
+    background: rgba(147,212,250,0.12);
+    color: #D9F0FF;
+
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.touch-text-format-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .touch-text-format-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+/* =====================================================
+   12. NOTEBOOK STAGE
+   ===================================================== */
+
+.notebook-stage {
+    width: 100%;
+    min-width: 0;
+
+    min-height: 700px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px 16px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 17px;
+
+    background: rgba(0,0,0,0.18);
+}
+
+
+/* =====================================================
+   13. NOTEBOOK LAYOUTS
+   ===================================================== */
+
+.notebook-book {
+    position: relative;
+
+    width: 100%;
+    max-width: 1080px;
+
+    min-width: 0;
+    min-height: 660px;
+
+    display: grid;
+}
+
+.notebook-book[hidden] {
+    display: none !important;
+}
+
+
+/* Two-page mode */
+
+.two-page-layout {
+    grid-template-columns:
+        minmax(0, 1fr)
+        13px
+        minmax(0, 1fr);
+}
+
+
+/* Free / One-page mode */
+
+.free-layout {
+    width: min(100%, 740px);
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.free-layout .notebook-page {
+    border-radius: 5px;
+}
+
+
+/* =====================================================
+   14. PAPER
+   ===================================================== */
+
+.notebook-page {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 660px;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    background-color: #FFFEFA;
+    color: #222222;
+
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow:
+        0 5px 12px rgba(0,0,0,0.12);
+}
+
+.left-page {
+    border-radius: 5px 0 0 5px;
+}
+
+.right-page {
+    border-radius: 0 5px 5px 0;
+}
+
+.free-page {
+    border-radius: 5px;
+}
+
+
+/* Paper styles */
+
+.notebook-page.lined-paper {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 29px,
+        rgba(130,155,185,0.32) 30px
+    );
+}
+
+.notebook-page.dot-grid-paper {
+    background-image: radial-gradient(
+        rgba(115,140,165,0.48) 0.8px,
+        transparent 1px
+    );
+    background-size: 18px 18px;
+}
+
+.notebook-page.grid-paper {
+    background-image:
+        linear-gradient(
+            rgba(115,140,165,0.28) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(115,140,165,0.28) 1px,
+            transparent 1px
+        );
+    background-size: 25px 25px;
+}
+
+.notebook-page.blank-paper {
+    background-image: none;
+}
+
+
+/* =====================================================
+   15. BOOK SPINE
+   ===================================================== */
+
+.notebook-spine {
+    position: relative;
+    z-index: 5;
+
+    background: linear-gradient(
+        to right,
+        rgba(0,0,0,0.1),
+        rgba(0,0,0,0.38),
+        rgba(0,0,0,0.62),
+        rgba(0,0,0,0.28),
+        rgba(0,0,0,0.08)
+    );
+}
+
+
+/* =====================================================
+   16. DIRECT WRITING AREA
+   20 visible lines × 30px = 600px
+   ===================================================== */
+
+.page-writing-area {
+    position: absolute;
+    z-index: 1;
+
+    top: 25px;
+    left: 28px;
+    right: 28px;
+
+    height: 600px;
+    min-height: 600px;
+    max-height: 600px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 0 5px;
+
+    color: #222222;
+
+    font-family: "Sarabun", sans-serif;
+    font-size: 16px;
+    line-height: 30px;
+
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+
+    outline: none;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+/* Exactly 20 visible writing rows on lined paper. */
+
+.notebook-page.lined-paper .page-writing-area {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 29px,
+        rgba(115,145,175,0.38) 29px,
+        rgba(115,145,175,0.38) 30px
+    );
+    background-position: 0 0;
+}
+
+.notebook-page.dot-grid-paper .page-writing-area {
+    background-image: radial-gradient(
+        rgba(115,140,165,0.48) 0.8px,
+        transparent 1px
+    );
+    background-size: 18px 18px;
+}
+
+.notebook-page.grid-paper .page-writing-area {
+    background-image:
+        linear-gradient(
+            rgba(115,140,165,0.28) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(115,140,165,0.28) 1px,
+            transparent 1px
+        );
+    background-size: 25px 25px;
+}
+
+.notebook-page.blank-paper .page-writing-area {
+    background-image: none;
+}
+
+.page-writing-area[contenteditable="false"] {
+    cursor: default;
+}
+
+.page-writing-area[contenteditable="true"] {
+    cursor: text;
+}
+
+.page-writing-area:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(0,0,0,0.27);
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   17. IMAGE LAYER
+   ===================================================== */
+
+.page-image-layer {
+    position: absolute;
+    z-index: 2;
+
+    top: 25px;
+    left: 28px;
+    right: 28px;
+
+    height: 600px;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.journal-image-object {
+    position: absolute;
+
+    min-width: 35px;
+    min-height: 35px;
+
+    pointer-events: auto;
+    touch-action: none;
+
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.journal-image-object:active {
+    cursor: grabbing;
+}
+
+.journal-image-object img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.journal-image-object.selected {
+    outline: 2px solid #65BDF0;
+    outline-offset: 1px;
+}
+
+.image-resize-handle {
+    display: none;
+
+    position: absolute;
+    right: -7px;
+    bottom: -7px;
+
+    width: 14px;
+    height: 14px;
+
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+
+    background: #65BDF0;
+
+    cursor: nwse-resize;
+    touch-action: none;
+}
+
+.journal-image-object.selected .image-resize-handle {
+    display: block;
+}
+
+
+/* =====================================================
+   18. PAGE SELECTION
+   ===================================================== */
+
+.notebook-page.page-selectable {
+    cursor: crosshair;
+}
+
+.notebook-page.page-hover {
+    outline: 2px solid #93D4FA;
+    outline-offset: -3px;
+
+    box-shadow:
+        inset 0 0 24px rgba(147,212,250,0.12),
+        0 0 12px rgba(147,212,250,0.14);
+}
+
+.notebook-page.page-active {
+    outline: 2px solid #93D4FA;
+    outline-offset: -3px;
+
+    box-shadow:
+        inset 0 0 20px rgba(147,212,250,0.1);
+}
+
+
+/* =====================================================
+   19. RIGHT PAGE PROPERTIES
+   ===================================================== */
+
+.page-properties-panel {
+    width: 100%;
+    min-width: 0;
+    height: fit-content;
+
+    padding: 20px 17px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.075);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.page-properties-panel[hidden] {
+    display: none !important;
+}
+
+.properties-heading {
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.properties-heading h3 {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+}
+
+.properties-heading span {
+    display: block;
+    margin-top: 6px;
+
+    color: #93D4FA;
+    font-size: 10px;
+}
+
+.property-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.property-field label {
+    color: rgba(255,255,255,0.48);
+    font-size: 9px;
+    letter-spacing: 1.2px;
+}
+
+.property-field input:not([type="color"]),
+.property-field select {
+    width: 100%;
+    min-width: 0;
+    min-height: 39px;
+
+    padding: 8px 10px;
+
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.07);
+    color: #FFFFFF;
+
+    font-size: 11px;
+}
+
+.property-field select option {
+    background: #171D2A;
+    color: #FFFFFF;
+}
+
+.property-field input[type="color"] {
+    width: 45px;
+    height: 34px;
+    padding: 2px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 7px;
+
+    background: transparent;
+    cursor: pointer;
+}
+
+.properties-divider {
+    height: 1px;
+    margin: 20px 0;
+
+    background: rgba(255,255,255,0.12);
+}
+
+.properties-section-title {
+    margin-bottom: 16px;
+
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+
+/* =====================================================
+   20. FOOTER AND PAGE NAVIGATION
+   ===================================================== */
+
+.notebook-footer {
+    position: relative;
+
+    width: 100%;
+    min-height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.065);
+
+    backdrop-filter: blur(14px);
+}
+
+.current-page-label {
+    color: rgba(255,255,255,0.66);
+    font-size: 11px;
+}
+
+.page-navigation {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.page-navigation button,
+.add-page-button {
+    min-height: 35px;
+    padding: 7px 12px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.07);
+    color: #FFFFFF;
+
+    font-size: 10px;
+}
+
+.page-navigation button:hover:not(:disabled),
+.add-page-button:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.page-navigation button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.page-count {
+    color: rgba(255,255,255,0.45);
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   21. ADD PAGE MENU
+   ===================================================== */
+
+.add-page-container {
+    position: relative;
+}
+
+.add-page-menu {
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 10px);
+    z-index: 50;
+
+    width: 220px;
+    padding: 7px;
+
+    border: 1px solid rgba(255,255,255,0.17);
+    border-radius: 12px;
+
+    background: rgba(18,24,36,0.97);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.add-page-menu[hidden] {
+    display: none !important;
+}
+
+.add-page-menu button {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    padding: 11px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #FFFFFF;
+
+    text-align: left;
+    cursor: pointer;
+}
+
+.add-page-menu button:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.add-page-menu strong {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.add-page-menu span {
+    color: rgba(255,255,255,0.48);
+    font-size: 9px;
+}
+
+
+/* =====================================================
+   22. IMAGE TOOLBAR
+   ===================================================== */
+
+.image-toolbar {
+    position: sticky;
+    bottom: 10px;
+    z-index: 30;
+
+    width: fit-content;
+    max-width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    margin: 0 auto;
+    padding: 10px 15px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+
+    background: rgba(18,24,36,0.96);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.image-toolbar[hidden] {
+    display: none !important;
+}
+
+.image-toolbar span {
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+}
+
+.image-toolbar button {
+    padding: 7px 12px;
+
+    border: 1px solid rgba(255,100,100,0.35);
+    border-radius: 7px;
+
+    background: rgba(255,80,80,0.1);
+    color: #FFB1B1;
+
+    font-size: 10px;
+}
+
+.image-toolbar button:hover {
+    background: rgba(255,80,80,0.2);
+}
+
+
+/* =====================================================
+   23. IPAD / TABLET
+   ===================================================== */
+
+@media (max-width: 1150px) {
+
+    .journal-workspace,
+    #journal-page.has-page-selection .journal-workspace {
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 14px;
+        padding: 14px;
+    }
+
+    .page-properties-panel {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .notebook-stage {
+        padding: 12px;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .journal-workspace,
+    #journal-page.has-page-selection .journal-workspace {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .journal-sidebar {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .page-properties-panel {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .journal-main {
+        grid-column: 1;
+    }
+
+    .notebook-stage {
+        min-height: 680px;
+    }
+
+}
+
+
+/* =====================================================
+   24. MOBILE
+   ===================================================== */
+
+@media (max-width: 560px) {
+
+    .journal-header {
+        min-height: 56px;
+        padding: 9px 13px;
+        gap: 8px;
+    }
+
+    .journal-header-title {
+        gap: 5px;
+        font-size: 10px;
+    }
+
+    .journal-back {
+        font-size: 10px;
+    }
+
+    .journal-save-status {
+        font-size: 9px;
+    }
+
+    .journal-workspace,
+    #journal-page.has-page-selection .journal-workspace {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .journal-sidebar {
+        padding: 14px;
+    }
+
+    .journal-topbar {
+        min-height: 52px;
+    }
+
+    .notebook-stage {
+        min-height: 620px;
+        padding: 8px;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .two-page-layout {
+        min-width: 600px;
+        min-height: 660px;
+    }
+
+    .free-layout {
+        min-width: 0;
+        min-height: 660px;
+    }
+
+    .notebook-book {
+        min-height: 660px;
+    }
+
+    .page-writing-area {
+        left: 15px;
+        right: 15px;
+    }
+
+    .page-image-layer {
+        left: 15px;
+        right: 15px;
+    }
+
+    .notebook-footer {
+        justify-content: center;
+    }
+
+    .current-page-label {
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-navigation button,
+    .add-page-button {
+        min-height: 38px;
+    }
+
+    .page-properties-panel {
+        padding: 16px;
+    }
+
+}
+
+
+/* =====================================================
+   25. SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 390px) {
+
+    .journal-header-title {
+        display: none;
+    }
+
+    .journal-save-status {
+        margin-left: auto;
+    }
+
+    .paper-options {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 5px;
+    }
+
+    .paper-preview {
+        width: 42px;
+        height: 55px;
+    }
+
+    .page-navigation {
+        width: 100%;
+    }
+
+    .page-navigation button {
+        flex: 1;
+    }
+
+}
+
+
+
+/* =====================================================
+   JOURNAL TEXT SELECTION MENU
+   ===================================================== */
+
+.journal-selection-menu {
+    position: fixed;
+    z-index: 9999;
+
+    width: 245px;
+    max-width: calc(100vw - 16px);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 15px;
+
+    background: rgba(19, 25, 38, 0.97);
+
+    border: 1px solid rgba(147,212,250,0.35);
+    border-radius: 13px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,0.35),
+        0 0 15px rgba(147,212,250,0.08);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.journal-selection-menu[hidden] {
+    display: none !important;
+}
+
+.selection-menu-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #93D4FA;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+}
+
+.selection-menu-heading button {
+    width: 25px;
+    height: 25px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.selection-menu-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.selection-menu-row label {
+    color: rgba(255,255,255,0.5);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.selection-menu-row select {
+    width: 100%;
+    min-height: 34px;
+
+    padding: 6px 9px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 7px;
+
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+
+    font-size: 11px;
+}
+
+.selection-menu-row select option {
+    background: #171D2A;
+    color: white;
+}
+
+.selection-menu-row input[type="color"] {
+    width: 100%;
+    height: 35px;
+
+    padding: 3px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 7px;
+
+    background: transparent;
+    cursor: pointer;
+}
+
+.selection-menu-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.selection-menu-actions button {
+    flex: 1;
+    min-height: 34px;
+
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 7px;
+
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.selection-menu-actions button:hover {
+    border-color: #93D4FA;
+    background: rgba(147,212,250,0.12);
+}
+
+.selection-menu-hint {
+    margin: 0;
+
+    color: rgba(255,255,255,0.38);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+
+/* =========================================
+   FUBAN OS — STICKER LIBRARY
+   Sidebar Sticker Collection
+========================================= */
+
+/* Category list */
+.sticker-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.sticker-category {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    background: transparent;
+    color: #f5f6fa;
+
+    font-family: inherit;
+    font-size: 14px;
+    text-align: left;
+
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sticker-category:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(3px);
+}
+
+.sticker-category:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sticker-category.active {
+    background: rgba(147, 212, 250, 0.16);
+    border-color: rgba(147, 212, 250, 0.45);
+}
+
+.sticker-count {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+}
+
+
+/* Custom packs */
+.custom-pack-section {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.custom-pack-heading {
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+#custom-pack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.custom-pack-button {
+    width: 100%;
+    padding: 10px 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #fff;
+
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.custom-pack-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.custom-pack-count {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+}
+
+
+/* Add Pack */
+.add-sticker-pack-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 11px;
+
+    border: 1px dashed rgba(255, 255, 255, 0.35);
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+
+    font-family: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.add-sticker-pack-button:hover:not(:disabled) {
+    background: rgba(147, 212, 250, 0.12);
+    border-color: #93D4FA;
+}
+
+.add-sticker-pack-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   STICKER BAG VIEW
+========================================= */
+
+.sticker-bag-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#back-to-sticker-categories {
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#back-to-sticker-categories:hover {
+    background: rgba(255, 255, 255, 0.17);
+}
+
+.sticker-bag-title {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    color: white;
+    font-size: 14px;
+}
+
+.sticker-bag-title small {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 10px;
+}
+
+
+/* Sticker grid */
+.sticker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+
+    max-height: 340px;
+    overflow-y: auto;
+
+    padding: 4px 3px 10px;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+.sticker-grid::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sticker-grid::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
+.sticker-item {
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 7px;
+
+    border: 1px solid rgba(255,255,255,0.13);
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.08);
+
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.sticker-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(147,212,250,0.65);
+}
+
+.sticker-item:active {
+    cursor: grabbing;
+}
+
+.sticker-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.sticker-drag-hint {
+    margin-top: 10px;
+
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+/* =========================================
+   STICKER ON NOTEBOOK
+========================================= */
+
+.page-sticker-layer {
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.journal-sticker-object {
+    position: absolute;
+
+    min-width: 24px;
+    min-height: 24px;
+
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+}
+
+.journal-sticker-object:active {
+    cursor: grabbing;
+}
+
+.journal-sticker-object.locked {
+    cursor: default;
+}
+
+.journal-sticker {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.journal-sticker-object.selected {
+    outline: 2px solid #93D4FA;
+    outline-offset: 3px;
+}
+
+.journal-sticker-object.selected .journal-sticker {
+    filter: drop-shadow(0 0 5px rgba(147,212,250,0.55));
+}
+
+.sticker-resize-handle {
+    display: none;
+
+    position: absolute;
+    right: -7px;
+    bottom: -7px;
+
+    width: 14px;
+    height: 14px;
+
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+    background: #65BDF0;
+
+    cursor: nwse-resize;
+    touch-action: none;
+}
+
+.journal-sticker-object.selected:not(.locked) .sticker-resize-handle {
+    display: block;
+}
+
+.journal-sticker-object.locked .journal-sticker {
+    cursor: default;
+}
+
+
+/* =========================================
+   STICKER IMPORT MODAL
+========================================= */
+
+.sticker-import-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 18px;
+
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.sticker-import-modal[hidden] {
+    display: none;
+}
+
+.sticker-import-content {
+    width: min(440px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 22px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 18px;
+
+    background: rgba(30,38,50,0.96);
+    color: white;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.sticker-import-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.sticker-import-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#close-sticker-import {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.1);
+    color: white;
+
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.sticker-import-preview {
+    height: 180px;
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px dashed rgba(255,255,255,0.3);
+    border-radius: 12px;
+
+    background-color: rgba(255,255,255,0.07);
+
+    background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.05) 75%);
+
+    background-size: 20px 20px;
+}
+
+.sticker-import-preview img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.sticker-import-dimensions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.sticker-import-content .property-field {
+    margin-bottom: 14px;
+}
+
+.sticker-import-content input,
+.sticker-import-content select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sticker-aspect-lock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin: 0 0 16px;
+
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+}
+
+.sticker-aspect-lock input {
+    width: auto;
+    accent-color: #93D4FA;
+}
+
+.sticker-import-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.sticker-import-actions button {
+    padding: 10px 16px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+
+    font: inherit;
+    cursor: pointer;
+}
+
+#confirm-sticker-import {
+    border-color: #93D4FA;
+    background: #93D4FA;
+    color: #15202b;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   LAYER PANEL
+========================================= */
+
+.journal-layer-panel {
+    position: absolute;
+    z-index: 500;
+
+    top: 65px;
+    right: 15px;
+
+    width: min(280px, calc(100% - 30px));
+    max-height: 70%;
+    overflow-y: auto;
+
+    padding: 15px;
+
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 14px;
+
+    background: rgba(28,35,46,0.94);
+    color: white;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.journal-layer-panel[hidden] {
+    display: none;
+}
+
+.layer-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.layer-panel-header h3 {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+#close-layer-panel {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px;
+
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+
+    background: rgba(255,255,255,0.06);
+
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.layer-item.active {
+    border-color: #93D4FA;
+    background: rgba(147,212,250,0.13);
+}
+
+.layer-item button {
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+}
+
+.layer-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+
+    margin-top: 14px;
+}
+
+.layer-actions button {
+    padding: 8px 5px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 7px;
+
+    background: rgba(255,255,255,0.07);
+    color: white;
+
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.layer-actions button:hover {
+    border-color: #93D4FA;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .sticker-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .sticker-import-content {
+        padding: 18px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .sticker-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sticker-import-modal {
+        padding: 10px;
+    }
+
+    .sticker-import-content {
+        max-height: 94vh;
+        padding: 16px;
+    }
+
+    .sticker-import-dimensions {
+        gap: 8px;
+    }
+
+    .journal-layer-panel {
+        top: 10px;
+        right: 10px;
+        width: min(260px, calc(100% - 20px));
+    }
+
+}

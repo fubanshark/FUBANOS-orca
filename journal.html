@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080D18">
+    <script src="js/theme.js"></script>
+    <title>Journal | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/journal.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body id="journal-page">
+
+    <!-- BACKGROUND -->
+    <div class="journal-background" id="journal-background"></div>
+
+    <!-- HEADER -->
+    <header class="journal-header">
+
+        <a href="dashboard.html" class="journal-back">
+            ← Dashboard
+        </a>
+
+        <div class="journal-header-title">
+            <span>FUBAN OS</span>
+            <span class="header-divider">/</span>
+            <span>Journal</span>
+        </div>
+
+        <div class="journal-save-status">
+            <span class="save-indicator" id="save-indicator"></span>
+            <span id="save-status">All changes saved</span>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN WORKSPACE -->
+    <main class="journal-workspace">
+
+        <!-- =====================================
+             LEFT SIDEBAR
+        ====================================== -->
+
+        <aside class="journal-sidebar" id="journal-sidebar">
+
+            <div class="sidebar-heading">
+                <h2>Journal Tools</h2>
+                <p>Your personal notebook</p>
+            </div>
+
+
+            <!-- INSERT IMAGE -->
+
+            <section class="tool-section">
+
+                <h3>INSERT</h3>
+
+                <button
+                    class="tool-button"
+                    id="image-tool"
+                    type="button"
+                    disabled
+                >
+                    <span class="tool-icon">▧</span>
+                    <span>Insert Image</span>
+                </button>
+
+                <input
+                    type="file"
+                    id="image-upload"
+                    accept="image/*"
+                    hidden
+                >
+
+                <p class="tool-description">
+                    Select a page with the binder clip first.
+                </p>
+
+            </section>
+
+
+            <!-- PAPER STYLE -->
+
+            <section class="tool-section">
+
+                <h3>PAPER STYLE</h3>
+
+                <p class="tool-description">
+                    Applies to selected page
+                </p>
+
+                <div class="paper-options">
+
+                    <button
+                        class="paper-option active"
+                        type="button"
+                        data-paper="lined"
+                        disabled
+                    >
+                        <span class="paper-preview lined-preview"></span>
+                        <span>Lined</span>
+                    </button>
+
+                    <button
+                        class="paper-option"
+                        type="button"
+                        data-paper="dot-grid"
+                        disabled
+                    >
+                        <span class="paper-preview dot-preview"></span>
+                        <span>Dot Grid</span>
+                    </button>
+
+                    <button
+                        class="paper-option"
+                        type="button"
+                        data-paper="grid"
+                        disabled
+                    >
+                        <span class="paper-preview grid-preview"></span>
+                        <span>Grid</span>
+                    </button>
+
+                    <button
+                        class="paper-option"
+                        type="button"
+                        data-paper="blank"
+                        disabled
+                    >
+                        <span class="paper-preview blank-preview"></span>
+                        <span>Blank</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- PAPER COLOR -->
+
+            <section class="tool-section">
+
+                <h3>PAPER COLOR</h3>
+
+                <div class="paper-color-control">
+
+                    <input
+                        type="color"
+                        id="paper-color"
+                        value="#fffefa"
+                        disabled
+                        aria-label="Choose paper color"
+                    >
+
+                    <span id="paper-color-value">#FFFEFA</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 STICKER LIBRARY
+            ====================================== -->
+
+            <section class="tool-section" id="sticker-library">
+
+                <h3>STICKER COLLECTION</h3>
+
+                <!-- CATEGORY VIEW -->
+
+                <div id="sticker-category-view">
+
+                    <div class="sticker-category-list">
+
+                        <button
+                            class="sticker-category"
+                            type="button"
+                            data-category="astronomy"
+                            disabled
+                        >
+                            <span>Astronomy</span>
+                            <span class="sticker-count">15</span>
+                        </button>
+
+                        <button
+                            class="sticker-category"
+                            type="button"
+                            data-category="nature"
+                            disabled
+                        >
+                            <span>Nature</span>
+                            <span class="sticker-count">3</span>
+                        </button>
+
+                        <button
+                            class="sticker-category"
+                            type="button"
+                            data-category="stationery"
+                            disabled
+                        >
+                            <span>Stationery</span>
+                            <span class="sticker-count">25</span>
+                        </button>
+
+                        <button
+                            class="sticker-category"
+                            type="button"
+                            data-category="science"
+                            disabled
+                        >
+                            <span>Science</span>
+                            <span class="sticker-count">10</span>
+                        </button>
+
+                        <button
+                            class="sticker-category"
+                            type="button"
+                            data-category="doodles"
+                            disabled
+                        >
+                            <span>Doodles</span>
+                            <span class="sticker-count">40</span>
+                        </button>
+
+                        <button
+                            class="sticker-category"
+                            type="button"
+                            data-category="journey"
+                            disabled
+                        >
+                            <span>Journey</span>
+                            <span class="sticker-count">4</span>
+                        </button>
+
+                    </div>
+
+
+                    <!-- CUSTOM PACKS -->
+
+                    <div class="custom-pack-section">
+
+                        <div class="custom-pack-heading">
+                            <span>MY PACKS</span>
+                        </div>
+
+                        <div id="custom-pack-list">
+                            <!-- Generated by JavaScript -->
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="add-sticker-pack-button"
+                        id="add-sticker-pack"
+                        type="button"
+                        disabled
+                    >
+                        <span>＋</span>
+                        Add Sticker Pack
+                    </button>
+
+                </div>
+
+
+                <!-- STICKER BAG VIEW -->
+
+                <div id="sticker-bag-view" hidden>
+
+                    <div class="sticker-bag-header">
+
+                        <button
+                            type="button"
+                            id="back-to-sticker-categories"
+                            aria-label="Back to sticker categories"
+                        >
+                            ←
+                        </button>
+
+                        <div class="sticker-bag-title">
+
+                            <span id="sticker-bag-name">
+                                Astronomy
+                            </span>
+
+                            <small id="sticker-bag-count">
+                                15 stickers
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- STICKER GRID -->
+
+                    <div
+                        class="sticker-grid"
+                        id="sticker-grid"
+                        aria-label="Sticker collection"
+                    >
+                        <!-- Sticker images generated by JavaScript -->
+                    </div>
+
+
+                    <p class="sticker-drag-hint">
+                        Drag a sticker onto your notebook
+                    </p>
+
+                </div>
+
+
+                <!-- STICKER FILE INPUT -->
+
+                <input
+                    type="file"
+                    id="sticker-upload"
+                    accept="image/png,image/jpeg,image/webp"
+                    multiple
+                    hidden
+                >
+
+            </section>
+
+        </aside>
+
+
+
+        <!-- =====================================
+             CENTER NOTEBOOK
+        ====================================== -->
+
+        <section class="journal-main">
+
+
+            <!-- BINDER CLIP TOPBAR -->
+
+            <div class="journal-topbar">
+
+                <div class="binder-clip-area">
+
+                    <button
+                        class="binder-clip-button"
+                        id="binder-clip-button"
+                        type="button"
+                        aria-label="Toggle page selection mode"
+                        aria-pressed="false"
+                        title="Select a page"
+                    >
+
+                        <img
+                            src="assets/icons/clip.png"
+                            alt=""
+                            width="36"
+                            height="36"
+                        >
+
+                    </button>
+
+                    <span
+                        class="selection-mode-label"
+                        id="selection-mode-label"
+                    >
+                        Click the clip to select a page
+                    </span>
+
+                    <button
+                        class="touch-text-format-button"
+                        id="touch-text-format-button"
+                        type="button"
+                        aria-label="Format selected text"
+                        aria-controls="journal-selection-menu"
+                        disabled
+                    >
+                        Format text
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NOTEBOOK STAGE -->
+
+            <div class="notebook-stage" id="notebook-stage">
+
+
+                <!-- TWO-PAGE LAYOUT -->
+
+                <div
+                    class="notebook-book two-page-layout"
+                    id="notebook-book"
+                >
+
+                    <!-- LEFT PAGE -->
+
+                    <article
+                        class="notebook-page left-page lined-paper"
+                        id="left-page"
+                    >
+
+                        <div
+                            class="page-writing-area"
+                            id="left-writing"
+                            contenteditable="false"
+                            spellcheck="true"
+                            data-placeholder="Start writing..."
+                        ></div>
+
+                        <div
+                            class="page-image-layer"
+                            id="left-images"
+                        ></div>
+
+                    </article>
+
+
+                    <!-- NOTEBOOK SPINE -->
+
+                    <div
+                        class="notebook-spine"
+                        id="notebook-spine"
+                    ></div>
+
+
+                    <!-- RIGHT PAGE -->
+
+                    <article
+                        class="notebook-page right-page lined-paper"
+                        id="right-page"
+                    >
+
+                        <div
+                            class="page-writing-area"
+                            id="right-writing"
+                            contenteditable="false"
+                            spellcheck="true"
+                            data-placeholder="Start writing..."
+                        ></div>
+
+                        <div
+                            class="page-image-layer"
+                            id="right-images"
+                        ></div>
+
+                    </article>
+
+                </div>
+
+
+
+                <!-- FREE / ONE PAGE LAYOUT -->
+
+                <div
+                    class="notebook-book free-layout"
+                    id="free-book"
+                    hidden
+                >
+
+                    <article
+                        class="notebook-page free-page lined-paper"
+                        id="free-page"
+                    >
+
+                        <div
+                            class="page-writing-area"
+                            id="free-writing"
+                            contenteditable="false"
+                            spellcheck="true"
+                            data-placeholder="Start writing..."
+                        ></div>
+
+                        <div
+                            class="page-image-layer"
+                            id="free-images"
+                        ></div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NOTEBOOK FOOTER -->
+
+            <footer class="notebook-footer">
+
+                <div
+                    class="current-page-label"
+                    id="current-page-label"
+                >
+                    Select a page using the binder clip
+                </div>
+
+
+                <div class="page-navigation">
+
+                    <button
+                        id="previous-spread"
+                        type="button"
+                    >
+                        ← Previous
+                    </button>
+
+                    <button
+                        id="next-spread"
+                        type="button"
+                    >
+                        Next →
+                    </button>
+
+                </div>
+
+
+                <!-- ADD PAGE MENU -->
+
+                <div class="add-page-container">
+
+                    <button
+                        class="add-page-button"
+                        id="add-page-button"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        + Add Page
+                    </button>
+
+
+                    <div
+                        class="add-page-menu"
+                        id="add-page-menu"
+                        hidden
+                    >
+
+                        <button
+                            type="button"
+                            id="add-two-page"
+                        >
+                            <strong>Two-page spread</strong>
+                            <span>Add a left and right page</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            id="add-free-page"
+                        >
+                            <strong>Free / One page</strong>
+                            <span>Add one independent page</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <span
+                    class="page-count"
+                    id="page-count"
+                >
+                    2 pages
+                </span>
+
+            </footer>
+
+
+
+            <!-- IMAGE TOOLBAR -->
+
+            <div
+                class="image-toolbar"
+                id="image-toolbar"
+                hidden
+            >
+
+                <span>Image selected</span>
+
+                <button
+                    id="delete-image"
+                    type="button"
+                >
+                    Delete Image
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             LAYER PANEL
+        ====================================== -->
+
+        <section
+            class="journal-layer-panel"
+            id="journal-layer-panel"
+            hidden
+        >
+
+            <div class="layer-panel-header">
+
+                <h3>LAYERS</h3>
+
+                <button
+                    type="button"
+                    id="close-layer-panel"
+                    aria-label="Close layers"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                class="layer-list"
+                id="layer-list"
+            >
+                <!-- Layers generated by JavaScript -->
+            </div>
+
+
+            <div class="layer-actions">
+
+                <button
+                    type="button"
+                    id="layer-bring-front"
+                >
+                    Bring to Front
+                </button>
+
+                <button
+                    type="button"
+                    id="layer-send-back"
+                >
+                    Send to Back
+                </button>
+
+                <button
+                    type="button"
+                    id="layer-lock"
+                >
+                    Lock
+                </button>
+
+                <button
+                    type="button"
+                    id="layer-hide"
+                >
+                    Hide
+                </button>
+
+                <button
+                    type="button"
+                    id="layer-delete"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             RIGHT PAGE PROPERTIES
+        ====================================== -->
+
+        <aside
+            class="page-properties-panel"
+            id="page-properties-panel"
+            hidden
+        >
+
+            <div class="properties-heading">
+
+                <h3>PAGE PROPERTIES</h3>
+
+                <span id="selected-page-label">
+                    No page selected
+                </span>
+
+            </div>
+
+
+            <!-- PAGE NAME -->
+
+            <div class="property-field">
+
+                <label for="page-title">
+                    PAGE NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="page-title"
+                    maxlength="80"
+                    placeholder="Untitled Page"
+                >
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="property-field">
+
+                <label for="page-date">
+                    DATE
+                </label>
+
+                <input
+                    type="date"
+                    id="page-date"
+                >
+
+            </div>
+
+
+            <!-- MOOD -->
+
+            <div class="property-field">
+
+                <label for="journal-mood">
+                    MOOD
+                </label>
+
+                <select id="journal-mood" disabled>
+
+                    <option value="">Select mood</option>
+                    <option value="happy">😊 Happy</option>
+                    <option value="calm">😌 Calm</option>
+                    <option value="excited">🤩 Excited</option>
+                    <option value="tired">😴 Tired</option>
+                    <option value="sad">😔 Sad</option>
+                    <option value="stressed">😵 Stressed</option>
+                    <option value="motivated">🔥 Motivated</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- WEATHER -->
+
+            <div class="property-field">
+
+                <label for="journal-weather">
+                    WEATHER
+                </label>
+
+                <select id="journal-weather" disabled>
+
+                    <option value="">Select weather</option>
+                    <option value="sunny">☀️ Sunny</option>
+                    <option value="cloudy">☁️ Cloudy</option>
+                    <option value="rainy">🌧️ Rainy</option>
+                    <option value="stormy">⛈️ Stormy</option>
+                    <option value="windy">🌬️ Windy</option>
+                    <option value="snowy">❄️ Snowy</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="properties-divider"></div>
+
+
+            <!-- WRITING STYLE -->
+
+            <div class="properties-section-title">
+                WRITING STYLE
+            </div>
+
+
+            <div class="property-field">
+
+                <label for="page-font">
+                    FONT FAMILY
+                </label>
+
+                <select id="page-font" disabled>
+
+                    <option value="Sarabun">Sarabun</option>
+                    <option value="UID Space">UID Space</option>
+                    <option value="Alice">Alice</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="property-field">
+
+                <label for="page-font-size">
+                    FONT SIZE
+                </label>
+
+                <select id="page-font-size" disabled>
+
+                    <option value="12">12 px</option>
+                    <option value="14">14 px</option>
+                    <option value="16" selected>16 px</option>
+                    <option value="18">18 px</option>
+                    <option value="20">20 px</option>
+                    <option value="22">22 px</option>
+                    <option value="24">24 px</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="property-field">
+
+                <label for="page-text-color">
+                    TEXT COLOR
+                </label>
+
+                <input
+                    type="color"
+                    id="page-text-color"
+                    value="#222222"
+                    disabled
+                >
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================
+             STICKER IMPORT MODAL
+        ====================================== -->
+
+        <div
+            class="sticker-import-modal"
+            id="sticker-import-modal"
+            hidden
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="sticker-import-title"
+        >
+
+            <div class="sticker-import-content">
+
+                <div class="sticker-import-header">
+
+                    <h2 id="sticker-import-title">
+                        Add New Sticker
+                    </h2>
+
+                    <button
+                        type="button"
+                        id="close-sticker-import"
+                        aria-label="Close"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <!-- PREVIEW -->
+
+                <div class="sticker-import-preview">
+
+                    <img
+                        id="sticker-import-image"
+                        src=""
+                        alt="Sticker preview"
+                    >
+
+                </div>
+
+
+                <!-- STICKER NAME -->
+
+                <div class="property-field">
+
+                    <label for="sticker-import-name">
+                        STICKER NAME
+                    </label>
+
+                    <input
+                        type="text"
+                        id="sticker-import-name"
+                        placeholder="My Sticker"
+                        maxlength="60"
+                    >
+
+                </div>
+
+
+                <!-- DIMENSIONS -->
+
+                <div class="sticker-import-dimensions">
+
+                    <div class="property-field">
+
+                        <label for="sticker-import-width">
+                            WIDTH (PX)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="sticker-import-width"
+                            min="20"
+                            max="2000"
+                            value="512"
+                        >
+
+                    </div>
+
+
+                    <div class="property-field">
+
+                        <label for="sticker-import-height">
+                            HEIGHT (PX)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="sticker-import-height"
+                            min="20"
+                            max="2000"
+                            value="512"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- ASPECT RATIO -->
+
+                <label class="sticker-aspect-lock">
+
+                    <input
+                        type="checkbox"
+                        id="sticker-lock-ratio"
+                        checked
+                    >
+
+                    Lock aspect ratio
+
+                </label>
+
+
+                <!-- DESTINATION PACK -->
+
+                <div class="property-field">
+
+                    <label for="sticker-import-pack">
+                        ADD TO PACK
+                    </label>
+
+                    <select id="sticker-import-pack">
+
+                        <option value="">
+                            Select a pack
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="sticker-import-actions">
+
+                    <button
+                        type="button"
+                        id="cancel-sticker-import"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="button"
+                        id="confirm-sticker-import"
+                    >
+                        Add Sticker
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/system-achievements.js"></script>
+    <script src="js/pages/journal.js"></script>
+
+</body>
+</html>

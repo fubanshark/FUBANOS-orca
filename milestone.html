@@ -1,0 +1,698 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#061421">
+    <script src="js/theme.js"></script>
+
+    <title>Milestone | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/milestone.css">
+    <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/theme.css">
+
+</head>
+
+<body class="milestone-page">
+
+    <!-- BACKGROUND -->
+    <div class="milestone-background"></div>
+    <div class="milestone-background-overlay"></div>
+
+
+    <!-- NAVIGATION -->
+    <header class="main-header">
+        <nav class="main-navigation navbar" aria-label="Main navigation">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="focus.html" class="nav-link">Focus</a>
+            <a href="garden.html" class="nav-link">Garden</a>
+            <a href="milestone.html" class="nav-link active" aria-current="page">Milestone</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="profile.html" class="header-link">Profile : FuBan</a>
+            <a href="settings.html" class="header-link">Setting</a>
+        </div>
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="milestone-container">
+
+        <!-- PAGE HEADING -->
+        <section class="milestone-heading">
+
+            <div>
+                <p class="milestone-eyebrow">YOUR PERSONAL JOURNEY</p>
+
+                <h1>Achievements</h1>
+
+                <p class="milestone-subtitle">
+                    Every little step becomes part of your story.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                id="open-achievement-modal"
+                class="milestone-primary-btn"
+            >
+                <span>＋</span>
+                <span>New Achievement</span>
+            </button>
+
+        </section>
+
+
+        <!-- SUMMARY -->
+        <section class="milestone-summary">
+
+            <div class="milestone-summary-card">
+                <span>TOTAL</span>
+                <strong id="total-achievements">0</strong>
+                <span>Achievements</span>
+            </div>
+
+            <div class="milestone-summary-card">
+                <span>INCOMPLETE</span>
+                <strong id="incomplete-count">0</strong>
+                <span>Still in progress</span>
+            </div>
+
+            <div class="milestone-summary-card">
+                <span>ACHIEVED</span>
+                <strong id="achieved-count">0</strong>
+                <span>Completed journeys</span>
+            </div>
+
+        </section>
+
+
+        <!-- ACHIEVEMENT PANEL -->
+        <section class="milestone-achievement-panel">
+
+            <!-- TABS -->
+            <div class="milestone-tabs" role="tablist" aria-label="Achievement status">
+
+                <button
+                    type="button"
+                    class="milestone-tab active"
+                    id="tab-incomplete"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="incomplete-panel"
+                >
+                    Incomplete
+                </button>
+
+                <button
+                    type="button"
+                    class="milestone-tab"
+                    id="tab-achieved"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="achieved-panel"
+                >
+                    Achieved
+                </button>
+
+                <button
+                    type="button"
+                    class="milestone-tab"
+                    id="tab-archive"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="archive-panel"
+                >
+                    Archive
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH AND FILTER -->
+            <div class="milestone-toolbar">
+
+                <input
+                    type="search"
+                    id="achievement-search"
+                    placeholder="Search achievements..."
+                    aria-label="Search achievements"
+                >
+
+                <select
+                    id="achievement-category-filter"
+                    aria-label="Filter by category"
+                >
+                    <option value="all">All Categories</option>
+                    <option value="Personal Growth">Personal Growth</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Science">Science</option>
+                    <option value="Creativity">Creativity</option>
+                    <option value="Exploration">Exploration</option>
+                    <option value="Life Milestones">Life Milestones</option>
+                    <option value="Sleeping">Sleeping</option>
+                    <option value="Diary Writer">Diary Writer</option>
+                    <option value="uncategorized">Uncategorized</option>
+                </select>
+
+            </div>
+
+
+            <!-- INCOMPLETE -->
+            <div
+                class="achievement-content"
+                id="incomplete-panel"
+                role="tabpanel"
+                aria-labelledby="tab-incomplete"
+            >
+
+                <div
+                    id="incomplete-achievement-list"
+                    class="achievement-list"
+                ></div>
+
+                <div class="achievement-empty" id="incomplete-empty">
+                    <h3>Your journey starts here</h3>
+                    <p>
+                        Create your first achievement and give yourself
+                        something to look forward to.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- ACHIEVED -->
+            <div
+                class="achievement-content"
+                id="achieved-panel"
+                role="tabpanel"
+                aria-labelledby="tab-achieved"
+                hidden
+            >
+
+                <div
+                    id="achieved-achievement-list"
+                    class="achievement-list"
+                ></div>
+
+                <div class="achievement-empty" id="achieved-empty" hidden>
+                    <h3>More stories to come</h3>
+                    <p>Your completed achievements will appear here.</p>
+                </div>
+
+            </div>
+
+
+            <!-- ARCHIVE -->
+            <div
+                class="achievement-content"
+                id="archive-panel"
+                role="tabpanel"
+                aria-labelledby="tab-archive"
+                hidden
+            >
+
+                <div
+                    id="archive-achievement-list"
+                    class="achievement-list"
+                ></div>
+
+                <div class="achievement-empty" id="archive-empty" hidden>
+                    <h3>No archived achievements</h3>
+                    <p>Archived achievements will be kept here.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="milestone-footer">
+            <p>Let's start the journey together.</p>
+            <span>✦</span>
+        </footer>
+
+    </main>
+
+
+
+    <!-- =========================================
+         CREATE / EDIT ACHIEVEMENT MODAL
+    ========================================== -->
+
+    <div
+        class="milestone-modal"
+        id="achievement-modal"
+        hidden
+    >
+
+        <section
+            class="milestone-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="achievement-modal-title"
+        >
+
+            <!-- MODAL HEADER -->
+            <div class="milestone-modal-header">
+
+                <div>
+                    <p class="modal-eyebrow">MAKE IT MEAN SOMETHING</p>
+
+                    <h2 id="achievement-modal-title">
+                        Create Achievement
+                    </h2>
+
+                    <p>Create an achievement worth remembering.</p>
+                </div>
+
+                <button
+                    type="button"
+                    class="milestone-secondary-btn"
+                    id="close-achievement-modal"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="achievement-form" class="milestone-form">
+
+                <input type="hidden" id="achievement-id">
+
+
+                <!-- LOGO EDITOR -->
+                <section class="achievement-logo-editor">
+
+                    <div>
+                        <h3>Achievement Logo</h3>
+                        <p>Choose a symbol for your journey.</p>
+                    </div>
+
+
+                    <!-- LOGO PREVIEW -->
+                    <div
+                        class="achievement-logo-preview"
+                        id="achievement-logo-preview"
+                    >
+                        <span
+                            id="achievement-emoji-preview"
+                            hidden
+                        >🌙</span>
+
+                        <span id="achievement-icon-preview" hidden>⭐</span>
+                        <span id="achievement-image-placeholder" hidden>＋</span>
+
+                        <img
+                            id="achievement-image-preview"
+                            src=""
+                            alt="Achievement logo preview"
+                            hidden
+                        >
+                    </div>
+
+
+                    <!-- LOGO TYPE TABS -->
+                    <div class="logo-type-tabs">
+
+                        <button
+                            type="button"
+                            class="active"
+                            data-logo-type="emoji"
+                            aria-pressed="true"
+                        >
+                            Emoji
+                        </button>
+
+                        <button
+                            type="button"
+                            data-logo-type="icon"
+                            aria-pressed="false"
+                        >
+                            Icon
+                        </button>
+
+                        <button
+                            type="button"
+                            data-logo-type="image"
+                            aria-pressed="false"
+                        >
+                            Upload Image
+                        </button>
+
+                    </div>
+
+
+                    <!-- EMOJI PANEL -->
+                    <div
+                        class="logo-type-panel"
+                        data-logo-type-panel="emoji"
+                    >
+
+                        <div class="milestone-form-group">
+                            <label for="achievement-emoji">Choose Emoji</label>
+
+                            <input
+                                type="text"
+                                id="achievement-emoji"
+                                value="🌙"
+                                maxlength="8"
+                                placeholder="🌙"
+                            >
+                        </div>
+
+                        <p>Emoji will appear without a circular frame.</p>
+
+                    </div>
+
+
+                    <!-- ICON PANEL -->
+                    <div
+                        class="logo-type-panel"
+                        data-logo-type-panel="icon"
+                        hidden
+                    >
+
+                        <div class="milestone-form-group">
+                            <label for="achievement-icon">Choose Icon</label>
+
+                            <select id="achievement-icon">
+                                <option value="star">Star</option>
+                                <option value="moon">Moon</option>
+                                <option value="sun">Sun</option>
+                                <option value="trophy">Trophy</option>
+                                <option value="book">Book</option>
+                                <option value="graduation-cap">Graduation</option>
+                                <option value="flask">Science</option>
+                                <option value="palette">Art</option>
+                                <option value="mountain">Exploration</option>
+                                <option value="leaf">Growth</option>
+                                <option value="music">Music</option>
+                                <option value="pen">Writing</option>
+                                <option value="bed">Sleeping</option>
+                                <option value="orbit">Space</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE PANEL -->
+                    <div
+                        class="logo-type-panel"
+                        data-logo-type-panel="image"
+                        hidden
+                    >
+
+                        <div class="milestone-form-group">
+                            <label for="achievement-image-upload">Upload Logo</label>
+
+                            <input
+                                type="file"
+                                id="achievement-image-upload"
+                                accept="image/png,image/jpeg,image/webp"
+                            >
+                        </div>
+
+                        <p>PNG with a transparent background is recommended. Maximum size: 2 MB.</p>
+
+                    </div>
+
+
+                    <!-- IMAGE ADJUSTMENT -->
+                    <div class="logo-adjustment" id="logo-adjustment" hidden>
+
+                        <h4>Adjust Image</h4>
+
+                        <div>
+                            <label for="logo-zoom">Zoom <span id="logo-zoom-value">100%</span></label>
+                            <input
+                                type="range"
+                                id="logo-zoom"
+                                min="50"
+                                max="200"
+                                value="100"
+                            >
+                        </div>
+
+                        <div>
+                            <label for="logo-position-x">Horizontal Position <span id="logo-position-x-value">50%</span></label>
+                            <input
+                                type="range"
+                                id="logo-position-x"
+                                min="0"
+                                max="100"
+                                value="50"
+                            >
+                        </div>
+
+                        <div>
+                            <label for="logo-position-y">Vertical Position <span id="logo-position-y-value">50%</span></label>
+                            <input
+                                type="range"
+                                id="logo-position-y"
+                                min="0"
+                                max="100"
+                                value="50"
+                            >
+                        </div>
+
+                        <button
+                            type="button"
+                            id="reset-logo-adjustment"
+                            class="milestone-secondary-btn"
+                        >
+                            Reset Image Position
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- BASIC INFORMATION -->
+                <section class="milestone-form-group">
+
+                    <h3>Basic Information</h3>
+
+                    <label for="achievement-name">
+                        Achievement Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="achievement-name"
+                        maxlength="80"
+                        placeholder="e.g. To the Moon"
+                        required
+                    >
+
+                    <label for="achievement-description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="achievement-description"
+                        rows="3"
+                        maxlength="500"
+                        placeholder="Describe what this achievement means to you..."
+                    ></textarea>
+
+                    <label for="achievement-category">
+                        Category (Optional)
+                    </label>
+
+                    <select id="achievement-category">
+                        <option value="">No Category</option>
+                        <option value="Personal Growth">Personal Growth</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Science">Science</option>
+                        <option value="Creativity">Creativity</option>
+                        <option value="Exploration">Exploration</option>
+                        <option value="Life Milestones">Life Milestones</option>
+                        <option value="Sleeping">Sleeping</option>
+                        <option value="Diary Writer">Diary Writer</option>
+                    </select>
+
+                </section>
+
+
+
+                <!-- TIMELINE -->
+                <section class="milestone-form-group">
+
+                    <h3>Timeline</h3>
+                    <p>Set the time period for your achievement.</p>
+
+                    <div class="milestone-form-row">
+
+                        <div class="milestone-form-group">
+                            <label for="achievement-start-date">Start Date</label>
+
+                            <input
+                                type="date"
+                                id="achievement-start-date"
+                            >
+                        </div>
+
+                        <div class="milestone-form-group">
+                            <label for="achievement-target-date">Target Date</label>
+
+                            <input
+                                type="date"
+                                id="achievement-target-date"
+                            >
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- INITIAL PROGRESS -->
+                <section class="milestone-form-group">
+
+                    <h3>Initial Progress</h3>
+                    <p>Set the starting progress for this achievement.</p>
+
+                    <label for="achievement-initial-progress">
+                        Progress
+                    </label>
+
+                    <div class="milestone-form-row">
+
+                        <input
+                            type="range"
+                            id="achievement-initial-progress"
+                            min="0"
+                            max="100"
+                            value="0"
+                        >
+
+                        <strong id="achievement-initial-progress-value">0%</strong>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- FORM ACTIONS -->
+                <div class="milestone-form-actions">
+
+                    <button
+                        type="button"
+                        class="milestone-secondary-btn"
+                        id="cancel-achievement"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="milestone-primary-btn"
+                        id="save-achievement"
+                    >
+                        Save Achievement
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =========================================
+         DELETE CONFIRMATION MODAL
+    ========================================== -->
+
+    <div
+        class="milestone-modal"
+        id="delete-achievement-modal"
+        hidden
+    >
+
+        <section
+            class="milestone-modal-content delete-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-achievement-title"
+        >
+
+            <h2 id="delete-achievement-title">Delete Achievement?</h2>
+
+            <p>
+                This achievement will be removed from your list.
+                This action cannot be undone.
+            </p>
+
+            <div class="delete-modal-actions">
+
+                <button
+                    type="button"
+                    class="milestone-secondary-btn"
+                    id="close-delete-modal"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="button"
+                    class="milestone-danger-btn"
+                    id="cancel-delete-achievement"
+                >
+                    Close
+                </button>
+
+                <button
+                    type="button"
+                    class="milestone-danger-btn"
+                    id="confirm-delete-achievement"
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- NOTIFICATION -->
+    <div
+        class="milestone-notification"
+        id="milestone-notification"
+        role="status"
+        aria-live="polite"
+        hidden
+    ></div>
+
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js" defer></script>
+    <script src="js/navigation.js" defer></script>
+    <script src="js/achievement-sync.js" defer></script>
+    <script src="js/system-achievements.js" defer></script>
+    <script src="js/pages/milestone.js" defer></script>
+    <script src="js/profile-avatar.js" defer></script>
+
+</body>
+</html>

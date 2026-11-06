@@ -1,0 +1,1596 @@
+/* =========================================
+   FUBAN OS - DASHBOARD
+========================================= */
+
+#dashboard-page {
+    --glass: rgba(8, 10, 16, 0.78);
+    --glass-light: rgba(255, 255, 255, 0.13);
+    --border-light: rgba(255, 255, 255, 0.20);
+
+    --text-main: #FFFFFF;
+    --text-muted: rgba(255,255,255,0.58);
+    --icon-color: #FFFFFF;
+
+    min-height: 100vh;
+    position: relative;
+    isolation: isolate;
+    overflow-x: hidden;
+
+    color: var(--text-main);
+    background: #08090D;
+
+    font-family: var(--font-main);
+}
+
+
+/* =========================================
+   WALLPAPER
+========================================= */
+
+.dashboard-wallpaper {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    background-image: url("../../assets/wallpapers/1403447.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    transform: scale(1.02);
+}
+
+.wallpaper-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background: rgba(0, 0, 0, 0.48);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.dashboard-header {
+    height: 66px;
+    width: 100%;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 4%;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    background: rgba(5,6,10,0.82);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.dashboard-home-link {
+    position: absolute;
+    left: 4%;
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 50%;
+
+    color: rgba(255,255,255,0.8);
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.dashboard-home-link:hover,
+.dashboard-home-link:focus-visible {
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.1);
+    color: #FFFFFF;
+    transform: scale(1.06);
+}
+
+.dashboard-home-link:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 3px;
+}
+
+.dashboard-home-link svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.nav-link {
+    padding: 9px 19px;
+
+    border: 1px solid transparent;
+    border-radius: 30px;
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 13px;
+
+    transition: 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #FFFFFF;
+
+    background: rgba(255,255,255,0.13);
+
+    border-color: rgba(255,255,255,0.22);
+}
+
+.header-actions {
+    position: absolute;
+    right: 4%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.top-button {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 8px 13px;
+
+    border: 1px solid rgba(255,255,255,0.17);
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.04);
+
+    color: #FFFFFF;
+
+    font-size: 11px;
+}
+
+.profile-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #FFFFFF;
+}
+
+
+/* =========================================
+   WALLPAPER BUTTON
+========================================= */
+
+.wallpaper-button {
+    position: fixed;
+
+    right: 25px;
+    top: 48%;
+
+    z-index: 5;
+
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+    place-items: center;
+
+    border: none;
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.82);
+
+    color: #17191D;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.wallpaper-button:hover {
+    background: #FFFFFF;
+    transform: scale(1.07);
+}
+
+.wallpaper-button svg {
+    width: 25px;
+    height: 25px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.dashboard-grid {
+    width: min(94%, 1540px);
+
+    margin: 28px auto 45px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-areas:
+        "activity activity"
+        "mission calendar"
+        "journal rooms";
+
+    gap: 22px;
+
+    align-items: stretch;
+}
+
+.panel {
+    min-width: 0;
+
+    position: relative;
+
+    padding: 24px;
+
+    border: 1px solid var(--border-light);
+    border-radius: 23px;
+
+    background: var(--glass);
+
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+}
+
+.panel h2 {
+    margin: 0;
+
+    color: #FFFFFF;
+
+    font-size: 17px;
+    font-weight: normal;
+}
+
+
+/* =========================================
+   PANEL AREAS
+========================================= */
+
+.activity-panel {
+    grid-area: activity;
+
+    width: 48%;
+    min-height: 235px;
+
+    background: rgba(255,255,255,0.35);
+
+    border-color: rgba(255,255,255,0.25);
+
+    color: #FFFFFF;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.mission-panel {
+    grid-area: mission;
+
+    min-height: 300px;
+
+    background: transparent;
+
+    box-shadow: none;
+}
+
+.calendar-panel {
+    grid-area: calendar;
+
+    min-height: 300px;
+
+    background: transparent;
+
+    box-shadow: none;
+}
+
+.journal-panel {
+    grid-area: journal;
+
+    min-height: 280px;
+
+    background: transparent;
+
+    box-shadow: none;
+}
+
+.rooms-panel {
+    grid-area: rooms;
+
+    min-height: 280px;
+
+    background: transparent;
+
+    box-shadow: none;
+}
+
+
+/* =========================================
+   ACTIVITY DONUT
+========================================= */
+
+.activity-content {
+    display: flex;
+    align-items: center;
+
+    gap: 35px;
+
+    margin-top: 18px;
+}
+
+
+/* Donut wrapper */
+
+.donut-wrapper {
+    width: 220px;
+    height: 220px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+}
+
+
+/* Donut outer circle */
+
+.donut-chart {
+    --donut-value: 0%;
+
+    width: 100%;
+    height: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: conic-gradient(
+        rgba(255,255,255,0.17) 0deg 360deg
+    );
+
+    position: relative;
+
+    transition: background 0.4s ease;
+
+    overflow: hidden;
+}
+
+
+/* Donut inner hole */
+
+.donut-chart::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 14%;
+
+    border-radius: 50%;
+
+    background: rgba(10,12,18,0.88);
+
+    z-index: 0;
+}
+
+
+/* Donut center text */
+
+.donut-inner {
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+.donut-inner strong {
+    color: #FFFFFF;
+
+    font-size: 36px;
+
+    font-family: "Roboto", sans-serif;
+
+    font-weight: 400;
+}
+
+.donut-inner span {
+    color: rgba(255,255,255,0.75);
+
+    font-size: 12px;
+}
+
+
+/* Activity summary */
+
+.activity-summary {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.activity-summary h3 {
+    margin-bottom: 12px;
+
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.activity-summary > p {
+    color: rgba(255,255,255,0.72);
+
+    font-size: 12px;
+}
+
+#activity-category-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-top: 15px;
+}
+
+.activity-category-row {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 12px;
+}
+
+.activity-marker {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+.activity-category-name {
+    flex: 1;
+}
+
+.activity-category-percent {
+    font-family: "Roboto", sans-serif;
+}
+
+
+/* =========================================
+   PANEL HEADING
+========================================= */
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.add-button {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255,255,255,0.48);
+    border-radius: 50%;
+
+    color: #FFFFFF;
+
+    background: rgba(255,255,255,0.07);
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.add-button:hover {
+    color: #111111;
+
+    background: #FFFFFF;
+}
+
+.empty-message {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 90%;
+
+    transform: translate(-50%,-50%);
+
+    color: var(--text-muted);
+
+    text-align: center;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   MISSION LIST
+========================================= */
+
+.mission-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+.mission-item {
+    padding: 12px 0;
+
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.mission-item:last-child {
+    border-bottom: none;
+}
+
+.mission-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.mission-info {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding-left: 13px;
+}
+
+.mission-name {
+    color: #FFFFFF;
+
+    font-size: 14px;
+}
+
+.mission-category {
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+.mission-xp-reward,
+.dashboard-xp-total {
+    color: #f7d774;
+    font-size: 11px;
+}
+
+.dashboard-xp-total {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* Mission color marker */
+
+.mission-color-marker {
+    position: absolute;
+
+    left: 0;
+    top: 4px;
+
+    width: 4px;
+    height: 80%;
+
+    min-height: 22px;
+
+    border-radius: 5px;
+}
+
+
+/* Mission delete */
+
+.mission-delete {
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.5);
+
+    cursor: pointer;
+
+    font-size: 17px;
+}
+
+
+/* Mission progress */
+
+.mission-progress-track {
+    height: 8px;
+    width: 100%;
+
+    margin-top: 12px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.18);
+}
+
+.mission-progress-fill {
+    height: 100%;
+    width: 0%;
+
+    border-radius: inherit;
+
+    background: #FFFFFF;
+
+    transition: width 0.3s ease;
+}
+
+
+/* Mission controls */
+
+.mission-controls {
+    margin-top: 9px;
+}
+
+.mission-range {
+    width: 100%;
+
+    accent-color: #FFFFFF;
+
+    cursor: pointer;
+}
+
+.mission-checkbox-label {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.mission-checkbox {
+    accent-color: #FFFFFF;
+}
+
+
+/* =========================================
+   CALENDAR
+========================================= */
+
+.calendar-heading {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 35px;
+
+    margin-bottom: 22px;
+}
+
+.calendar-heading h2 {
+    font-family: "Roboto", sans-serif;
+
+    font-size: 17px;
+    font-weight: 500;
+}
+
+
+/* Calendar arrows */
+
+.calendar-arrow {
+    position: absolute;
+
+    left: 0;
+
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.06);
+
+    color: #FFFFFF;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#calendar-next {
+    left: auto;
+    right: 0;
+}
+
+
+/* Calendar expand link */
+
+.calendar-expand {
+    position: absolute;
+
+    top: 50%;
+    right: 42px;
+
+    transform: translateY(-50%);
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 3;
+
+    color: rgba(255,255,255,0.75);
+
+    background: transparent;
+
+    border: none;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.calendar-expand svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.6;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.calendar-expand:hover {
+    color: #FFFFFF;
+
+    transform: translateY(-50%) scale(1.12);
+}
+
+
+/* Weekdays and dates */
+
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    gap: 7px;
+}
+
+.calendar-weekdays {
+    margin-bottom: 12px;
+}
+
+.calendar-weekdays span {
+    display: block;
+
+    text-align: center;
+
+    color: var(--text-muted);
+
+    font-family: "Roboto", sans-serif;
+
+    font-size: 11px;
+}
+
+
+/* Calendar day */
+
+.calendar-day {
+    min-width: 0;
+
+    aspect-ratio: 1.5 / 1;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+
+    position: relative;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #FFFFFF;
+
+    font-family: "Roboto", sans-serif;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.calendar-day:hover {
+    background: rgba(255,255,255,0.12);
+
+    border-color: rgba(255,255,255,0.2);
+}
+
+.calendar-day.empty {
+    pointer-events: none;
+
+    border-color: transparent;
+
+    background: transparent;
+}
+
+
+/* Today marker */
+
+.calendar-day.today::before {
+    content: "";
+
+    display: block;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #93D4FA;
+
+    box-shadow: 0 0 6px rgba(147,212,250,0.7);
+}
+
+
+/* Today highlight */
+
+.calendar-day.today {
+    background: rgba(255,255,255,0.27);
+
+    border-color: rgba(255,255,255,0.7);
+
+    box-shadow: 0 0 16px rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* Selected date */
+
+.calendar-day.selected {
+    background: rgba(255,255,255,0.17);
+
+    border-color: rgba(255,255,255,0.4);
+}
+
+.calendar-day-number {
+    display: block;
+
+    line-height: 1.2;
+}
+
+
+/* Mission dots */
+
+.calendar-mission-dots {
+    min-height: 5px;
+
+    max-width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 3px;
+}
+
+.calendar-mission-dot {
+    display: block;
+
+    width: 5px;
+    height: 5px;
+
+    min-width: 5px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+
+    box-shadow: 0 0 4px rgba(255,255,255,0.25);
+}
+
+
+/* =========================================
+   JOURNAL
+========================================= */
+
+.view-link {
+    color: rgba(255,255,255,0.8);
+
+    font-size: 12px;
+}
+
+.journal-panel {
+    position: relative;
+
+    overflow: hidden;
+}
+
+.journal-preview {
+    width: 100%;
+    height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    position: relative;
+
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.04);
+
+    transition: 0.2s ease;
+}
+
+.journal-preview:hover {
+    background: rgba(255,255,255,0.09);
+}
+
+.journal-book {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 120px;
+    max-height: 120px;
+
+    object-fit: contain;
+
+    position: relative;
+
+    margin: auto;
+
+    transition: transform 0.3s ease;
+}
+
+.journal-preview:hover .journal-book {
+    transform: scale(1.06);
+}
+
+
+/* =========================================
+   ROOMS
+========================================= */
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 13px;
+}
+
+.room-item {
+    width: 90px;
+    min-height: 90px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(255,255,255,0.17);
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.10);
+
+    color: #FFFFFF;
+
+    text-align: center;
+
+    transition: 0.2s ease;
+}
+
+.room-item:hover {
+    background: rgba(255,255,255,0.22);
+
+    transform: translateY(-3px);
+}
+
+.room-item a {
+    position: relative;
+
+    z-index: 5;
+
+    display: inline-block;
+
+    color: #FFFFFF;
+
+    font-size: 11px;
+
+    overflow-wrap: anywhere;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+}
+
+.room-icon {
+    font-size: 26px;
+}
+
+.room-actions {
+    display: flex;
+
+    gap: 5px;
+}
+
+.room-actions button {
+    padding: 3px 6px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 5px;
+
+    background: transparent;
+
+    color: #FFFFFF;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   MODALS
+========================================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 20;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,0.68);
+
+    backdrop-filter: blur(8px);
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-box {
+    width: min(100%, 440px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    position: relative;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+
+    background: rgba(12,14,20,0.97);
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+
+    font-size: 21px;
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #FFFFFF;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.modal-box form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.modal-box label {
+    color: rgba(255,255,255,0.75);
+
+    font-size: 12px;
+}
+
+.modal-box input,
+.modal-box select {
+    width: 100%;
+
+    min-height: 42px;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.07);
+
+    color: #FFFFFF;
+
+    font: inherit;
+}
+
+.modal-box select option {
+    color: #111111;
+}
+
+.modal-submit {
+    min-height: 43px;
+
+    margin-top: 14px;
+
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 9px;
+
+    background: #FFFFFF;
+
+    color: #111111;
+
+    font: inherit;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.modal-submit:hover {
+    background: rgba(255,255,255,0.8);
+}
+
+.achievement-sync-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+#mission-modal .achievement-sync-option input[type="checkbox"] {
+    flex: 0 0 17px;
+    width: 17px;
+    min-height: 17px;
+    height: 17px;
+    margin: 0;
+    padding: 0;
+    accent-color: #FFFFFF;
+}
+
+#mission-sync-achievement-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+#mission-sync-achievement-fields[hidden] {
+    display: none;
+}
+
+#mission-sync-achievement-fields small {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.modal-description {
+    margin: -10px 0 18px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   WALLPAPER SELECTOR
+========================================= */
+
+.wallpaper-modal-box {
+    width: min(100%, 520px);
+}
+
+.wallpaper-options {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0,1fr));
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.wallpaper-option {
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.06);
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+
+.wallpaper-option.selected {
+    border-color: #FFFFFF;
+
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
+}
+
+.wallpaper-option img {
+    width: 100%;
+    height: 100px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.wallpaper-option span {
+    display: block;
+
+    padding: 9px;
+
+    font-size: 12px;
+}
+
+.upload-wallpaper {
+    display: block;
+
+    padding: 14px;
+
+    border: 1px dashed rgba(255,255,255,0.35);
+    border-radius: 10px;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.upload-wallpaper input {
+    display: none;
+}
+
+.wallpaper-adjustments {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.wallpaper-adjustments label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wallpaper-adjustments input {
+    accent-color: #FFFFFF;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (min-width: 1000px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+
+        grid-template-areas:
+            "activity activity"
+            "mission calendar"
+            "journal rooms";
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .dashboard-header {
+        height: auto;
+
+        min-height: 65px;
+
+        padding: 12px 10px;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .dashboard-home-link {
+        left: 10px;
+        top: 12px;
+    }
+
+    .header-actions {
+        position: static;
+    }
+
+    .main-navigation {
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        padding: 7px 12px;
+
+        font-size: 11px;
+    }
+
+    .dashboard-grid {
+        width: 92%;
+
+        margin-top: 20px;
+
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "activity"
+            "mission"
+            "calendar"
+            "journal"
+            "rooms";
+
+        gap: 15px;
+    }
+
+    .activity-panel {
+        width: 100%;
+    }
+
+    .activity-content {
+        gap: 18px;
+    }
+
+    .donut-wrapper {
+        width: 150px;
+        height: 150px;
+    }
+
+    .donut-inner strong {
+        font-size: 26px;
+    }
+
+    .panel {
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+    .add-button {
+        width: 44px;
+        height: 44px;
+    }
+
+    .wallpaper-button {
+        right: 12px;
+
+        top: auto;
+        bottom: 20px;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .activity-content {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .donut-wrapper {
+        align-self: center;
+    }
+
+    .header-actions {
+        gap: 6px;
+    }
+
+    .top-button {
+        padding: 7px 9px;
+
+        font-size: 10px;
+    }
+
+    .calendar-weekdays,
+    .calendar-days {
+        gap: 4px;
+    }
+
+    .calendar-day {
+        font-size: 11px;
+
+        aspect-ratio: 1.25 / 1;
+    }
+
+    .calendar-mission-dot {
+        width: 4px;
+        height: 4px;
+
+        min-width: 4px;
+    }
+
+}
+
+
+/* =====================================
+   DASHBOARD WALLPAPER OPTIONS
+===================================== */
+
+.wallpaper-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 15px 0 22px;
+}
+
+.wallpaper-option {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.wallpaper-option img {
+    display: block;
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+}
+
+.wallpaper-option span {
+    display: block;
+    padding: 9px 4px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.wallpaper-option:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.13);
+}
+
+.wallpaper-option.selected {
+    border: 2px solid #93D4FA;
+    box-shadow: 0 0 12px rgba(147,212,250,0.3);
+}
+
+@media (max-width: 420px) {
+    .wallpaper-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

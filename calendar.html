@@ -1,0 +1,1164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090D">
+    <script src="js/theme.js"></script>
+
+    <title>Calendar | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/calendar.css">
+    <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body id="calendar-page">
+
+    <!-- =====================================
+         BACKGROUND
+    ====================================== -->
+
+    <div class="calendar-wallpaper"></div>
+    <div class="calendar-wallpaper-overlay"></div>
+
+
+    <!-- =====================================
+         NAVIGATION
+    ====================================== -->
+
+    <header class="calendar-header">
+
+        <nav class="calendar-navigation">
+
+            <a href="dashboard.html" class="calendar-nav-link">
+                Dashboard
+            </a>
+
+            <a href="focus.html" class="calendar-nav-link">
+                Focus
+            </a>
+
+            <a href="garden.html" class="calendar-nav-link">
+                Garden
+            </a>
+
+            <a href="milestone.html" class="calendar-nav-link">
+                Milestone
+            </a>
+
+        </nav>
+
+        <div class="calendar-header-actions">
+
+            <a href="profile.html" class="calendar-top-button">
+                Profile : FuBan
+            </a>
+
+            <a href="settings.html" class="calendar-top-button">
+                Setting
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN CONTENT
+    ====================================== -->
+
+    <main class="calendar-main">
+
+
+        <!-- =================================
+             PAGE TITLE
+        ================================== -->
+
+        <section class="calendar-page-heading">
+
+            <div>
+                <p class="calendar-eyebrow">
+                    ORGANIZE YOUR LIFE
+                </p>
+
+                <h1>Calendar</h1>
+
+                <p class="calendar-subtitle">
+                    Make every day count.
+                </p>
+            </div>
+
+            <button
+                type="button"
+                id="calendar-today-button"
+                class="calendar-today-button"
+            >
+                Today
+            </button>
+
+        </section>
+
+
+        <!-- =================================
+             GOAL OVERVIEW
+        ================================== -->
+
+        <section class="calendar-goal-overview">
+
+            <div class="calendar-section-heading">
+
+                <div>
+                    <p class="calendar-eyebrow">
+                        LONG-TERM DIRECTION
+                    </p>
+
+                    <h2>Goal Overview</h2>
+                </div>
+
+                <button
+                    type="button"
+                    id="add-goal-button"
+                    class="calendar-add-button"
+                >
+                    + New Goal
+                </button>
+
+            </div>
+
+
+            <div class="calendar-goal-grid">
+
+
+                <!-- YEARLY GOAL -->
+
+                <article class="calendar-goal-card">
+
+                    <div class="calendar-goal-card-heading">
+
+                        <span class="calendar-goal-label">
+                            YEARLY GOAL
+                        </span>
+
+                        <span class="calendar-goal-period"
+                              id="yearly-goal-period">
+                            2026
+                        </span>
+
+                    </div>
+
+                    <div id="yearly-goal-list"
+                         class="calendar-goal-list">
+
+                        <p class="calendar-empty">
+                            No yearly goals yet.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="calendar-text-button"
+                        data-goal-type="yearly"
+                    >
+                        + Add yearly goal
+                    </button>
+
+                </article>
+
+
+                <!-- MONTHLY GOAL -->
+
+                <article class="calendar-goal-card">
+
+                    <div class="calendar-goal-card-heading">
+
+                        <span class="calendar-goal-label">
+                            MONTHLY GOAL
+                        </span>
+
+                        <span class="calendar-goal-period"
+                              id="monthly-goal-period">
+                            November
+                        </span>
+
+                    </div>
+
+                    <div id="monthly-goal-list"
+                         class="calendar-goal-list">
+
+                        <p class="calendar-empty">
+                            No monthly goals yet.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="calendar-text-button"
+                        data-goal-type="monthly"
+                    >
+                        + Add monthly goal
+                    </button>
+
+                </article>
+
+
+                <!-- WEEKLY GOAL -->
+
+                <article class="calendar-goal-card">
+
+                    <div class="calendar-goal-card-heading">
+
+                        <span class="calendar-goal-label">
+                            WEEKLY GOAL
+                        </span>
+
+                        <span class="calendar-goal-period"
+                              id="weekly-goal-period">
+                            This week
+                        </span>
+
+                    </div>
+
+                    <div id="weekly-goal-list"
+                         class="calendar-goal-list">
+
+                        <p class="calendar-empty">
+                            No weekly goals yet.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="calendar-text-button"
+                        data-goal-type="weekly"
+                    >
+                        + Add weekly goal
+                    </button>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             MONTHLY + DAILY CALENDAR
+        ================================== -->
+
+        <section class="calendar-workspace">
+
+
+            <!-- MONTHLY VIEW -->
+
+            <section class="calendar-month-panel">
+
+                <div class="calendar-section-heading">
+
+                    <div>
+                        <p class="calendar-eyebrow">
+                            PLAN YOUR DAYS
+                        </p>
+
+                        <h2>Monthly Calendar</h2>
+                    </div>
+
+                </div>
+
+
+                <!-- Month Navigation -->
+
+                <div class="calendar-month-navigation">
+
+                    <button
+                        type="button"
+                        id="calendar-month-prev"
+                        class="calendar-month-arrow"
+                        aria-label="Previous month"
+                    >
+                        ‹
+                    </button>
+
+                    <h3 id="calendar-month-title">
+                        November 2026
+                    </h3>
+
+                    <button
+                        type="button"
+                        id="calendar-month-next"
+                        class="calendar-month-arrow"
+                        aria-label="Next month"
+                    >
+                        ›
+                    </button>
+
+                </div>
+
+
+                <!-- Weekdays -->
+
+                <div class="calendar-weekdays">
+
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+
+                </div>
+
+
+                <!-- Calendar Days -->
+
+                <div
+                    id="calendar-month-days"
+                    class="calendar-month-days"
+                >
+
+                    <!-- Generated by JavaScript -->
+
+                </div>
+
+
+                <!-- Legend -->
+
+                <div class="calendar-legend">
+
+                    <span>
+                        <i class="legend-dot today-dot"></i>
+                        Today
+                    </span>
+
+                    <span>
+                        <i class="legend-dot mission-dot"></i>
+                        Mission
+                    </span>
+
+                    <span>
+                        <i class="legend-dot habit-dot"></i>
+                        Habit
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- DAILY VIEW -->
+
+            <section class="calendar-daily-panel">
+
+
+                <!-- Selected Date -->
+
+                <div class="calendar-daily-heading">
+
+                    <div>
+
+                        <p class="calendar-eyebrow">
+                            DAILY OVERVIEW
+                        </p>
+
+                        <h2 id="selected-date-title">
+                            Sunday, November 1
+                        </h2>
+
+                        <p id="selected-date-subtitle">
+                            Your daily activities
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="add-daily-mission-button"
+                        class="calendar-add-button"
+                    >
+                        + Add Mission
+                    </button>
+
+                </div>
+
+
+                <!-- Daily Efficiency -->
+
+                <div class="calendar-efficiency-card">
+
+                    <div class="calendar-efficiency-heading">
+
+                        <div>
+                            <span class="calendar-small-label">
+                                DAILY EFFICIENCY
+                            </span>
+
+                            <strong id="daily-efficiency-value">
+                                0%
+                            </strong>
+                        </div>
+
+                        <div class="calendar-efficiency-stat">
+
+                            <strong id="daily-completed-count">
+                                0 / 0
+                            </strong>
+
+                            <span>Missions completed</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="calendar-efficiency-track">
+
+                        <div
+                            id="daily-efficiency-fill"
+                            class="calendar-efficiency-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+                <div class="calendar-focus-time">
+                    <span>Focus time</span>
+                    <strong id="daily-focus-minutes">0 minutes</strong>
+                </div>
+
+
+                <!-- Daily Habits -->
+
+                <section class="calendar-daily-section">
+
+                    <div class="calendar-subsection-heading">
+
+                        <div>
+                            <h3>Daily Habits</h3>
+
+                            <p>
+                                Your recurring routines
+                            </p>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="add-habit-button"
+                            class="calendar-small-add-button"
+                        >
+                            + Add Habit
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="daily-habit-list"
+                        class="calendar-daily-list"
+                    >
+
+                        <p class="calendar-empty">
+                            No habits scheduled for this day.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Daily Missions -->
+
+                <section class="calendar-daily-section">
+
+                    <div class="calendar-subsection-heading">
+
+                        <div>
+                            <h3>Daily Missions</h3>
+
+                            <p>
+                                Tasks planned for this day
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="daily-mission-list"
+                        class="calendar-daily-list"
+                    >
+
+                        <p class="calendar-empty">
+                            No missions planned for this day.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Daily Reflection -->
+
+                <section class="calendar-daily-section">
+
+                    <div class="calendar-subsection-heading">
+
+                        <div>
+                            <h3>Daily Summary</h3>
+
+                            <p>
+                                What did you accomplish?
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="calendar-daily-summary">
+
+                        <p id="daily-summary-text">
+                            No activity recorded yet.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Journal -->
+
+                <section class="calendar-daily-section">
+
+                    <div class="calendar-subsection-heading">
+
+                        <div>
+                            <h3>Journal</h3>
+
+                            <p>
+                                Your thoughts and memories
+                            </p>
+                        </div>
+
+                        <a
+                            href="journal.html"
+                            class="calendar-text-button"
+                        >
+                            Open Journal
+                        </a>
+
+                    </div>
+
+                    <div
+                        id="calendar-journal-preview"
+                        class="calendar-journal-preview"
+                    >
+
+                        <p class="calendar-empty">
+                            No journal entry for this day.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================
+             UPCOMING + OVERDUE
+        ================================== -->
+
+        <section class="calendar-secondary-grid">
+
+
+            <!-- UPCOMING -->
+
+            <section class="calendar-secondary-panel">
+
+                <div class="calendar-section-heading">
+
+                    <div>
+                        <p class="calendar-eyebrow">
+                            COMING NEXT
+                        </p>
+
+                        <h2>Upcoming</h2>
+                    </div>
+
+                </div>
+
+                <div
+                    id="calendar-upcoming-list"
+                    class="calendar-secondary-list"
+                >
+
+                    <p class="calendar-empty">
+                        No upcoming missions.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- OVERDUE -->
+
+            <section class="calendar-secondary-panel">
+
+                <div class="calendar-section-heading">
+
+                    <div>
+                        <p class="calendar-eyebrow">
+                            NEED ATTENTION
+                        </p>
+
+                        <h2>Overdue</h2>
+                    </div>
+
+                </div>
+
+                <div
+                    id="calendar-overdue-list"
+                    class="calendar-secondary-list"
+                >
+
+                    <p class="calendar-empty">
+                        No overdue missions.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================
+         ADD MISSION MODAL
+    ====================================== -->
+
+    <div
+        id="calendar-mission-modal"
+        class="calendar-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="calendar-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="calendar-mission-title"
+        >
+
+            <button
+                type="button"
+                class="calendar-modal-close"
+                data-close="calendar-mission-modal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <h2 id="calendar-mission-title">
+                New Mission
+            </h2>
+
+            <p class="calendar-modal-description">
+                Plan something meaningful for this day.
+            </p>
+
+
+            <form id="calendar-mission-form">
+
+                <label for="calendar-mission-name">
+                    Mission Name
+                </label>
+
+                <input
+                    id="calendar-mission-name"
+                    type="text"
+                    placeholder="Enter mission name"
+                    required
+                >
+
+
+                <label for="calendar-mission-date">
+                    Date
+                </label>
+
+                <input
+                    id="calendar-mission-date"
+                    type="date"
+                    required
+                >
+
+
+                <label for="calendar-mission-category">
+                    Category
+                </label>
+
+                <select
+                    id="calendar-mission-category"
+                    required
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Earth & Astronomy">Earth & Astronomy</option>
+                    <option value="Painting & Art">Painting & Art</option>
+                    <option value="Music Skills">Music Skills</option>
+                    <option value="Sleeping">Sleeping</option>
+                    <option value="Fitness / Workout">Fitness / Workout</option>
+                    <option value="English Language">English Language</option>
+                    <option value="Japanese Language">Japanese Language</option>
+                    <option value="Russian Language">Russian Language</option>
+
+                </select>
+
+
+                <label for="calendar-mission-subcategory">
+                    Subcategory
+                </label>
+
+                <input
+                    id="calendar-mission-subcategory"
+                    type="text"
+                    placeholder="Optional"
+                >
+
+                <label for="calendar-mission-xp-reward">
+                    XP Reward (0-1000)
+                </label>
+
+                <input
+                    id="calendar-mission-xp-reward"
+                    type="number"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    value="10"
+                    required
+                >
+
+
+                <label for="calendar-mission-type">
+                    Tracking Type
+                </label>
+
+                <select
+                    id="calendar-mission-type"
+                    required
+                >
+
+                    <option value="percentage">
+                        Percentage
+                    </option>
+
+                    <option value="checkbox">
+                        Checkbox
+                    </option>
+
+                </select>
+
+                <label class="achievement-sync-option">
+                    <input
+                        id="calendar-mission-sync-achievement-enabled"
+                        type="checkbox"
+                    >
+                    Sync with Achievement
+                </label>
+
+                <div id="calendar-mission-sync-achievement-fields" hidden>
+                    <label for="calendar-mission-sync-achievement">
+                        Achievement
+                    </label>
+                    <select id="calendar-mission-sync-achievement" disabled></select>
+
+                    <label for="calendar-mission-sync-achievement-progress">
+                        Progress on completion (1-100%)
+                    </label>
+                    <input
+                        id="calendar-mission-sync-achievement-progress"
+                        type="number"
+                        min="1"
+                        max="100"
+                        step="1"
+                        value="10"
+                        disabled
+                    >
+                    <small>Progress is added when this mission reaches 100% and is reverted if it becomes incomplete.</small>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="calendar-modal-submit"
+                >
+                    Create Mission
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         ADD HABIT MODAL
+    ====================================== -->
+
+    <div
+        id="calendar-habit-modal"
+        class="calendar-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="calendar-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="calendar-habit-title"
+        >
+
+            <button
+                type="button"
+                class="calendar-modal-close"
+                data-close="calendar-habit-modal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <h2 id="calendar-habit-title">
+                New Habit
+            </h2>
+
+            <p class="calendar-modal-description">
+                Build a routine that supports your goals.
+            </p>
+
+
+            <form id="calendar-habit-form">
+
+                <label for="calendar-habit-name">
+                    Habit Name
+                </label>
+
+                <input
+                    id="calendar-habit-name"
+                    type="text"
+                    placeholder="e.g. Read Biology"
+                    required
+                >
+
+
+                <label for="calendar-habit-category">
+                    Category
+                </label>
+
+                <select
+                    id="calendar-habit-category"
+                    required
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Earth & Astronomy">Earth & Astronomy</option>
+                    <option value="Painting & Art">Painting & Art</option>
+                    <option value="Music Skills">Music Skills</option>
+                    <option value="Sleeping">Sleeping</option>
+                    <option value="Fitness / Workout">Fitness / Workout</option>
+                    <option value="English Language">English Language</option>
+                    <option value="Japanese Language">Japanese Language</option>
+                    <option value="Russian Language">Russian Language</option>
+
+                </select>
+
+
+                <label for="calendar-habit-frequency">
+                    Frequency
+                </label>
+
+                <select
+                    id="calendar-habit-frequency"
+                    required
+                >
+
+                    <option value="daily">Every day</option>
+                    <option value="weekdays">Monday – Friday</option>
+                    <option value="weekends">Saturday – Sunday</option>
+                    <option value="custom">Choose specific days</option>
+
+                </select>
+
+
+                <div
+                    id="calendar-habit-custom-days"
+                    class="calendar-habit-custom-days"
+                    hidden
+                >
+
+                    <span>Select days</span>
+
+                    <div class="calendar-weekday-checkboxes">
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="0">
+                            Sun
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="1">
+                            Mon
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="2">
+                            Tue
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="3">
+                            Wed
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="4">
+                            Thu
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="5">
+                            Fri
+                        </label>
+
+                        <label>
+                            <input type="checkbox" name="habit-day" value="6">
+                            Sat
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <label for="calendar-habit-start">
+                    Start Date
+                </label>
+
+                <input
+                    id="calendar-habit-start"
+                    type="date"
+                    required
+                >
+
+
+                <label for="calendar-habit-end">
+                    End Date
+                </label>
+
+                <input
+                    id="calendar-habit-end"
+                    type="date"
+                >
+
+                <p class="calendar-field-note">
+                    Leave empty if this habit has no end date.
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="calendar-modal-submit"
+                >
+                    Create Habit
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         ADD GOAL MODAL
+    ====================================== -->
+
+    <div
+        id="calendar-goal-modal"
+        class="calendar-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="calendar-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="calendar-goal-title"
+        >
+
+            <button
+                type="button"
+                class="calendar-modal-close"
+                data-close="calendar-goal-modal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+            <h2 id="calendar-goal-title">
+                New Goal
+            </h2>
+
+            <p class="calendar-modal-description">
+                Set a direction and work towards it.
+            </p>
+
+
+            <form id="calendar-goal-form">
+
+                <label for="calendar-goal-name">
+                    Goal Name
+                </label>
+
+                <input
+                    id="calendar-goal-name"
+                    type="text"
+                    placeholder="What do you want to achieve?"
+                    required
+                >
+
+
+                <label for="calendar-goal-type">
+                    Goal Period
+                </label>
+
+                <select
+                    id="calendar-goal-type"
+                    required
+                >
+
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+
+                </select>
+
+
+                <label for="calendar-goal-description">
+                    Description
+                </label>
+
+                <textarea
+                    id="calendar-goal-description"
+                    rows="3"
+                    placeholder="Describe your goal..."
+                ></textarea>
+
+
+                <label for="calendar-goal-target">
+                    Target
+                </label>
+
+                <input
+                    id="calendar-goal-target"
+                    type="text"
+                    placeholder="e.g. Complete 20 practice sets"
+                >
+
+
+                <label for="calendar-goal-deadline">
+                    Deadline
+                </label>
+
+                <input
+                    id="calendar-goal-deadline"
+                    type="date"
+                >
+
+                <label class="achievement-sync-option">
+                    <input
+                        id="calendar-goal-sync-achievement-enabled"
+                        type="checkbox"
+                    >
+                    Sync with Achievement
+                </label>
+
+                <div id="calendar-goal-sync-achievement-fields" hidden>
+                    <label for="calendar-goal-sync-achievement">
+                        Achievement
+                    </label>
+                    <select id="calendar-goal-sync-achievement" disabled></select>
+
+                    <label for="calendar-goal-sync-achievement-progress">
+                        Progress at 100% goal completion (1-100%)
+                    </label>
+                    <input
+                        id="calendar-goal-sync-achievement-progress"
+                        type="number"
+                        min="1"
+                        max="100"
+                        step="1"
+                        value="10"
+                        disabled
+                    >
+                    <small>Achievement progress follows this goal's percentage in real time.</small>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="calendar-modal-submit"
+                >
+                    Save Goal
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         SCRIPTS
+    ====================================== -->
+
+    <script src="js/main.js"></script>
+    <script src="js/xp.js"></script>
+    <script src="js/achievement-sync.js"></script>
+    <script src="js/system-achievements.js"></script>
+    <script src="js/pages/calendar.js"></script>
+    <script src="js/profile-avatar.js" defer></script>
+
+</body>
+
+</html>

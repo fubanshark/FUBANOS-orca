@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#26352A">
+    <script src="js/theme.js"></script>
+
+    <title>Settings | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/settings.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body id="settings-page">
+
+    <div class="settings-background" aria-hidden="true"></div>
+
+    <!-- HEADER -->
+    <header class="dashboard-header settings-header">
+
+        <a href="index.html"
+           class="dashboard-home-link"
+           aria-label="Back to Welcome">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9-4.4-4.3 6.1-.9L12 3Z"></path>
+            </svg>
+
+        </a>
+
+        <nav class="main-navigation" aria-label="Main navigation">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="focus.html" class="nav-link">Focus</a>
+            <a href="garden.html" class="nav-link">Garden</a>
+            <a href="milestone.html" class="nav-link">Milestone</a>
+        </nav>
+
+        <div class="header-actions">
+
+            <a href="profile.html" class="top-button">
+                <span class="profile-dot"></span>
+                Profile : FuBan
+            </a>
+
+            <a href="settings.html" class="top-button active">
+                ⚙ Settings
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="settings-main">
+
+        <section class="settings-intro">
+
+            <p class="settings-eyebrow">
+                SYSTEM CONTROL / 01
+            </p>
+
+            <h1>Settings<span>.</span></h1>
+
+            <p>
+                Make this space feel like yours.
+            </p>
+
+        </section>
+
+
+        <!-- SETTINGS CARDS -->
+        <section class="settings-grid"
+                 aria-label="Settings categories">
+
+
+            <!-- 01 ACCOUNT -->
+            <article class="settings-card account-card"
+                     id="account-settings">
+
+                <div class="settings-card-heading">
+
+                    <span class="settings-icon">◉</span>
+
+                    <div>
+                        <p class="settings-card-index">
+                            01 / IDENTITY
+                        </p>
+
+                        <h2>Account</h2>
+                    </div>
+
+                </div>
+
+                <p class="settings-card-description">
+                    Your account and personal identity.
+                </p>
+
+
+                <div class="account-summary">
+
+                    <div class="account-avatar">
+                        F
+                    </div>
+
+                    <div class="account-details">
+
+                        <strong id="settings-display-name">
+                            FuBan
+                        </strong>
+
+                        <span id="settings-username">
+                            Personal space
+                        </span>
+
+                    </div>
+
+                    <span class="local-status">
+                        LOCAL
+                    </span>
+
+                </div>
+
+
+                <div class="settings-info-row">
+                    <span>Account system</span>
+                    <strong>Not connected</strong>
+                </div>
+
+                <div class="settings-info-row">
+                    <span>Email</span>
+
+                    <strong class="muted-value">
+                        Available after login setup
+                    </strong>
+                </div>
+
+
+                <a href="profile.html" class="settings-link">
+                    Manage profile <span>↗</span>
+                </a>
+
+            </article>
+
+
+
+            <!-- 02 APPEARANCE -->
+            <article class="settings-card"
+                     id="appearance-settings">
+
+                <div class="settings-card-heading">
+
+                    <span class="settings-icon">✳</span>
+
+                    <div>
+                        <p class="settings-card-index">
+                            02 / ENVIRONMENT
+                        </p>
+
+                        <h2>Appearance</h2>
+                    </div>
+
+                </div>
+
+                <p class="settings-card-description">
+                    A quieter interface when you need it.
+                </p>
+
+                <label class="select-setting theme-setting"
+                       for="theme-select">
+                    <span>
+                        <strong>Color theme</strong>
+                        <small id="theme-status">
+                            Choose a light or dark interface.
+                        </small>
+                    </span>
+                    <select id="theme-select">
+                        <option value="light">Light · Serif/Sans & green</option>
+                        <option value="dark">Dark · Space & glass</option>
+                    </select>
+                </label>
+
+
+                <div class="settings-control-row">
+
+                    <div class="control-copy">
+
+                        <strong>Reduced Motion</strong>
+
+                        <span>
+                            Limit non-essential interface animations.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch"
+                           for="reduced-motion-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="reduced-motion-toggle"
+                            role="switch"
+                            aria-label="Reduced Motion"
+                        >
+
+                        <span class="switch-track"></span>
+
+                    </label>
+
+                </div>
+
+
+                <p class="settings-note" id="motion-status">
+                    Animation preference is saved on this device.
+                </p>
+
+
+                <div class="settings-static-row">
+                    <span>Visual style</span>
+                    <strong>Eco-brutalism</strong>
+                </div>
+
+                <div class="settings-static-row">
+                    <span>Background</span>
+                    <strong>ecbt.png</strong>
+                </div>
+
+            </article>
+
+
+
+            <!-- 03 PREFERENCES -->
+            <article class="settings-card"
+                     id="preferences-settings">
+
+                <div class="settings-card-heading">
+
+                    <span class="settings-icon">⌘</span>
+
+                    <div>
+                        <p class="settings-card-index">
+                            03 / WORKFLOW
+                        </p>
+
+                        <h2>Preferences</h2>
+                    </div>
+
+                </div>
+
+                <p class="settings-card-description">
+                    Small choices for your daily workflow.
+                </p>
+
+
+                <label class="select-setting"
+                       for="week-start-select">
+
+                    <span>
+
+                        <strong>
+                            Calendar week starts on
+                        </strong>
+
+                        <small>
+                            Choose the first day of your week.
+                        </small>
+
+                    </span>
+
+
+                    <select id="week-start-select">
+
+                        <option value="monday">
+                            Monday
+                        </option>
+
+                        <option value="sunday">
+                            Sunday
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+
+                <label class="select-setting"
+                       for="time-format-select">
+
+                    <span>
+
+                        <strong>
+                            Time format
+                        </strong>
+
+                        <small>
+                            Choose how time is displayed.
+                        </small>
+
+                    </span>
+
+
+                    <select id="time-format-select">
+
+                        <option value="24">
+                            24-hour
+                        </option>
+
+                        <option value="12">
+                            12-hour
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <p class="settings-note">
+                    These preferences are stored locally for now.
+                </p>
+
+            </article>
+
+
+
+            <!-- 04 PRIVACY & DATA -->
+            <article class="settings-card"
+                     id="privacy-settings">
+
+                <div class="settings-card-heading">
+
+                    <span class="settings-icon">⬡</span>
+
+                    <div>
+                        <p class="settings-card-index">
+                            04 / PRIVACY
+                        </p>
+
+                        <h2>Privacy & Data</h2>
+                    </div>
+
+                </div>
+
+                <p class="settings-card-description">
+                    Choose what may appear on your public profile.
+                </p>
+
+
+                <div class="settings-control-row">
+
+                    <div class="control-copy">
+
+                        <strong>Public Profile</strong>
+
+                        <span>
+                            Allow your profile to be visible to others
+                            when public profiles are enabled.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch"
+                           for="public-profile-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="public-profile-toggle"
+                            role="switch"
+                            aria-label="Public Profile visibility"
+                        >
+
+                        <span class="switch-track"></span>
+
+                    </label>
+
+                </div>
+
+
+                <p class="settings-note" id="privacy-status">
+                    Your profile is private by default.
+                </p>
+
+
+                <div class="settings-danger-zone">
+
+                    <div>
+
+                        <strong>
+                            Clear Local Cache
+                        </strong>
+
+                        <span>
+                            Remove temporary browser cache without
+                            deleting missions, journal, XP or settings.
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="clear-cache-button"
+                        id="clear-cache-button"
+                    >
+                        Clear cache
+                    </button>
+
+                </div>
+
+
+                <p
+                    class="settings-feedback"
+                    id="cache-feedback"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </article>
+
+        </section>
+
+        <a class="settings-auth-link" href="login.html">
+            Log in <span aria-hidden="true">→</span>
+        </a>
+
+        <!-- FOOTER -->
+        <footer class="settings-footer">
+
+            <span>FUBAN OS</span>
+
+            <span>
+                PERSONAL SYSTEM · VERSION 1.0
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="js/pages/settings.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+
+/* =========================================
+   FUBAN OS - WELCOME PAGE
+   ========================================= */
+
+
+/* -----------------------------------------
+   1. PAGE BACKGROUND
+----------------------------------------- */
+
+#welcome-page {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    background-image: url("../../assets/images/gradient.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.space-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* -----------------------------------------
+   2. SHOOTING STARS
+----------------------------------------- */
+
+#shooting-star-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #FFFFFF;
+
+    box-shadow:
+        0 0 5px 2px rgba(147, 212, 250, 0.8),
+        0 0 12px 4px rgba(147, 212, 250, 0.4);
+
+    opacity: 0;
+
+    animation:
+        shooting-star-fall var(--duration) linear forwards;
+}
+
+.shooting-star::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 2px;
+
+    width: var(--tail);
+    height: 1.5px;
+
+    transform: translateY(-50%);
+
+    background: linear-gradient(
+        to left,
+        rgba(255,255,255,0.9),
+        rgba(147,212,250,0.4),
+        transparent
+    );
+}
+
+@keyframes shooting-star-fall {
+    0% {
+        opacity: 0;
+        transform: translate(0,0) rotate(var(--angle));
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(
+            var(--distance-x),
+            var(--distance-y)
+        ) rotate(var(--angle));
+    }
+}
+
+
+/* -----------------------------------------
+   3. HEADER
+----------------------------------------- */
+
+.welcome-header {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    z-index: 5;
+}
+
+.welcome-logout-link {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 30px;
+    color: #e8edf7;
+    background: rgba(15, 24, 48, 0.35);
+    font-family: var(--font-main);
+    font-size: 12px;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: 0.25s ease;
+}
+
+.welcome-logout-link:hover {
+    border-color: #93d4fa;
+    background: rgba(147, 212, 250, 0.15);
+}
+
+.welcome-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.top-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 9px 15px;
+
+    color: #E8EDF7;
+    font-family: var(--font-main);
+    font-size: 12px;
+
+    background: rgba(15, 24, 48, 0.35);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 30px;
+
+    backdrop-filter: blur(8px);
+
+    transition: 0.25s ease;
+}
+
+.top-button:hover {
+    background: rgba(147,212,250,0.15);
+    border-color: #93D4FA;
+}
+
+.button-icon {
+    color: #93D4FA;
+}
+
+
+/* -----------------------------------------
+   4. WELCOME CONTENT
+----------------------------------------- */
+
+.welcome-content {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0;
+}
+.welcome-content h1 {
+    position: absolute;
+    top: 24%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100%;
+
+    color: #FFFFFF;
+    font-family: var(--font-quote);
+    font-size: clamp(30px, 3vw, 42px);
+    font-weight: normal;
+}
+
+.welcome-quote {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: min(750px, 85%);
+
+    color: #FFFFFF;
+    font-family: var(--font-quote);
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.welcome-quote p {
+    margin-bottom: 5px;
+}
+
+.welcome-quote .quote-author {
+    font-size: 13px;
+    color: #AFC9E8;
+}
+
+.enter-button {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    color: #FFFFFF;
+    font-family: var(--font-main);
+    font-size: 14px;
+
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(147,212,250,0.6);
+
+    transition: 0.3s ease;
+}
+
+.enter-button:hover {
+    color: #93D4FA;
+    border-color: #93D4FA;
+}
+
+
+/* -----------------------------------------
+   5. CONSTELLATION LAYER
+----------------------------------------- */
+
+#constellation-area {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#constellation-layer {
+    position: absolute;
+    inset: 0;
+}
+
+.constellation {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+
+    cursor: pointer;
+    pointer-events: auto;
+
+    opacity: 0.75;
+
+    transition:
+        opacity 0.3s ease,
+        filter 0.3s ease;
+
+    animation: constellation-appear 1.5s ease both;
+}
+
+.constellation:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 7px #93D4FA);
+}
+
+.constellation svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.constellation line {
+    stroke: rgba(147,212,250,0.65);
+    stroke-width: 1;
+}
+
+.constellation circle {
+    fill: #FFFFFF;
+    filter: drop-shadow(0 0 4px #93D4FA);
+}
+
+@keyframes constellation-appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.75;
+    }
+}
+
+
+/* -----------------------------------------
+   6. CONSTELLATION DETAIL CARD
+----------------------------------------- */
+
+#constellation-tooltip {
+    position: fixed;
+
+    width: 280px;
+    min-height: 125px;
+
+    padding: 22px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(2,6,18,0.88);
+
+    border: 1.5px solid rgba(210,220,245,0.45);
+    border-radius: 22px;
+
+    color: #FFFFFF;
+    text-align: center;
+
+    z-index: 20;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(8px);
+
+    backdrop-filter: blur(12px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+#constellation-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.constellation-detail {
+    width: 100%;
+}
+
+.constellation-detail h2 {
+    font-family: var(--font-main);
+    font-size: 23px;
+    font-weight: normal;
+
+    margin-bottom: 5px;
+}
+
+.constellation-date {
+    font-family: var(--font-quote);
+    font-size: 12px;
+
+    color: #AFC9E8;
+
+    margin-bottom: 10px;
+}
+
+.constellation-description {
+    font-family: var(--font-main);
+    font-size: 13px;
+    line-height: 1.55;
+
+    color: #F1F2F8;
+}
+
+
+/* -----------------------------------------
+   7. CONNECTOR LINE
+----------------------------------------- */
+
+#constellation-connector {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+    overflow: visible;
+
+    z-index: 19;
+}
+
+
+/* -----------------------------------------
+   8. RESPONSIVE
+----------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .welcome-header {
+        top: 15px;
+        right: 15px;
+    }
+
+    .welcome-logout-link {
+        top: 15px;
+        left: 15px;
+        min-height: 34px;
+        padding: 7px 10px;
+        font-size: 10px;
+    }
+
+    .welcome-actions {
+        gap: 7px;
+    }
+
+    .top-button {
+        padding: 7px 10px;
+        font-size: 10px;
+    }
+
+    .welcome-content h1 {
+        font-size: 30px;
+    }
+
+    .welcome-quote {
+        width: 88%;
+        font-size: 13px;
+    }
+
+    .enter-button {
+        font-size: 12px;
+    }
+
+    .constellation {
+        width: 75px;
+        height: 75px;
+    }
+
+    #constellation-tooltip {
+        width: min(260px, calc(100vw - 32px));
+        min-height: 115px;
+
+        padding: 18px 16px;
+        border-radius: 18px;
+    }
+
+    .constellation-detail h2 {
+        font-size: 21px;
+    }
+
+    .constellation-description {
+        font-size: 12px;
+    }
+}
+
+
+/* -----------------------------------------
+   9. REDUCED MOTION
+----------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .constellation,
+    .shooting-star,
+    #constellation-tooltip {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* QUOTE */
+.quote-container {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: min(750px, 85%);
+    text-align: center;
+
+    color: #FFFFFF;
+    font-family: var(--font-quote);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+#daily-quote {
+    margin-bottom: 5px;
+}
+
+.quote-author {
+    font-size: 13px;
+    color: #AFC9E8;
+}

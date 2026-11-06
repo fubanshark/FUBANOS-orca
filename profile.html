@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090D">
+    <script src="js/theme.js"></script>
+
+    <title>Profile | FUBAN OS</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages/profile.css">
+    <link rel="stylesheet" href="css/profile-avatar.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body id="profile-page">
+
+    <!-- PROFILE WALLPAPER -->
+    <div class="profile-wallpaper" id="profile-wallpaper"></div>
+    <div class="profile-wallpaper-overlay"></div>
+
+    <!-- HEADER: ใช้โครงเดียวกับ Dashboard -->
+    <header class="dashboard-header">
+
+        <a href="index.html"
+           class="dashboard-home-link"
+           aria-label="Back to Welcome"
+           title="Back to Welcome">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9-4.4-4.3 6.1-.9L12 3Z"></path>
+            </svg>
+        </a>
+
+        <nav class="main-navigation">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="focus.html" class="nav-link">Focus</a>
+            <a href="garden.html" class="nav-link">Garden</a>
+            <a href="milestone.html" class="nav-link">Milestone</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="profile.html" class="top-button active">
+                <span class="profile-dot"></span>
+                Profile : FuBan
+            </a>
+
+            <a href="settings.html" class="top-button">
+                <span>⚙</span>
+                Setting
+            </a>
+        </div>
+
+    </header>
+
+
+    <main class="profile-main">
+
+        <!-- =================================
+             01. COVER BANNER
+        ================================== -->
+
+        <section class="profile-cover">
+
+            <img
+                src="assets/wallpapers/deepsea.jpg"
+                alt="Profile cover"
+                class="profile-cover-image"
+                id="profile-cover-image"
+            >
+
+            <div class="profile-cover-shade"></div>
+
+            <div class="profile-cover-content">
+                <p class="profile-eyebrow">PERSONAL SPACE</p>
+                <h1>Profile</h1>
+                <p class="profile-cover-subtitle">
+                    Your journey, your identity, your universe.
+                </p>
+            </div>
+
+            <label for="cover-upload" class="profile-cover-edit">
+                <span>✎</span>
+                Edit Cover
+            </label>
+
+            <input
+                type="file"
+                id="cover-upload"
+                class="visually-hidden"
+                accept="image/png,image/jpeg,image/webp"
+            >
+
+            <details class="profile-image-controls cover-image-controls">
+                <summary>Adjust crop</summary>
+                <div class="profile-image-control-fields">
+                    <label>
+                        Zoom
+                        <input type="range" min="100" max="250" step="1"
+                               data-image-control="cover" data-property="zoom">
+                        <output data-image-output="cover-zoom">100%</output>
+                    </label>
+                    <label>
+                        Horizontal position
+                        <input type="range" min="0" max="100" step="1"
+                               data-image-control="cover" data-property="x">
+                        <output data-image-output="cover-x">50%</output>
+                    </label>
+                    <label>
+                        Vertical position
+                        <input type="range" min="0" max="100" step="1"
+                               data-image-control="cover" data-property="y">
+                        <output data-image-output="cover-y">50%</output>
+                    </label>
+                    <button type="button" class="profile-image-reset"
+                            data-reset-image="cover">Reset</button>
+                </div>
+            </details>
+
+        </section>
+
+
+        <!-- =================================
+             02. PROFILE IDENTITY
+        ================================== -->
+
+        <section class="profile-identity panel">
+
+            <div class="profile-picture-area">
+
+                <div class="profile-picture-frame">
+
+                    <div class="profile-picture-clip">
+                        <img
+                            alt="Profile picture"
+                            id="profile-picture-preview"
+                            class="profile-picture"
+                        >
+                    </div>
+
+                    <label
+                        for="profile-picture-upload"
+                        class="profile-picture-edit"
+                        title="Change profile picture"
+                    >
+                        ✎
+                    </label>
+
+                </div>
+
+                <input
+                    type="file"
+                    id="profile-picture-upload"
+                    class="visually-hidden"
+                    accept="image/png,image/jpeg,image/webp"
+                >
+
+                <details class="profile-image-controls picture-image-controls">
+                    <summary>Adjust crop</summary>
+                    <div class="profile-image-control-fields">
+                        <label>
+                            Zoom
+                            <input type="range" min="100" max="250" step="1"
+                                   data-image-control="picture" data-property="zoom">
+                            <output data-image-output="picture-zoom">100%</output>
+                        </label>
+                        <label>
+                            Horizontal position
+                            <input type="range" min="0" max="100" step="1"
+                                   data-image-control="picture" data-property="x">
+                            <output data-image-output="picture-x">50%</output>
+                        </label>
+                        <label>
+                            Vertical position
+                            <input type="range" min="0" max="100" step="1"
+                                   data-image-control="picture" data-property="y">
+                            <output data-image-output="picture-y">50%</output>
+                        </label>
+                        <button type="button" class="profile-image-reset"
+                                data-reset-image="picture">Reset</button>
+                    </div>
+                </details>
+
+                <span class="profile-picture-caption">
+                    PROFILE PICTURE
+                </span>
+
+            </div>
+
+
+            <div class="profile-identity-info">
+
+                <p class="section-eyebrow">YOUR IDENTITY</p>
+
+                <h2 id="profile-display-name">FuBan</h2>
+
+                <p class="profile-username" id="profile-username">
+                    @username
+                </p>
+
+                <p class="profile-bio" id="profile-bio">
+                    A little introduction about yourself.
+                </p>
+
+                <button type="button" class="profile-more-button"
+                        id="profile-details-toggle" aria-expanded="false"
+                        aria-controls="profile-extra-info">
+                    Show more
+                </button>
+
+                <dl class="profile-extra-info" id="profile-extra-info" hidden>
+                    <div data-profile-detail="birthday" hidden>
+                        <dt>Birthday</dt><dd id="profile-birthday"></dd>
+                    </div>
+                    <div data-profile-detail="location" hidden>
+                        <dt>Location</dt><dd id="profile-location"></dd>
+                    </div>
+                    <div data-profile-detail="pronouns" hidden>
+                        <dt>Pronouns</dt><dd id="profile-pronouns"></dd>
+                    </div>
+                    <div data-profile-detail="interests" hidden>
+                        <dt>Interests</dt><dd id="profile-interests"></dd>
+                    </div>
+                    <div data-profile-detail="website" hidden>
+                        <dt>Website</dt><dd id="profile-website"></dd>
+                    </div>
+                </dl>
+
+                <div class="profile-meta">
+                    <span id="profile-join-date">Member since —</span>
+                    <span class="meta-dot">•</span>
+                    <span id="profile-identity-rank">NOVICE</span>
+                </div>
+
+            </div>
+
+
+            <div class="profile-identity-actions">
+                <button type="button" class="profile-outline-button"
+                        id="profile-edit-toggle" aria-expanded="false"
+                        aria-controls="profile-edit-form">
+                    Edit Profile
+                </button>
+            </div>
+
+            <form class="profile-edit-form panel" id="profile-edit-form" hidden>
+                <div class="profile-edit-heading">
+                    <div>
+                        <p class="section-eyebrow">YOUR IDENTITY</p>
+                        <h3>Edit Profile</h3>
+                    </div>
+                </div>
+                <div class="profile-edit-grid">
+                    <label>
+                        Display name
+                        <input type="text" name="displayName" maxlength="48"
+                               autocomplete="name" required>
+                    </label>
+                    <label>
+                        Username
+                        <input type="text" name="username" maxlength="30"
+                               autocomplete="username" placeholder="username">
+                    </label>
+                    <label class="profile-edit-bio">
+                        Bio
+                        <textarea name="bio" maxlength="240" rows="3"
+                                  placeholder="A little introduction about yourself."></textarea>
+                    </label>
+                    <label>
+                        Birthday
+                        <input type="date" name="birthday">
+                    </label>
+                </div>
+                <details class="profile-edit-more">
+                    <summary>Show more fields</summary>
+                    <div class="profile-edit-grid profile-edit-extra">
+                        <label>
+                            Location
+                            <input type="text" name="location" maxlength="80"
+                                   autocomplete="address-level2">
+                        </label>
+                        <label>
+                            Pronouns
+                            <input type="text" name="pronouns" maxlength="40">
+                        </label>
+                        <label>
+                            Interests
+                            <input type="text" name="interests" maxlength="120">
+                        </label>
+                        <label>
+                            Website
+                            <input type="url" name="website" maxlength="200"
+                                   placeholder="https://example.com">
+                        </label>
+                    </div>
+                </details>
+                <div class="profile-edit-actions">
+                    <button type="button" class="profile-outline-button"
+                            id="profile-edit-cancel">Cancel</button>
+                    <button type="submit" class="profile-outline-button profile-save-button">
+                        Save Profile
+                    </button>
+                </div>
+            </form>
+
+        </section>
+
+
+        <!-- =================================
+             03. AVATAR SPACE
+             แยกจาก Profile Picture
+        ================================== -->
+
+        <section class="profile-section avatar-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">YOUR CHARACTER</p>
+                    <h2>Avatar Space</h2>
+                    <p class="section-description">
+                        Your own character, ready to explore your world.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="avatar-card panel">
+
+                <div class="avatar-preview-area">
+
+                    <div class="avatar-placeholder">
+
+                        <div class="avatar-placeholder-icon">
+                            ✧
+                        </div>
+
+                        <span>AVATAR PREVIEW</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="avatar-information">
+
+                    <span class="avatar-status">CHARACTER SYSTEM</span>
+
+                    <h3>Your Avatar</h3>
+
+                    <p>
+                        Your 2D character will live here.
+                        Customize its appearance, outfits and accessories
+                        when the Avatar Editor is ready.
+                    </p>
+
+                    <div class="avatar-coming-soon">
+                        <span class="coming-soon-dot"></span>
+                        Avatar Editor — Coming Soon
+                    </div>
+
+                    <button type="button"
+                            class="profile-outline-button"
+                            disabled>
+                        Customize Avatar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             04. PROFILE WALLPAPER
+        ================================== -->
+
+        <section class="profile-wallpaper-settings panel">
+
+            <div class="wallpaper-setting-info">
+                <p class="section-eyebrow">PERSONALIZATION</p>
+                <h2>Profile Wallpaper</h2>
+                <p>
+                    Choose the atmosphere of your personal space.
+                </p>
+            </div>
+
+            <div class="wallpaper-controls">
+
+                <label for="profile-wallpaper-select">
+                    Choose Wallpaper
+                </label>
+
+                <select id="profile-wallpaper-select">
+                    <option value="assets/wallpapers/1403447.jpg">Default</option>
+                    <option value="assets/wallpapers/deepsea.jpg">Deep Sea</option>
+                    <option value="assets/wallpapers/abyss.jpg">Abyss</option>
+                    <option value="assets/wallpapers/moon.jpg">Moon</option>
+                    <option value="assets/wallpapers/jungle.jpg">Jungle</option>
+                    <option value="assets/wallpapers/orca.jpg">Orca</option>
+                    <option value="assets/wallpapers/greatblue.jpg">Great Blue</option>
+                    <option value="assets/wallpapers/moonjelly.jpg">Moon Jelly</option>
+                </select>
+
+                <label for="profile-wallpaper-upload"
+                       class="profile-outline-button upload-wallpaper-button">
+                    Upload Image
+                </label>
+
+                <input
+                    type="file"
+                    id="profile-wallpaper-upload"
+                    class="visually-hidden"
+                    accept="image/png,image/jpeg,image/webp"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             05. RANK & XP
+        ================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">YOUR PROGRESS</p>
+                    <h2>Rank & Experience</h2>
+                </div>
+            </div>
+
+
+            <div class="rank-layout">
+
+                <article class="rank-card panel">
+
+                    <p class="card-label">CURRENT RANK</p>
+
+                    <div class="rank-emblem">
+                        <span>Ⅰ</span>
+                    </div>
+
+                    <p class="rank-number">RANK 01 / 10</p>
+
+                    <h3 id="profile-rank-name">NOVICE</h3>
+
+                    <p class="rank-subtitle">
+                        The First Spark
+                    </p>
+
+                    <span class="rank-status">
+                        Starting Your Journey
+                    </span>
+
+                </article>
+
+
+                <article class="xp-card panel">
+
+                    <div class="xp-card-heading">
+                        <div>
+                            <p class="card-label">TOTAL EXPERIENCE</p>
+                            <h3>
+                                <span id="profile-total-xp">0</span>
+                                <small>XP</small>
+                            </h3>
+                        </div>
+
+                        <span class="xp-cap">MAX 100,000 XP</span>
+                    </div>
+
+
+                    <div class="xp-progress-track">
+                        <div class="xp-progress-fill"
+                             id="profile-xp-progress"></div>
+                    </div>
+
+
+                    <div class="xp-progress-labels">
+                        <span id="profile-xp-current-label">0 XP</span>
+                        <span id="profile-xp-next-label">500 XP to next rank</span>
+                    </div>
+
+
+                    <div class="next-rank-info">
+                        <span>Next Rank</span>
+                        <strong id="profile-next-rank">EXPLORER</strong>
+                    </div>
+
+
+                    <p class="xp-note">
+                        XP progression is based on your activities
+                        and milestones in FUBAN OS.
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <!-- ALL RANKS -->
+
+            <div class="panel rank-ladder-panel">
+
+                <div class="subsection-heading">
+                    <div>
+                        <p class="card-label">RANK PROGRESSION</p>
+                        <h3>Your Journey</h3>
+                    </div>
+
+                    <span class="rank-ladder-caption">
+                        10 LEVELS
+                    </span>
+                </div>
+
+
+                <div class="rank-ladder">
+
+                    <div class="rank-ladder-item current">
+                        <span class="ladder-number">01</span>
+                        <div>
+                            <strong>NOVICE</strong>
+                            <small>0 XP · The First Spark</small>
+                        </div>
+                        <span class="ladder-state">CURRENT</span>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">02</span>
+                        <div>
+                            <strong>EXPLORER</strong>
+                            <small>500 XP · The Discovery</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">03</span>
+                        <div>
+                            <strong>NAVIGATOR</strong>
+                            <small>1,500 XP · Finding Direction</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">04</span>
+                        <div>
+                            <strong>PIONEER</strong>
+                            <small>3,000 XP · Beyond the Known</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">05</span>
+                        <div>
+                            <strong>VOYAGER</strong>
+                            <small>5,500 XP · The Long Journey</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">06</span>
+                        <div>
+                            <strong>ASTRAL</strong>
+                            <small>9,000 XP · Among the Stars</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">07</span>
+                        <div>
+                            <strong>CELESTIAL</strong>
+                            <small>15,000 XP · Beyond the Horizon</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">08</span>
+                        <div>
+                            <strong>STELLAR</strong>
+                            <small>25,000 XP · A Greater Universe</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">09</span>
+                        <div>
+                            <strong>TRANSCENDENT</strong>
+                            <small>40,000 XP · Beyond Limits</small>
+                        </div>
+                    </div>
+
+                    <div class="rank-ladder-item">
+                        <span class="ladder-number">10</span>
+                        <div>
+                            <strong>INFINITE</strong>
+                            <small>100,000 XP · The Endless Frontier</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             06. MASTERY
+        ================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">KNOWLEDGE & SKILLS</p>
+                    <h2>Mastery</h2>
+                    <p class="section-description">
+                        Every field has its own journey of mastery.
+                    </p>
+                </div>
+            </div>
+
+
+            <article class="mastery-overview panel">
+
+                <div>
+                    <p class="card-label">OVERALL MASTERY</p>
+                    <h3>INITIATE</h3>
+                    <p>Level 01 · The First Step</p>
+                </div>
+
+                <div class="mastery-overview-level">
+                    <span>01</span>
+                    <small>/ 10</small>
+                </div>
+
+            </article>
+
+
+            <div class="mastery-grid">
+
+
+                <!-- SCIENCE -->
+
+                <article class="mastery-card panel">
+
+                    <div class="mastery-card-heading">
+                        <span class="mastery-icon">⚛</span>
+                        <div>
+                            <h3>Science</h3>
+                            <span>0 XP · INITIATE</span>
+                        </div>
+                    </div>
+
+                    <div class="mastery-progress-track">
+                        <span style="width: 0%"></span>
+                    </div>
+
+                    <div class="mastery-subcategories">
+                        <span>Biology</span>
+                        <span>Chemistry</span>
+                        <span>Physics</span>
+                    </div>
+
+                </article>
+
+
+                <!-- MATHEMATICS -->
+
+                <article class="mastery-card panel">
+
+                    <div class="mastery-card-heading">
+                        <span class="mastery-icon">∑</span>
+                        <div>
+                            <h3>Mathematics</h3>
+                            <span>0 XP · INITIATE</span>
+                        </div>
+                    </div>
+
+                    <div class="mastery-progress-track">
+                        <span style="width: 0%"></span>
+                    </div>
+
+                </article>
+
+
+                <!-- LANGUAGE -->
+
+                <article class="mastery-card panel">
+
+                    <div class="mastery-card-heading">
+                        <span class="mastery-icon">文</span>
+                        <div>
+                            <h3>Language</h3>
+                            <span>0 XP · INITIATE</span>
+                        </div>
+                    </div>
+
+                    <div class="mastery-progress-track">
+                        <span style="width: 0%"></span>
+                    </div>
+
+                </article>
+
+
+                <!-- TECHNOLOGY -->
+
+                <article class="mastery-card panel">
+
+                    <div class="mastery-card-heading">
+                        <span class="mastery-icon">⌘</span>
+                        <div>
+                            <h3>Technology</h3>
+                            <span>0 XP · INITIATE</span>
+                        </div>
+                    </div>
+
+                    <div class="mastery-progress-track">
+                        <span style="width: 0%"></span>
+                    </div>
+
+                </article>
+
+
+                <!-- CREATIVE -->
+
+                <article class="mastery-card panel">
+
+                    <div class="mastery-card-heading">
+                        <span class="mastery-icon">✧</span>
+                        <div>
+                            <h3>Creative</h3>
+                            <span>0 XP · INITIATE</span>
+                        </div>
+                    </div>
+
+                    <div class="mastery-progress-track">
+                        <span style="width: 0%"></span>
+                    </div>
+
+                </article>
+
+
+                <!-- PERSONAL -->
+
+                <article class="mastery-card panel">
+
+                    <div class="mastery-card-heading">
+                        <span class="mastery-icon">◇</span>
+                        <div>
+                            <h3>Personal Growth</h3>
+                            <span>0 XP · INITIATE</span>
+                        </div>
+                    </div>
+
+                    <div class="mastery-progress-track">
+                        <span style="width: 0%"></span>
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- MASTERY LEVELS -->
+
+            <div class="panel mastery-levels-panel">
+
+                <div class="subsection-heading">
+                    <div>
+                        <p class="card-label">MASTERY PROGRESSION</p>
+                        <h3>10 Levels of Mastery</h3>
+                    </div>
+                </div>
+
+                <div class="mastery-level-list">
+
+                    <span class="mastery-level active">01 · INITIATE</span>
+                    <span class="mastery-level">02 · APPRENTICE</span>
+                    <span class="mastery-level">03 · LEARNER</span>
+                    <span class="mastery-level">04 · PRACTITIONER</span>
+                    <span class="mastery-level">05 · ADEPT</span>
+                    <span class="mastery-level">06 · SPECIALIST</span>
+                    <span class="mastery-level">07 · EXPERT</span>
+                    <span class="mastery-level">08 · AUTHORITY</span>
+                    <span class="mastery-level">09 · MASTER</span>
+                    <span class="mastery-level">10 · GRANDMASTER</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             07. STATISTICS
+        ================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">YOUR ACTIVITY</p>
+                    <h2>Statistics</h2>
+                </div>
+            </div>
+
+
+            <div class="statistics-grid">
+
+                <article class="stat-card panel">
+                    <span>MISSIONS COMPLETED</span>
+                    <strong id="profile-stat-missions">—</strong>
+                </article>
+
+                <article class="stat-card panel">
+                    <span>FOCUS TIME</span>
+                    <strong id="profile-stat-focus">—</strong>
+                </article>
+
+                <article class="stat-card panel">
+                    <span>ACHIEVEMENTS</span>
+                    <strong id="profile-stat-achievements">—</strong>
+                </article>
+
+                <article class="stat-card panel">
+                    <span>JOURNAL ENTRIES</span>
+                    <strong id="profile-stat-journal">—</strong>
+                </article>
+
+            </div>
+
+
+            <article class="panel activity-panel">
+
+                <div class="subsection-heading">
+                    <div>
+                        <p class="card-label">ACTIVITY OVERVIEW</p>
+                        <h3>Consistency</h3>
+                    </div>
+
+                    <span class="card-label">ACTIVITY HEATMAP</span>
+                </div>
+
+                <div id="profile-activity-heatmap"
+                     class="activity-heatmap">
+
+                    <p>
+                        Your activity history will appear here.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================
+             08. ACHIEVEMENT SHOWCASE
+        ================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">MILESTONES</p>
+                    <h2>Achievement Showcase</h2>
+                    <p class="section-description">
+                        Your proudest moments and accomplishments.
+                    </p>
+                </div>
+
+                <a href="milestone.html" class="profile-text-link">
+                    View all ↗
+                </a>
+            </div>
+
+
+            <div id="profile-achievement-showcase"
+                 class="achievement-showcase panel">
+
+                <p>
+                    Your selected achievements will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             09. ACTIVITY HISTORY
+        ================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="section-eyebrow">RECENT MOMENTS</p>
+                    <h2>Activity History</h2>
+                </div>
+            </div>
+
+
+            <div id="profile-activity-history"
+                 class="activity-history panel">
+
+                <p>
+                    Your selected activity events will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js" defer></script>
+    <script src="js/navigation.js" defer></script>
+    <script src="js/xp.js" defer></script>
+    <script src="js/pages/profile.js" defer></script>
+    <script src="js/profile-avatar.js" defer></script>
+
+</body>
+</html>

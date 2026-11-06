@@ -1,0 +1,713 @@
+/* =========================================
+   FUBAN OS - FOCUS
+========================================= */
+
+#focus-page {
+    min-height: 100vh;
+    width: 100%;
+
+    position: relative;
+    isolation: isolate;
+
+    overflow: hidden;
+
+    background: #07152E;
+    color: #FFFFFF;
+
+    font-family: var(--font-main, sans-serif);
+}
+
+
+/* =========================================
+   WALLPAPER
+========================================= */
+
+.focus-wallpaper {
+    position: fixed;
+    inset: 0;
+
+    z-index: -2;
+
+    background-image: url("../../assets/wallpapers/1403447.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    transform: scale(1.01);
+}
+
+.focus-wallpaper-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: -1;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    pointer-events: none;
+
+    transition: background-color 0.25s ease;
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.focus-header {
+    position: absolute;
+
+    top: 24px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    width: min(94%, 620px);
+}
+
+.focus-navigation {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    padding: 5px;
+
+    border: 1px solid rgba(255,255,255,0.23);
+    border-radius: 50px;
+
+    background: rgba(15,30,55,0.30);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.focus-nav-link {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 40px;
+
+    color: rgba(255,255,255,0.76);
+
+    font-size: 12px;
+
+    text-align: center;
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: 0.25s ease;
+}
+
+.focus-nav-link:hover {
+    color: #FFFFFF;
+    background: rgba(255,255,255,0.10);
+}
+
+.focus-nav-link.active {
+    color: #FFFFFF;
+
+    background: rgba(255,255,255,0.20);
+
+    border-color: rgba(255,255,255,0.18);
+}
+
+
+/* =========================================
+   WALLPAPER BUTTON
+========================================= */
+
+.focus-wallpaper-button {
+    position: absolute;
+
+    top: 28px;
+    right: 28px;
+
+    z-index: 11;
+
+    width: 39px;
+    height: 39px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(255,255,255,0.30);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition: 0.2s ease;
+}
+
+.focus-wallpaper-button:hover {
+    background: rgba(255,255,255,0.22);
+
+    transform: scale(1.06);
+}
+
+.focus-wallpaper-button svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================
+   MAIN CLOCK
+========================================= */
+
+.focus-main {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 100px 20px 40px;
+}
+
+.focus-clock-section {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    width: 100%;
+}
+
+.focus-clock {
+    color: #FFFFFF;
+
+    font-family: "Roboto", sans-serif;
+
+    font-size: clamp(76px, 15vw, 156px);
+
+    font-weight: 300;
+
+    line-height: 1;
+
+    letter-spacing: 1px;
+
+    font-variant-numeric: tabular-nums;
+
+    text-shadow: 0 3px 30px rgba(0,0,0,0.12);
+
+    user-select: none;
+}
+
+.focus-start-time {
+    margin-top: 20px;
+
+    color: rgba(255,255,255,0.85);
+
+    font-family: "Roboto", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    letter-spacing: 0.2px;
+
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+
+/* =========================================
+   WALLPAPER MODAL
+========================================= */
+
+.focus-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,0.68);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.focus-modal.show {
+    display: flex;
+}
+
+.focus-modal-box {
+    width: min(100%, 460px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    position: relative;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 20px;
+
+    background: rgba(8,17,34,0.96);
+
+    color: #FFFFFF;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.focus-modal-box h2 {
+    margin: 0 35px 10px 0;
+
+    font-size: 21px;
+    font-weight: 500;
+}
+
+.focus-modal-description {
+    margin-bottom: 22px;
+
+    color: rgba(255,255,255,0.60);
+
+    font-size: 12px;
+}
+
+.focus-modal-close {
+    position: absolute;
+
+    top: 14px;
+    right: 18px;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #FFFFFF;
+
+    font-size: 26px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   WALLPAPER OPTIONS
+========================================= */
+
+.focus-wallpaper-options {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.focus-wallpaper-option {
+    overflow: hidden;
+
+    padding: 0;
+
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.05);
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.focus-wallpaper-option:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.focus-wallpaper-option.selected {
+    border-color: #93D4FA;
+
+    box-shadow: 0 0 0 2px rgba(147,212,250,0.20);
+}
+
+.focus-wallpaper-option img {
+    display: block;
+
+    width: 100%;
+    height: 105px;
+
+    object-fit: cover;
+}
+
+.focus-wallpaper-option span {
+    display: block;
+
+    padding: 9px;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   UPLOAD
+========================================= */
+
+.focus-upload-label {
+    display: block;
+
+    padding: 15px;
+
+    border: 1px dashed rgba(255,255,255,0.35);
+    border-radius: 10px;
+
+    color: rgba(255,255,255,0.85);
+
+    font-size: 12px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.focus-upload-label:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.focus-upload-label input {
+    display: none;
+}
+
+
+/* =========================================
+   DARKNESS CONTROL
+========================================= */
+
+.focus-darkness-control {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 23px;
+}
+
+.focus-darkness-heading {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    color: rgba(255,255,255,0.85);
+
+    font-size: 12px;
+}
+
+#focus-wallpaper-opacity-value {
+    color: #93D4FA;
+
+    font-family: "Roboto", sans-serif;
+}
+
+#focus-wallpaper-opacity {
+    width: 100%;
+
+    accent-color: #93D4FA;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   SAVE BUTTON
+========================================= */
+
+.focus-modal-submit {
+    width: 100%;
+
+    min-height: 44px;
+
+    margin-top: 25px;
+
+    border: 1px solid rgba(147,212,250,0.65);
+    border-radius: 10px;
+
+    background: #93D4FA;
+
+    color: #07152E;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.focus-modal-submit:hover {
+    background: #B7E4FF;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 760px) {
+
+    .focus-header {
+        top: 18px;
+
+        width: 94%;
+    }
+
+    .focus-navigation {
+        gap: 2px;
+
+        padding: 4px;
+    }
+
+    .focus-nav-link {
+        padding: 9px 7px;
+
+        font-size: 11px;
+    }
+
+    .focus-wallpaper-button {
+        top: 90px;
+        right: 18px;
+
+        width: 35px;
+        height: 35px;
+    }
+
+    .focus-clock {
+        font-size: clamp(70px, 17vw, 115px);
+    }
+
+    .focus-start-time {
+        margin-top: 16px;
+
+        font-size: 12px;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .focus-header {
+        top: 15px;
+    }
+
+    .focus-nav-link {
+        padding: 9px 4px;
+
+        font-size: 10px;
+    }
+
+    .focus-wallpaper-button {
+        top: 82px;
+        right: 16px;
+    }
+
+    .focus-main {
+        padding-top: 85px;
+    }
+
+    .focus-clock {
+        font-size: clamp(64px, 18vw, 90px);
+    }
+
+    .focus-modal-box {
+        padding: 23px;
+    }
+
+}
+
+/* =========================================
+   FOCUS CONTROLS
+========================================= */
+
+.focus-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+
+    margin-top: 38px;
+}
+
+.focus-control-button {
+    min-width: 125px;
+    padding: 11px 22px;
+
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 30px;
+
+    font-family: var(--font-main, sans-serif);
+    font-size: 12px;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.focus-control-button.start {
+    background: rgba(255,255,255,0.90);
+    color: #07152E;
+}
+
+.focus-control-button.start:hover:not(:disabled) {
+    background: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+.focus-control-button.stop {
+    background: rgba(0,0,0,0.18);
+    color: #FFFFFF;
+}
+
+.focus-control-button.stop:hover:not(:disabled) {
+    background: rgba(255,255,255,0.18);
+    transform: translateY(-2px);
+}
+
+.focus-control-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================================
+   FOCUS DURATION
+========================================= */
+
+.focus-duration {
+    margin-top: 10px;
+
+    color: rgba(255,255,255,0.75);
+
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.focus-xp-total {
+    margin-top: 0;
+    color: #f7d774;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+}
+
+.focus-xp-toggle {
+    margin-top: 14px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    color: #FFFFFF;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.focus-xp-toggle:hover {
+    background: rgba(255,255,255,0.17);
+}
+
+.focus-xp-details[hidden] {
+    display: none;
+}
+
+.focus-xp-details {
+    margin-top: 10px;
+}
+
+.focus-xp-hint {
+    margin-top: 5px;
+    color: rgba(255,255,255,0.65);
+    font-size: 11px;
+}
+
+.focus-xp-session-result {
+    margin-top: 7px;
+    color: #f7d774;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   CLOCK WITH SECONDS
+========================================= */
+
+.focus-clock {
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+    .focus-controls {
+        gap: 9px;
+        margin-top: 30px;
+    }
+
+    .focus-control-button {
+        min-width: 115px;
+        padding: 10px 15px;
+        font-size: 11px;
+    }
+
+}
