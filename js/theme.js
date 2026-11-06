@@ -6,13 +6,13 @@
     function readTheme() {
         try {
             const raw = localStorage.getItem(SETTINGS_KEY);
-            if (!raw) return "light";
+            if (!raw) return "dark";
 
             const settings = JSON.parse(raw);
-            return settings && settings.theme === "dark" ? "dark" : "light";
+            return settings && settings.theme === "light" ? "light" : "dark";
         } catch (error) {
             console.error("Could not read the saved color theme:", error);
-            return "light";
+            return "dark";
         }
     }
 

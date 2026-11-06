@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         publicProfile: false,
 
-        theme: "light",
+        theme: "dark",
 
         weekStart: "monday",
 

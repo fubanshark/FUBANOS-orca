@@ -563,9 +563,8 @@ html[data-theme="dark"] .milestone-page .milestone-background {
 }
 
 html[data-theme="dark"] #welcome-page {
-    background-image:
-        linear-gradient(rgba(4, 12, 21, 0.48), rgba(4, 12, 21, 0.64)),
-        url("../assets/wallpapers/1403447.jpg");
+    background-image: url("../assets/images/gradient.png");
+    background-color: #08090d;
 }
 
 html[data-theme="dark"] #garden-page {
