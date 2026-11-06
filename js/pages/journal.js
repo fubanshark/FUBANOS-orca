@@ -883,7 +883,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        darkness = Math.max(0, Math.min(1, darkness));
+        darkness = Math.max(0, Math.min(0.78, darkness));
 
         background.style.setProperty(
             "--journal-darkness",
